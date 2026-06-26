@@ -31,6 +31,8 @@ export const regionInfo: Record<string, RegionIntro> = {
       { es: 'Gracias', local: 'Terima kasih', lang: 'ms-MY' },
       { es: 'Por favor', local: 'Tolong', lang: 'ms-MY' },
       { es: 'Adiós', local: 'Selamat tinggal', lang: 'ms-MY' },
+      { es: 'Disculpa / perdón', local: 'Maaf', lang: 'ms-MY' },
+      { es: '¿Cuánto cuesta?', local: 'Berapa harga?', lang: 'ms-MY' },
     ],
     shopping: {
       what: 'Electrónica y gadgets de última generación, juguetes y ropa. Es el paraíso de los centros comerciales.',
@@ -56,6 +58,8 @@ export const regionInfo: Record<string, RegionIntro> = {
       { es: 'Gracias', local: 'Terima kasih', lang: 'ms-MY' },
       { es: 'Por favor', local: 'Tolong', lang: 'ms-MY' },
       { es: 'Adiós', local: 'Selamat tinggal', lang: 'ms-MY' },
+      { es: 'Disculpa / perdón', local: 'Maaf', lang: 'ms-MY' },
+      { es: '¿Cuánto cuesta?', local: 'Berapa harga?', lang: 'ms-MY' },
     ],
     shopping: {
       what: 'Poco de compras y mucha naturaleza: camisetas de orangutanes, artesanía de las tribus (telas y cestería).',
@@ -81,6 +85,8 @@ export const regionInfo: Record<string, RegionIntro> = {
       { es: 'Gracias', local: 'Terima kasih', lang: 'ms-MY' },
       { es: 'Por favor', local: 'Tolong', lang: 'ms-MY' },
       { es: 'Adiós', local: 'Jumpa lagi', lang: 'ms-MY' },
+      { es: 'Disculpa / perdón', local: 'Maaf', lang: 'ms-MY' },
+      { es: '¿Cuánto cuesta?', local: 'Berapa harga?', lang: 'ms-MY' },
     ],
     shopping: {
       what: 'Ropa y calzado baratos, electrónica y artesanía. Buen sitio para renovar maleta antes de la playa.',
@@ -106,6 +112,8 @@ export const regionInfo: Record<string, RegionIntro> = {
       { es: 'Gracias', local: 'Terima kasih', lang: 'id-ID' },
       { es: 'Por favor', local: 'Tolong', lang: 'id-ID' },
       { es: 'Adiós', local: 'Sampai jumpa', lang: 'id-ID' },
+      { es: 'Disculpa / perdón', local: 'Permisi', lang: 'id-ID' },
+      { es: '¿Cuánto cuesta?', local: 'Berapa harganya?', lang: 'id-ID' },
     ],
     shopping: {
       what: 'Artesanía en madera, pareos y batik, plata de Celuk, café de Bali y cometas. Regatear es parte del juego.',
