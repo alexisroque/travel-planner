@@ -539,3 +539,12 @@ nav.bottom a.active .ni { transform: translateY(-1px); }
 .sr-eur { font-weight: 800; min-width: 56px; text-align: right; }
 .sr-del { color: var(--muted); font-size: .9em; padding: 2px 4px; }
 .spend-more { font-size: .78em; color: var(--muted); text-align: center; padding-top: 8px; }
+
+/* Parada fija (aeropuerto/hotel): no se quita ni se mueve */
+.stop-lock { font-size: .76em; font-weight: 700; color: var(--muted); background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; }
+
+/* Aviso de salud (Borneo) */
+.health-card { border-left: 4px solid var(--bo, #2d5016); }
+.health-card .health-head { font-size: 1.02em; font-weight: 800; margin-bottom: 8px; }
+.health-card .health-row { font-size: .86em; line-height: 1.4; padding: 5px 0; border-bottom: 1px solid var(--line); }
+.health-card .health-row:last-child { border-bottom: 0; }

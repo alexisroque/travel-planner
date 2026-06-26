@@ -110,6 +110,10 @@ export default function DayView({ day }: { day: Day }) {
     if (item.kind === 'base' && item.origDayId && item.n != null) hideBase(item.origDayId, item.n)
     else if (item.kind === 'added' && item.placeId) removePlace(day.id, item.placeId)
   }
+  // Paradas clave que no se pueden quitar ni mover de día (solo reordenar).
+  // Solo se editan actividades, restaurantes y sitios añadidos desde Explorar.
+  const LOCKED_CATS = new Set(['Aeropuerto', 'Hotel'])
+  const isLocked = (item: AgendaItem) => item.kind === 'base' && LOCKED_CATS.has(item.category)
 
   return (
     <div style={destStyle(day.destinationId)} className="fadein">
@@ -225,8 +229,14 @@ export default function DayView({ day }: { day: Day }) {
                     <div className="stop-ctl">
                       <button onClick={() => reorder(day.id, item.key, -1, keys)} disabled={idx === 0} aria-label="Subir">▲</button>
                       <button onClick={() => reorder(day.id, item.key, 1, keys)} disabled={idx === agenda.length - 1} aria-label="Bajar">▼</button>
-                      <button onClick={() => setMoving(item)}>⤴ Mover de día</button>
-                      <button className="danger" onClick={() => removeItem(item)}>✕ Quitar</button>
+                      {isLocked(item) ? (
+                        <span className="stop-lock">🔒 parada fija</span>
+                      ) : (
+                        <>
+                          <button onClick={() => setMoving(item)}>⤴ Mover de día</button>
+                          <button className="danger" onClick={() => removeItem(item)}>✕ Quitar</button>
+                        </>
+                      )}
                       {item.coords && <a href={gmapsUrl(item.name, undefined, item.coords)} target="_blank" rel="noreferrer">🗺️ Maps</a>}
                     </div>
                   </div>
@@ -236,7 +246,7 @@ export default function DayView({ day }: { day: Day }) {
             ))}
           </div>
           <div style={{ margin: '2px 14px 0', fontSize: '.78em', color: 'var(--muted)' }}>
-            💡 Reordena con ▲▼, mueve paradas a otro día o quita lo que no harás. Añade más desde <b>Explorar</b>.
+            💡 Reordena con ▲▼. Puedes mover o quitar actividades y restaurantes (los añadidos desde <b>Explorar</b> también). El aeropuerto y el hotel quedan fijos 🔒.
           </div>
         </>
       )}

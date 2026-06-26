@@ -117,6 +117,16 @@ export default function Today() {
         </div>
       </div>
 
+      {/* Salud en zona de malaria (Borneo) */}
+      {until <= 0 && (today.destinationId === 'sepilok' || today.destinationId === 'kinabatangan') && (
+        <div className="card health-card">
+          <div className="health-head">💊 Salud en Borneo</div>
+          <div className="health-row">💊 Toma hoy tu <strong>antipalúdico</strong> según la pauta de tu médico (suele empezar antes de llegar y seguir varias semanas después de salir).</div>
+          <div className="health-row">🦟 Repelente DEET por la mañana y, sobre todo, al atardecer (manga larga en los cruceros).</div>
+          <div className="health-row">💧 Bebe solo agua embotellada; nada de hielo de origen dudoso.</div>
+        </div>
+      )}
+
       {/* Clima del destino */}
       {focusDest.climate && (
         <div className="card climate">
