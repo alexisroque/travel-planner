@@ -29,6 +29,33 @@ export function useWeather(coords?: { lat: number; lon: number }) {
   return { data, live: state === 'ok', loading: state === 'loading' }
 }
 
+// Aviso de lluvia: busca la próxima franja de hoy con prob. alta de lluvia.
+export interface RainAlert { hour: string; prob: number }
+export function useRainToday(coords?: { lat: number; lon: number }) {
+  const [alert, setAlert] = useState<RainAlert | null>(null)
+  useEffect(() => {
+    if (!coords) return
+    let cancelled = false
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&hourly=precipitation_probability&timezone=auto&forecast_days=1`
+    fetch(url)
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((j) => {
+        if (cancelled) return
+        const times: string[] = j?.hourly?.time ?? []
+        const probs: number[] = j?.hourly?.precipitation_probability ?? []
+        const nowH = new Date().getHours()
+        for (let i = 0; i < times.length; i++) {
+          const h = Number(times[i].slice(11, 13))
+          if (h >= nowH && probs[i] >= 60) { setAlert({ hour: times[i].slice(11, 16), prob: probs[i] }); return }
+        }
+        setAlert(null)
+      })
+      .catch(() => !cancelled && setAlert(null))
+    return () => { cancelled = true }
+  }, [coords?.lat, coords?.lon])
+  return alert
+}
+
 // Mapeo simple de weather_code (WMO) a emoji
 export function weatherEmoji(code: number): string {
   if (code === 0) return '☀️'

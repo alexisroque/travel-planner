@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import type { Day, Stop, TransitMode } from '../types'
 import { trip } from '../data/trip'
 import { destById, destStyle, KIND_LABEL } from '../lib/utils'
@@ -162,6 +163,7 @@ export default function DayView({ day }: { day: Day }) {
                   </button>
                 ))}
               </div>
+              <Link to="/frases" className="region-more">🗣️ Ver todas las frases (por situación, con audio) →</Link>
               <div className="region-sec">🛍️ De compras</div>
               <div className="region-shop"><b>Qué:</b> {region.shopping.what}</div>
               <div className="region-shop"><b>Dónde:</b> {region.shopping.where}</div>

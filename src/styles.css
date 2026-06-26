@@ -561,3 +561,20 @@ nav.bottom a.active .ni { transform: translateY(-1px); }
 .om-prepare { width: 100%; font-size: .9em; font-weight: 800; color: #fff; background: var(--sa); border-radius: 12px; padding: 13px; }
 .om-prepare:disabled { opacity: .5; }
 .om-sub { font-size: .72em; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); font-weight: 700; margin: 16px 0 4px; }
+
+/* ============ Frasebook ============ */
+.ph-langs { display: flex; gap: 8px; margin: 0 14px; }
+.ph-lang { flex: 1; font-size: .9em; font-weight: 700; border: 1px solid var(--line); border-radius: 12px; padding: 11px; color: var(--muted); background: var(--card); }
+.ph-lang.on { background: var(--sa); color: #fff; border-color: var(--sa); }
+.ph-note { margin: 10px 16px 0; font-size: .82em; color: var(--muted); line-height: 1.45; }
+.phrase-row { width: 100%; display: flex; align-items: center; gap: 10px; text-align: left; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.phrase-row:last-child { border-bottom: 0; }
+.pr-body { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.pr-es { font-size: .82em; color: var(--muted); }
+.pr-local { font-size: 1.02em; font-weight: 700; }
+.pr-pron { font-weight: 400; color: var(--muted); font-style: italic; font-size: .88em; }
+.pr-spk { font-size: 1.2em; flex: 0 0 auto; }
+.region-more { display: block; margin-top: 12px; font-size: .82em; font-weight: 700; color: var(--sa); }
+
+/* Aviso de lluvia */
+.rain-alert { margin: 12px 14px 0; background: color-mix(in srgb, var(--sin) 12%, transparent); border: 1px solid color-mix(in srgb, var(--sin) 30%, transparent); color: var(--ink); border-radius: 12px; padding: 11px 13px; font-size: .84em; font-weight: 600; line-height: 1.4; }

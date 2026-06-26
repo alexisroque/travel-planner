@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { trip } from '../data/trip'
 import { activeDay, daysUntilTrip, destById, destStyle, dayIntro, distanceKm, visitStops } from '../lib/utils'
 import { usePlanner, useUI } from '../store'
-import { useWeather, weatherEmoji } from '../lib/weather'
+import { useWeather, weatherEmoji, useRainToday } from '../lib/weather'
 import { useGeo } from '../lib/useGeo'
 import { todayBrief } from '../lib/brief'
 import TripMap, { type MapPoint } from '../components/TripMap'
@@ -20,6 +20,7 @@ export default function Today() {
   const toggleStatus = usePlanner((s) => s.toggleStatus)
   const isTaskDoneSel = usePlanner((s) => s.isTaskDone)
   const { data: wx, live } = useWeather(focusDest.coords)
+  const rain = useRainToday(until <= 0 ? focusDest.coords : undefined)
   const geo = useGeo()
   const brief = todayBrief(now, isTaskDoneSel)
   const setFocusDay = useUI((s) => s.setFocusDay)
@@ -86,6 +87,11 @@ export default function Today() {
         <Link to="/vuelos" className="checkin-badge">
           ✈️ {isTravel ? 'Vuelo hoy' : 'Vuelo mañana'} · haz el check-in online (24–48 h antes) y lleva la tarjeta en el móvil ›
         </Link>
+      )}
+
+      {/* Aviso de lluvia */}
+      {rain && (
+        <div className="rain-alert">🌧️ Lluvia probable hacia las {rain.hour} ({rain.prob}%) · lleva chubasquero y ten un plan bajo techo a mano.</div>
       )}
 
       {/* En vivo: ahora / próximo */}

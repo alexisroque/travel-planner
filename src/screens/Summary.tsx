@@ -112,6 +112,10 @@ export default function Summary() {
         <span><strong>💱 Cambio de moneda</strong><div style={{ fontSize: '.82em', color: 'var(--muted)' }}>conversor €/SGD/MYR/IDR · efectivo y propina por país · sin conexión</div></span>
         <span style={{ fontSize: '1.3em', color: 'var(--muted)' }}>›</span>
       </Link>
+      <Link to="/frases" className="card tight" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span><strong>🗣️ Frases útiles</strong><div style={{ fontSize: '.82em', color: 'var(--muted)' }}>malayo e indonesio por situación · con audio · sin conexión</div></span>
+        <span style={{ fontSize: '1.3em', color: 'var(--muted)' }}>›</span>
+      </Link>
 
       {/* Progreso */}
       <div className="card tight">
