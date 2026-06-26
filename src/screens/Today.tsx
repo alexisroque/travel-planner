@@ -38,12 +38,19 @@ export default function Today() {
   const isTravel = today.kind === 'travel'
   const legCount = (today.legIds ?? []).length
 
+  // "Mensaje del día" del guía: en viaje, lo que te espera hoy; pre-viaje, lo que te espera el día 1.
+  const firstDay = trip.days.find((d) => d.dayNumber === 1)
+  const firstHl = (firstDay?.highlights ?? []).join(' · ')
+  const heroMessage = until > 0
+    ? `Os espera ${focusDest.name}${firstHl ? `: ${firstHl}` : ''}`
+    : dayIntro(today)
+
   return (
     <div className="fadein">
       <div className="hero" style={{ ...destStyle(focusDest.id), background: destColor }}>
         <div className="hero-date">{until > 0 ? `Faltan ${until} días para volar` : `${today.weekday} · ${today.date} · ${until === 0 ? 'día 1' : `día ${today.dayNumber}`} de ${trip.stats.days}`}</div>
         <div className="big">{focusDest.emoji} {focusDest.name}</div>
-        <div className="hero-guide">{until > 0 ? `Tu gran viaje por Asia: ${trip.subtitle}` : dayIntro(today)}</div>
+        <div className="hero-guide">{heroMessage}</div>
         <div className="countdown">
           {until > 0 ? (
             <>
