@@ -105,7 +105,7 @@ export default function DayView({ day }: { day: Day }) {
       {/* Mapa del día */}
       {mapPointsResolved.length > 0 && (
         <div className="map-wrap">
-          <TripMap points={mapPointsResolved} height={190} />
+          <TripMap points={mapPointsResolved} height={190} caption={`🗺️ ${day.title}`} />
           <span className="map-cap">🗺️ Recorrido del día · {mapPointsResolved.length} paradas</span>
         </div>
       )}

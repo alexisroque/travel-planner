@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import L from 'leaflet'
 
 export interface MapPoint {
@@ -19,12 +19,15 @@ interface Props {
   rounded?: boolean
   fitPadding?: number
   routeCount?: number // solo enrutar los primeros N puntos (el resto son pins sueltos)
+  expandable?: boolean // botón de pantalla completa
+  caption?: string // rótulo mostrado dentro del mapa
 }
 
 // Mapa Leaflet con marcadores numerados y ruta. Online (tiles CARTO Voyager).
-export default function TripMap({ points, height = 200, showRoute = true, routeColor = '#1a1a2a', interactive = true, rounded = true, fitPadding = 40, routeCount }: Props) {
+export default function TripMap({ points, height = 200, showRoute = true, routeColor = '#1a1a2a', interactive = true, rounded = true, fitPadding = 40, routeCount, expandable = true, caption }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const mapRef = useRef<L.Map | null>(null)
+  const [full, setFull] = useState(false)
 
   useEffect(() => {
     if (!ref.current) return
@@ -41,7 +44,7 @@ export default function TripMap({ points, height = 200, showRoute = true, routeC
       tap: interactive,
     })
     mapRef.current = map
-    if (interactive) map.zoomControl.setPosition('topright')
+    if (interactive) map.zoomControl.setPosition('bottomleft')
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       maxZoom: 19,
@@ -82,5 +85,30 @@ export default function TripMap({ points, height = 200, showRoute = true, routeC
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(points), height, routeCount])
 
-  return <div ref={ref} className={`trip-map ${rounded ? 'rounded' : ''}`} style={{ height }} />
+  // Recalcular tamaño al entrar/salir de pantalla completa
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map) return
+    const valid = points.filter((p) => typeof p.lat === 'number' && typeof p.lon === 'number')
+    const t = setTimeout(() => {
+      map.invalidateSize()
+      if (valid.length) map.fitBounds(L.latLngBounds(valid.map((p) => [p.lat, p.lon] as [number, number])), { padding: [full ? 60 : fitPadding, full ? 60 : fitPadding], maxZoom: 14 })
+    }, 120)
+    if (full) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = ''
+    return () => { clearTimeout(t); document.body.style.overflow = '' }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [full])
+
+  return (
+    <div className={`trip-map-shell ${full ? 'full' : ''}`}>
+      <div ref={ref} className={`trip-map ${rounded && !full ? 'rounded' : ''}`} style={{ height: full ? '100%' : height }} />
+      {full && caption && <span className="map-cap map-cap-full">{caption}</span>}
+      {expandable && (
+        <button className={`map-expand ${full ? 'is-full' : ''}`} onClick={() => setFull((f) => !f)} aria-label={full ? 'Cerrar mapa' : 'Ampliar mapa'}>
+          {full ? '✕ Cerrar' : '⤢'}
+        </button>
+      )}
+    </div>
+  )
 }

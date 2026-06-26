@@ -136,7 +136,7 @@ export default function Today() {
       {/* Mini-mapa del recorrido de hoy */}
       {mapPoints.length > 0 && (
         <div className="map-wrap">
-          <TripMap points={mapPoints} height={170} />
+          <TripMap points={mapPoints} height={170} caption="🗺️ Recorrido de hoy" />
           <span className="map-cap">🗺️ Recorrido de hoy · {mapPoints.length} paradas</span>
         </div>
       )}

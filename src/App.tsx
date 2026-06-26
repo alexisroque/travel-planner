@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom'
 import Today from './screens/Today'
 import Summary from './screens/Summary'
@@ -18,8 +19,20 @@ const NAV = [
 ]
 
 export default function App() {
+  const [online, setOnline] = useState(navigator.onLine)
+  useEffect(() => {
+    const on = () => setOnline(true)
+    const off = () => setOnline(false)
+    window.addEventListener('online', on)
+    window.addEventListener('offline', off)
+    return () => { window.removeEventListener('online', on); window.removeEventListener('offline', off) }
+  }, [])
+
   return (
     <div className="app">
+      {!online && (
+        <div className="offline-bar">📴 Sin conexión · plan e itinerario disponibles · los mapas usan lo ya descargado</div>
+      )}
       <Routes>
         <Route path="/" element={<Today />} />
         <Route path="/resumen" element={<Summary />} />

@@ -27,7 +27,7 @@ export default function Summary() {
 
       {/* Mapa de toda la ruta */}
       <div className="map-wrap">
-        <TripMap points={routePoints} height={260} />
+        <TripMap points={routePoints} height={260} caption="🗺️ Ruta del viaje" />
         <span className="map-cap">🗺️ Ruta · {dests.length} destinos · {trip.stats.flights} vuelos</span>
       </div>
 
