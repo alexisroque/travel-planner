@@ -60,6 +60,14 @@ export default function DayView({ day }: { day: Day }) {
   const legs = (day.legIds ?? []).map((lid) => trip.legs.find((l) => l.id === lid)).filter(Boolean)
   const destColor = DEST_HEX[dest.colorVar] ?? '#1a1a2a'
 
+  // Amanecer/atardecer: usa el del destino; en días de vuelo, el del destino de llegada (siguiente con datos).
+  let sun = dest.sun
+  if (!sun) {
+    const di = trip.days.findIndex((d) => d.id === day.id)
+    for (let i = di; i < trip.days.length && !sun; i++) sun = destById(trip.days[i].destinationId).sun
+    for (let i = di; i >= 0 && !sun; i--) sun = destById(trip.days[i].destinationId).sun
+  }
+
   const agenda = buildAgenda(day.id, { addedByDay, movedBase, hiddenBase, order })
   const keys = agenda.map((i) => i.key)
   const dayEdited = !!(order[day.id]?.length) ||
@@ -90,7 +98,7 @@ export default function DayView({ day }: { day: Day }) {
         </div>
         <h2 style={{ fontSize: '1.3em', fontWeight: 800, letterSpacing: '-.3px' }}>{day.emoji} {day.title}</h2>
         <div className="dc-headline" style={{ marginTop: 5 }}>{day.headline}</div>
-        {dest.sun && <div style={{ marginTop: 8, fontSize: '.78em', color: 'var(--muted)' }}>🌅 Amanece {dest.sun.rise} · 🌇 Anochece {dest.sun.set}</div>}
+        {sun && <div style={{ marginTop: 8, fontSize: '.78em', color: 'var(--muted)' }}>🌅 Amanece {sun.rise} · 🌇 Anochece {sun.set}</div>}
         <div style={{ display: 'flex', gap: 8, marginTop: 10, flexWrap: 'wrap' }}>
           <span className="badge free">{KIND_LABEL[day.kind]}</span>
           {day.accommodation && <span className={`badge ${day.accommodation.status}`}>🛏️ {day.accommodation.name}</span>}
