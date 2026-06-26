@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import type { Day, Stop, TransitMode } from '../types'
 import { trip } from '../data/trip'
 import { destById, destStyle, KIND_LABEL } from '../lib/utils'
 import { usePlanner } from '../store'
+import { buildAgenda, type AgendaItem } from '../lib/agenda'
 import TripMap, { type MapPoint } from './TripMap'
+import DayPicker from './DayPicker'
 import { Tip } from './common'
 
 const TRANSIT_ICON: Record<TransitMode, string> = {
@@ -29,19 +32,38 @@ export default function DayView({ day }: { day: Day }) {
   const dest = destById(day.destinationId)
   const isStatusDone = usePlanner((s) => s.isStatusDone)
   const toggleStatus = usePlanner((s) => s.toggleStatus)
-  const addedIds = usePlanner((s) => s.addedByDay[day.id]) ?? []
+  const { addedByDay, movedBase, hiddenBase, order } = usePlanner((s) => ({
+    addedByDay: s.addedByDay, movedBase: s.movedBase, hiddenBase: s.hiddenBase, order: s.order,
+  }))
+  const reorder = usePlanner((s) => s.reorder)
+  const moveBaseToDay = usePlanner((s) => s.moveBaseToDay)
+  const hideBase = usePlanner((s) => s.hideBase)
+  const addPlace = usePlanner((s) => s.addPlace)
   const removePlace = usePlanner((s) => s.removePlace)
+  const [moving, setMoving] = useState<AgendaItem | null>(null)
+
   const legs = (day.legIds ?? []).map((lid) => trip.legs.find((l) => l.id === lid)).filter(Boolean)
-
   const destColor = DEST_HEX[dest.colorVar] ?? '#1a1a2a'
-  const baseStops = (day.stops ?? []).filter((s) => s.coords)
-  const addedPlaces = addedIds.map((id) => trip.catalog.find((p) => p.id === id)).filter(Boolean) as NonNullable<ReturnType<typeof trip.catalog.find>>[]
 
-  const mapPointsResolved: MapPoint[] = [
-    ...baseStops.map((s) => ({ lat: s.coords!.lat, lon: s.coords!.lon, n: s.n, label: s.name, color: destColor })),
-    ...addedPlaces.filter((p) => p.coords).map((p) => ({ lat: p.coords!.lat, lon: p.coords!.lon, emoji: '⭐', label: p.name, color: '#d4900a' })),
-  ]
-  const routeCount = baseStops.length
+  const agenda = buildAgenda(day.id, { addedByDay, movedBase, hiddenBase, order })
+  const keys = agenda.map((i) => i.key)
+  const dayEdited = !!(order[day.id]?.length) ||
+    Object.entries(movedBase).some(([k, v]) => v === day.id || k.startsWith(`${day.id}:`)) ||
+    (addedByDay[day.id]?.length ?? 0) > 0
+
+  const mapPointsResolved: MapPoint[] = agenda.filter((i) => i.coords).map((i, idx) => ({
+    lat: i.coords!.lat, lon: i.coords!.lon, n: idx + 1, label: i.name,
+    color: i.kind === 'added' ? '#d4900a' : destColor,
+  }))
+
+  function moveItemTo(item: AgendaItem, targetDay: string) {
+    if (item.kind === 'base' && item.origDayId && item.n != null) moveBaseToDay(item.origDayId, item.n, targetDay)
+    else if (item.kind === 'added' && item.placeId) addPlace(targetDay, item.placeId)
+  }
+  function removeItem(item: AgendaItem) {
+    if (item.kind === 'base' && item.origDayId && item.n != null) hideBase(item.origDayId, item.n)
+    else if (item.kind === 'added' && item.placeId) removePlace(day.id, item.placeId)
+  }
 
   return (
     <div style={destStyle(day.destinationId)} className="fadein">
@@ -67,28 +89,9 @@ export default function DayView({ day }: { day: Day }) {
       {/* Mapa del día */}
       {mapPointsResolved.length > 0 && (
         <div className="map-wrap">
-          <TripMap points={mapPointsResolved} height={190} routeCount={routeCount} />
-          <span className="map-cap">🗺️ Recorrido del día · {mapPointsResolved.length} paradas{addedPlaces.length ? ` (⭐ ${addedPlaces.length} añadidas)` : ''}</span>
+          <TripMap points={mapPointsResolved} height={190} />
+          <span className="map-cap">🗺️ Recorrido del día · {mapPointsResolved.length} paradas</span>
         </div>
-      )}
-
-      {/* Añadidos por ti (desde Explorar) */}
-      {addedPlaces.length > 0 && (
-        <>
-          <div className="section-title">⭐ Añadidos por ti</div>
-          <div className="card">
-            {addedPlaces.map((p) => (
-              <div className="added-place" key={p.id}>
-                <span style={{ fontSize: '1.2em' }}>{p.emoji}</span>
-                <div className="ap-body">
-                  <div className="ap-name">{p.name}</div>
-                  <div className="ap-meta">{p.category}{p.hours ? ` · 🕒 ${p.hours}` : ''}{p.price ? ` · ${p.price}` : ''}</div>
-                </div>
-                <button className="ap-rm" onClick={() => removePlace(day.id, p.id)} aria-label="Quitar">✕</button>
-              </div>
-            ))}
-          </div>
-        </>
       )}
 
       {/* Reservas / estado */}
@@ -109,35 +112,47 @@ export default function DayView({ day }: { day: Day }) {
         </>
       )}
 
-      {/* Timeline de paradas */}
-      {day.stops && day.stops.length > 0 && (
+      {/* Agenda editable */}
+      {agenda.length > 0 && (
         <>
-          <div className="section-title">Recorrido · paso a paso</div>
+          <div className="section-title" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>Recorrido · paso a paso</span>
+            <span style={{ color: 'var(--muted)', fontWeight: 600, textTransform: 'none', letterSpacing: 0 }}>editable ✏️</span>
+          </div>
           <div className="stops">
-            {day.stops.map((s) => (
-              <div key={s.n} className="stop">
+            {agenda.map((item, idx) => (
+              <div key={item.key} className="stop">
                 <div className="marker">
-                  <div className="num">{s.n}</div>
+                  <div className="num" style={item.kind === 'added' ? { background: '#d4900a' } : undefined}>{idx + 1}</div>
                   <div className="line" />
                 </div>
                 <div className="content">
                   <div className="stop-card">
                     <div className="sc-top">
-                      <span className="sc-name">{s.emoji} {s.name}</span>
-                      {s.time && <span className="sc-time">{s.time}</span>}
+                      <span className="sc-name">{item.emoji} {item.name}{item.kind === 'added' && <span className="added-tag"> ⭐ añadido</span>}</span>
+                      {item.time && <span className="sc-time">{item.time}</span>}
                     </div>
                     <div className="sc-meta">
-                      <span className="sc-cat">{s.category}</span>
-                      {s.hours && <span>🕒 {s.hours}</span>}
-                      {s.status === 'pending' && <span className="badge pending">⏳ reservar</span>}
-                      {s.status === 'booked' && <span className="badge booked">✓ ok</span>}
+                      <span className="sc-cat">{item.category}</span>
+                      {item.hours && <span>🕒 {item.hours}</span>}
+                      {item.status === 'pending' && <span className="badge pending">⏳ reservar</span>}
+                      {item.status === 'booked' && <span className="badge booked">✓ ok</span>}
                     </div>
-                    {s.note && <div className="sc-note">{s.note}</div>}
+                    {item.note && <div className="sc-note">{item.note}</div>}
+                    <div className="stop-ctl">
+                      <button onClick={() => reorder(day.id, item.key, -1, keys)} disabled={idx === 0} aria-label="Subir">▲</button>
+                      <button onClick={() => reorder(day.id, item.key, 1, keys)} disabled={idx === agenda.length - 1} aria-label="Bajar">▼</button>
+                      <button onClick={() => setMoving(item)}>⤴ Mover de día</button>
+                      <button className="danger" onClick={() => removeItem(item)}>✕ Quitar</button>
+                    </div>
                   </div>
-                  {s.transitToNext && <Transit t={s.transitToNext} />}
+                  {!dayEdited && item.transit && <Transit t={item.transit} />}
                 </div>
               </div>
             ))}
+          </div>
+          <div style={{ margin: '2px 14px 0', fontSize: '.78em', color: 'var(--muted)' }}>
+            💡 Reordena con ▲▼, mueve paradas a otro día o quita lo que no harás. Añade más desde <b>Explorar</b>.
           </div>
         </>
       )}
@@ -196,6 +211,15 @@ export default function DayView({ day }: { day: Day }) {
             </div>
           ))}
         </>
+      )}
+
+      {moving && (
+        <DayPicker
+          title={`Mover: ${moving.emoji} ${moving.name}`}
+          sub="¿A qué día lo llevas?"
+          onPick={(target) => moveItemTo(moving, target)}
+          onClose={() => setMoving(null)}
+        />
       )}
     </div>
   )

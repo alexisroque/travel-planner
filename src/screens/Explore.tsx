@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { trip } from '../data/trip'
 import { destById } from '../lib/utils'
 import { DEST_HEX } from '../components/DayView'
+import DayPicker from '../components/DayPicker'
 import { usePlanner } from '../store'
 import type { Place } from '../types'
 
@@ -11,6 +12,7 @@ export default function Explore() {
   const [picker, setPicker] = useState<Place | null>(null)
 
   const addedByDay = usePlanner((s) => s.addedByDay)
+  const addPlace = usePlanner((s) => s.addPlace)
   const removePlace = usePlanner((s) => s.removePlace)
 
   const dest = destById(destId)
@@ -78,36 +80,15 @@ export default function Explore() {
       })}
       <div style={{ height: 12 }} />
 
-      {picker && <DayPicker place={picker} onClose={() => setPicker(null)} />}
-    </div>
-  )
-}
-
-function DayPicker({ place, onClose }: { place: Place; onClose: () => void }) {
-  const addPlace = usePlanner((s) => s.addPlace)
-  const dest = destById(place.destinationId)
-  // Días de ese destino (donde tiene sentido hacerlo)
-  const days = trip.days.filter((d) => d.destinationId === place.destinationId)
-  const fallback = days.length ? days : trip.days.filter((d) => d.destinationId !== 'travel')
-
-  return (
-    <div className="sheet-backdrop" onClick={onClose}>
-      <div className="sheet" onClick={(e) => e.stopPropagation()}>
-        <div className="sheet-handle" />
-        <div className="sheet-title">{place.emoji} {place.name}</div>
-        <div className="sheet-sub">¿Qué día lo hacéis? · {dest.emoji} {dest.name}</div>
-        <div className="sheet-days">
-          {fallback.map((d) => (
-            <button key={d.id} className="sheet-day" style={{ ['--dest' as string]: DEST_HEX[dest.colorVar] }}
-              onClick={() => { addPlace(d.id, place.id); onClose() }}>
-              <span className="sd-num">Día {d.dayNumber ?? 0}</span>
-              <span className="sd-info"><b>{d.date} · {d.weekday}</b><span>{d.title}</span></span>
-              <span className="sd-go">＋</span>
-            </button>
-          ))}
-        </div>
-        <button className="sheet-cancel" onClick={onClose}>Cancelar</button>
-      </div>
+      {picker && (
+        <DayPicker
+          title={`${picker.emoji} ${picker.name}`}
+          sub={`¿Qué día lo hacéis? · ${dest.emoji} ${dest.name}`}
+          destId={picker.destinationId}
+          onPick={(dayId) => addPlace(dayId, picker.id)}
+          onClose={() => setPicker(null)}
+        />
+      )}
     </div>
   )
 }

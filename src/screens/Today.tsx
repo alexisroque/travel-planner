@@ -3,6 +3,8 @@ import { trip } from '../data/trip'
 import { activeDay, daysUntilTrip, destById, destStyle, eur } from '../lib/utils'
 import { usePlanner } from '../store'
 import { useWeather, weatherEmoji } from '../lib/weather'
+import { useGeo } from '../lib/useGeo'
+import { todayBrief } from '../lib/brief'
 import TripMap, { type MapPoint } from '../components/TripMap'
 import { DEST_HEX } from '../components/DayView'
 
@@ -15,12 +17,13 @@ export default function Today() {
   const totalBudget = trip.budget.reduce((s, b) => s + b.amount, 0)
   const isStatusDone = usePlanner((s) => s.isStatusDone)
   const toggleStatus = usePlanner((s) => s.toggleStatus)
+  const isTaskDoneSel = usePlanner((s) => s.isTaskDone)
   const { data: wx, live } = useWeather(focusDest.coords)
+  const geo = useGeo()
+  const brief = todayBrief(now, isTaskDoneSel)
 
   const idx = trip.days.findIndex((d) => d.id === today.id)
   const nextDay = trip.days[idx + 1]
-  const pendingTasks = trip.tasks.filter((t) => t.urgency === 'urgent' || t.urgency === 'soon')
-    .filter((t) => !isTaskDone(t))
 
   const destColor = DEST_HEX[focusDest.colorVar] ?? '#1a1a2a'
   const mapPoints: MapPoint[] = (today.stops ?? []).filter((s) => s.coords)
@@ -41,6 +44,31 @@ export default function Today() {
             : <div className="cd"><div className="n">{today.dayNumber ?? 0}</div><div className="l">de {trip.stats.days} días</div></div>}
           <div className="cd"><div className="n">{tempShown ? `${tempShown}°` : '—'}</div><div className="l">{live ? `${wxIcon} ahora` : '🌡️ típico jul'}</div></div>
           <div className="cd"><div className="n">{eur(totalBudget)}</div><div className="l">presupuesto</div></div>
+        </div>
+      </div>
+
+      {/* Agenda contextual de hoy */}
+      <div className="card brief" style={{ ['--dest' as string]: destColor }}>
+        <div className="brief-loc">
+          <span>{geo.state === 'ok' && geo.nearestName ? `📍 Estás cerca de ${geo.nearestName} (${geo.nearestKm} km)` : brief.locationLine}</span>
+          {geo.state !== 'ok' && (
+            <button className="brief-geo" onClick={geo.request}>{geo.state === 'asking' ? '…' : '📍 ¿Dónde estás?'}</button>
+          )}
+        </div>
+        <div className="brief-head">{brief.mode === 'pre' ? '🧭 Para ir cerrando' : '🧭 Tu agenda de hoy'} · {brief.headline}</div>
+        <div className="brief-items">
+          {brief.items.map((it, i) => {
+            const inner = (
+              <>
+                <span className="bi-ic">{it.icon}</span>
+                <span className="bi-body"><span className={`bi-title ${it.warn ? 'warn' : ''}`}>{it.title}</span>{it.sub && <span className="bi-sub">{it.sub}</span>}</span>
+                {it.to && <span className="bi-go">›</span>}
+              </>
+            )
+            return it.to
+              ? <Link key={i} to={it.to} className="brief-item">{inner}</Link>
+              : <div key={i} className="brief-item">{inner}</div>
+          })}
         </div>
       </div>
 
@@ -119,19 +147,6 @@ export default function Today() {
 
       <Link to={`/dia/${today.id}`} className="section-title" style={{ display: 'block', color: 'var(--sa)' }}>Ver día completo →</Link>
 
-      {/* Lo que falta */}
-      {until > 0 && pendingTasks.length > 0 && (
-        <>
-          <div className="section-title">Lo que falta por cerrar</div>
-          <Link to="/pendientes" className="card tight" style={{ display: 'block' }}>
-            <strong>{pendingTasks.length} tareas pendientes</strong>
-            <div style={{ color: 'var(--muted)', fontSize: '.85em', marginTop: 3 }}>
-              {pendingTasks.slice(0, 3).map((t) => t.title.split('—')[0].trim()).join(' · ')}…
-            </div>
-          </Link>
-        </>
-      )}
-
       {nextDay && until <= 0 && (
         <>
           <div className="section-title">Mañana</div>
@@ -147,8 +162,4 @@ export default function Today() {
       </div>
     </div>
   )
-}
-
-function isTaskDone(t: { id: string; done: boolean }) {
-  return usePlanner.getState().isTaskDone(t.id, t.done)
 }

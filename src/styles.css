@@ -197,6 +197,11 @@ nav.bottom a.active .ni { transform: translateY(-1px); }
 .stop-card .sc-meta { font-size: .76em; color: var(--muted); margin-top: 3px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .stop-card .sc-cat { background: var(--dest-l, #eee); color: var(--dest, #555); font-weight: 700; padding: 1px 8px; border-radius: 999px; font-size: .92em; }
 .stop-card .sc-note { font-size: .82em; margin-top: 5px; color: #444; }
+.stop-ctl { display: flex; gap: 6px; margin-top: 9px; flex-wrap: wrap; }
+.stop-ctl button { font-size: .72em; font-weight: 700; padding: 4px 9px; border-radius: 8px; background: #f0eee9; color: #555; }
+.stop-ctl button:disabled { opacity: .35; }
+.stop-ctl button.danger { color: var(--urg); }
+.added-tag { font-size: .7em; font-weight: 800; color: #b87808; }
 .transit { display: flex; align-items: center; gap: 7px; font-size: .74em; color: var(--muted); padding: 3px 0 9px; }
 .transit .tx-ic { font-size: 1.05em; }
 .transit .tx-line { flex: 1; height: 1px; border-top: 1px dashed var(--line); }
@@ -267,6 +272,21 @@ nav.bottom a.active .ni { transform: translateY(-1px); }
 .added-place .ap-name { font-weight: 700; font-size: .92em; }
 .added-place .ap-meta { font-size: .76em; color: var(--muted); }
 .added-place .ap-rm { color: var(--urg); font-size: 1.1em; padding: 4px 8px; }
+
+/* ===== Brief (agenda contextual de Hoy) ===== */
+.brief { border-top: 4px solid var(--dest, var(--sa)); }
+.brief-loc { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: .82em; font-weight: 700; color: var(--ink); }
+.brief-geo { font-size: .72em; font-weight: 700; color: var(--sa); background: var(--sa-l); padding: 4px 9px; border-radius: 999px; flex-shrink: 0; }
+.brief-head { font-size: .74em; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); font-weight: 800; margin: 10px 0 8px; }
+.brief-items { display: flex; flex-direction: column; }
+.brief-item { display: flex; align-items: flex-start; gap: 11px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.brief-item:last-child { border-bottom: none; }
+.brief-item .bi-ic { font-size: 1.2em; width: 24px; text-align: center; flex-shrink: 0; }
+.brief-item .bi-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.brief-item .bi-title { font-weight: 700; font-size: .92em; }
+.brief-item .bi-title.warn { color: var(--urg); }
+.brief-item .bi-sub { font-size: .8em; color: var(--muted); margin-top: 1px; }
+.brief-item .bi-go { color: var(--muted); font-size: 1.2em; align-self: center; }
 
 /* fade-in for screen mounts */
 @keyframes fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }

@@ -8,13 +8,19 @@ interface PlannerState {
   taskDone: Record<string, boolean>
   statusDone: Record<string, boolean> // clave: `${dayId}:${index}`
   addedByDay: Record<string, string[]> // dayId -> placeId[]
+  movedBase: Record<string, string> // baseKey `${origDayId}:${n}` -> targetDayId
+  hiddenBase: Record<string, boolean> // baseKey -> oculto
+  order: Record<string, string[]> // dayId -> orden explícito de claves de agenda
   toggleTask: (id: string) => void
   toggleStatus: (dayId: string, index: number) => void
   isTaskDone: (id: string, fallback: boolean) => boolean
   isStatusDone: (dayId: string, index: number, fallback: boolean) => boolean
   addPlace: (dayId: string, placeId: string) => void
   removePlace: (dayId: string, placeId: string) => void
-  dayForPlace: (placeId: string) => string | undefined
+  moveBaseToDay: (origDayId: string, n: number, targetDay: string) => void
+  hideBase: (origDayId: string, n: number) => void
+  reorder: (dayId: string, key: string, dir: -1 | 1, currentKeys: string[]) => void
+  setOrder: (dayId: string, keys: string[]) => void
   reset: () => void
 }
 
@@ -24,6 +30,9 @@ export const usePlanner = create<PlannerState>()(
       taskDone: {},
       statusDone: {},
       addedByDay: {},
+      movedBase: {},
+      hiddenBase: {},
+      order: {},
       toggleTask: (id) =>
         set((s) => ({ taskDone: { ...s.taskDone, [id]: !s.taskDone[id] } })),
       toggleStatus: (dayId, index) =>
@@ -54,12 +63,21 @@ export const usePlanner = create<PlannerState>()(
         set((s) => ({
           addedByDay: { ...s.addedByDay, [dayId]: (s.addedByDay[dayId] ?? []).filter((id) => id !== placeId) },
         })),
-      dayForPlace: (placeId) => {
-        const entries = Object.entries(get().addedByDay)
-        const hit = entries.find(([, ids]) => ids.includes(placeId))
-        return hit?.[0]
-      },
-      reset: () => set({ taskDone: {}, statusDone: {}, addedByDay: {} }),
+      moveBaseToDay: (origDayId, n, targetDay) =>
+        set((s) => ({ movedBase: { ...s.movedBase, [`${origDayId}:${n}`]: targetDay } })),
+      hideBase: (origDayId, n) =>
+        set((s) => ({ hiddenBase: { ...s.hiddenBase, [`${origDayId}:${n}`]: true } })),
+      reorder: (dayId, key, dir, currentKeys) =>
+        set((s) => {
+          const keys = [...currentKeys]
+          const i = keys.indexOf(key)
+          const j = i + dir
+          if (i < 0 || j < 0 || j >= keys.length) return {}
+          ;[keys[i], keys[j]] = [keys[j], keys[i]]
+          return { order: { ...s.order, [dayId]: keys } }
+        }),
+      setOrder: (dayId, keys) => set((s) => ({ order: { ...s.order, [dayId]: keys } })),
+      reset: () => set({ taskDone: {}, statusDone: {}, addedByDay: {}, movedBase: {}, hiddenBase: {}, order: {} }),
     }),
     { name: 'roque-asia-2026' },
   ),
