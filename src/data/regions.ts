@@ -16,7 +16,7 @@ export const regionInfo: Record<string, RegionIntro> = {
   // ---- Singapur (día 1) ----
   d1: {
     flag: '🇸🇬', title: 'Singapur',
-    intro: 'Estamos en Singapur, una ciudad-estado tan pequeña que cabría unas 9.000 veces en España. En solo 50 años pasó de pueblo de pescadores a una de las ciudades más ricas, limpias y futuristas del mundo. Es tan ordenada que ¡está prohibido tirar chicle al suelo! Aquí conviven chinos, malayos e indios y se hablan cuatro idiomas.',
+    intro: 'Estamos en Singapur, una ciudad-estado tan pequeña que cabría unas 9.000 veces en España. En solo 50 años pasó de pueblo de pescadores a una de las ciudades más ricas, limpias y futuristas del mundo. Es tan ordenada que ¡está prohibido tirar chicle al suelo! Aquí conviven chinos, malayos e indios y se hablan cuatro idiomas; el malayo es la lengua nacional (aunque casi todo el mundo entiende inglés).',
     funFacts: [
       'Tiene árboles-jardín gigantes que se iluminan y suenan de noche (los Supertrees).',
       'El aeropuerto tiene dentro una cascada de 40 metros, la más alta del mundo.',
@@ -27,10 +27,10 @@ export const regionInfo: Record<string, RegionIntro> = {
       text: 'Cuenta la leyenda que hace siglos un príncipe llegó a la isla y vio un león. La llamó "Singapura", que significa "ciudad del león". Hoy su símbolo es el Merlión: mitad león, mitad pez, que escupe agua a la bahía.',
     },
     phrases: [
-      { es: 'Hola', local: 'Hello', lang: 'en-GB' },
-      { es: 'Gracias', local: 'Thank you', lang: 'en-GB' },
-      { es: 'Por favor', local: 'Please', lang: 'en-GB' },
-      { es: 'Adiós', local: 'Goodbye', lang: 'en-GB' },
+      { es: 'Hola', local: 'Apa khabar', lang: 'ms-MY' },
+      { es: 'Gracias', local: 'Terima kasih', lang: 'ms-MY' },
+      { es: 'Por favor', local: 'Tolong', lang: 'ms-MY' },
+      { es: 'Adiós', local: 'Selamat tinggal', lang: 'ms-MY' },
     ],
     shopping: {
       what: 'Electrónica y gadgets de última generación, juguetes y ropa. Es el paraíso de los centros comerciales.',
