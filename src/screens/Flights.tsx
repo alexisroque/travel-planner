@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { trip } from '../data/trip'
 import type { Leg } from '../types'
 
@@ -58,6 +59,7 @@ export default function Flights() {
   return (
     <>
       <div className="page-head">
+        <Link to="/resumen" className="back-link">‹ Resumen</Link>
         <h1>Vuelos & Transporte</h1>
         <div className="sub">{flights} vuelos · {ferries} ferries · trasbordos modelados</div>
       </div>

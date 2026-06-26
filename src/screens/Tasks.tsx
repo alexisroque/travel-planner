@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { trip } from '../data/trip'
 import { usePlanner } from '../store'
+import { packGroups } from '../data/packing'
 import type { Task, TaskUrgency } from '../types'
 
 const GROUPS: { key: TaskUrgency; label: string; color: string }[] = [
@@ -18,6 +20,10 @@ export default function Tasks() {
   const total = trip.tasks.length
   const doneTasks = trip.tasks.filter((t) => isTaskDone(t.id, t.done))
   const done = doneTasks.length
+
+  const packDone = usePlanner((s) => s.packDone)
+  const packItems = packGroups.flatMap((g) => g.items)
+  const packReady = packItems.filter((it) => packDone[it.id]).length
 
   const TaskRow = ({ t }: { t: Task }) => {
     const on = isTaskDone(t.id, t.done)
@@ -47,6 +53,11 @@ export default function Tasks() {
         <div className="prog-label"><span>Progreso de preparación</span><span>{Math.round((done / total) * 100)}%</span></div>
         <div className="prog"><i style={{ width: `${(done / total) * 100}%` }} /></div>
       </div>
+
+      <Link to="/maleta" className="card tight" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span><strong>🧳 Checklist de maleta</strong><div style={{ fontSize: '.82em', color: 'var(--muted)' }}>{packReady}/{packItems.length} cosas listas · adaptada al recorrido · lavandería</div></span>
+        <span style={{ fontSize: '1.3em', color: 'var(--muted)' }}>›</span>
+      </Link>
 
       {GROUPS.map((g) => {
         const tasks = trip.tasks.filter((t) => t.urgency === g.key && !isTaskDone(t.id, t.done))

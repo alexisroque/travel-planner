@@ -18,6 +18,9 @@ interface PlannerState {
   movedBase: Record<string, string> // baseKey `${origDayId}:${n}` -> targetDayId
   hiddenBase: Record<string, boolean> // baseKey -> oculto
   order: Record<string, string[]> // dayId -> orden explícito de claves de agenda
+  packDone: Record<string, boolean> // id de ítem de maleta -> empacado
+  togglePack: (id: string) => void
+  isPackDone: (id: string) => boolean
   toggleTask: (id: string) => void
   toggleStatus: (dayId: string, index: number) => void
   isTaskDone: (id: string, fallback: boolean) => boolean
@@ -40,6 +43,10 @@ export const usePlanner = create<PlannerState>()(
       movedBase: {},
       hiddenBase: {},
       order: {},
+      packDone: {},
+      togglePack: (id) =>
+        set((s) => ({ packDone: { ...s.packDone, [id]: !s.packDone[id] } })),
+      isPackDone: (id) => !!get().packDone[id],
       toggleTask: (id) =>
         set((s) => ({ taskDone: { ...s.taskDone, [id]: !s.taskDone[id] } })),
       toggleStatus: (dayId, index) =>
@@ -84,7 +91,7 @@ export const usePlanner = create<PlannerState>()(
           return { order: { ...s.order, [dayId]: keys } }
         }),
       setOrder: (dayId, keys) => set((s) => ({ order: { ...s.order, [dayId]: keys } })),
-      reset: () => set({ taskDone: {}, statusDone: {}, addedByDay: {}, movedBase: {}, hiddenBase: {}, order: {} }),
+      reset: () => set({ taskDone: {}, statusDone: {}, addedByDay: {}, movedBase: {}, hiddenBase: {}, order: {}, packDone: {} }),
     }),
     { name: 'roque-asia-2026' },
   ),

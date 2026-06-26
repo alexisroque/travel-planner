@@ -6,6 +6,8 @@ import Itinerary from './screens/Itinerary'
 import DayDetail from './screens/DayDetail'
 import Explore from './screens/Explore'
 import Flights from './screens/Flights'
+import Hotels from './screens/Hotels'
+import Packing from './screens/Packing'
 import Tasks from './screens/Tasks'
 import Budget from './screens/Budget'
 import SideMap from './components/SideMap'
@@ -42,6 +44,8 @@ export default function App() {
           <Route path="/explorar" element={<Explore />} />
           <Route path="/dia/:id" element={<DayDetail />} />
           <Route path="/vuelos" element={<Flights />} />
+          <Route path="/hoteles" element={<Hotels />} />
+          <Route path="/maleta" element={<Packing />} />
           <Route path="/pendientes" element={<Tasks />} />
           <Route path="/presupuesto" element={<Budget />} />
           <Route path="*" element={<Navigate to="/" replace />} />

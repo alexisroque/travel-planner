@@ -379,3 +379,35 @@ nav.bottom a.active .ni { transform: translateY(-1px); }
   .app { flex: 0 0 540px; max-width: 540px; }
   nav.bottom { max-width: 540px; }
 }
+
+/* ============ Back link en cabeceras ============ */
+.back-link { display: inline-block; color: var(--sa); font-size: .85em; font-weight: 700; margin-bottom: 6px; }
+.back-link:active { opacity: .6; }
+
+/* ============ Tarjetas de hotel ============ */
+.hotel-card { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--dest, var(--sa)); border-radius: 14px; margin: 10px 14px; padding: 14px; }
+.hotel-card .hc-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.hotel-card .hc-dest { font-size: .78em; font-weight: 800; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); }
+.hotel-card .hc-name { font-size: 1.12em; font-weight: 800; margin-top: 6px; }
+.hotel-card .hc-dates { font-size: .85em; color: var(--ink); margin-top: 4px; }
+.hotel-card .hc-kv { display: flex; justify-content: space-between; gap: 12px; font-size: .85em; margin-top: 7px; }
+.hotel-card .hc-kv .k { color: var(--muted); }
+.hotel-card .hc-kv span:last-child { text-align: right; font-weight: 600; }
+.hotel-card .hc-note { font-size: .82em; color: var(--muted); margin-top: 9px; line-height: 1.4; }
+.hotel-card .hc-maps { display: inline-block; margin-top: 11px; font-size: .82em; font-weight: 700; color: var(--sa); }
+
+/* ============ Maleta / packing ============ */
+.pack-strat .ps-row { display: flex; gap: 10px; font-size: .86em; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.pack-strat .ps-row:last-of-type { border-bottom: 0; }
+.pack-strat .ps-k { flex: 0 0 72px; color: var(--muted); font-weight: 700; }
+.pack-tip { margin-top: 10px; font-size: .84em; background: var(--bg); border-radius: 10px; padding: 9px 11px; line-height: 1.4; }
+.section-title.pack-head { display: flex; justify-content: space-between; align-items: baseline; }
+.pack-count { font-size: .82em; color: var(--muted); font-weight: 700; }
+.pack-intro { margin: -2px 16px 8px; font-size: .82em; color: var(--muted); line-height: 1.45; }
+.pack-item { width: 100%; text-align: left; align-items: flex-start; }
+.pack-item .ct { display: flex; flex-direction: column; gap: 2px; }
+.pi-label { font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.pi-qty { font-size: .72em; font-weight: 700; color: var(--sa); background: color-mix(in srgb, var(--sa) 12%, transparent); padding: 1px 7px; border-radius: 999px; }
+.pi-kids { font-size: .68em; font-weight: 800; text-transform: uppercase; letter-spacing: .3px; color: var(--warn); background: color-mix(in srgb, var(--warn) 14%, transparent); padding: 1px 6px; border-radius: 999px; }
+.pi-note { font-size: .8em; color: var(--muted); line-height: 1.4; }
+.pack-item.on .pi-label { text-decoration: line-through; color: var(--muted); }

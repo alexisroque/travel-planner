@@ -95,6 +95,14 @@ export default function Summary() {
         <span><strong>✈️ Vuelos y transporte</strong><div style={{ fontSize: '.82em', color: 'var(--muted)' }}>{trip.legs.filter((l) => l.type === 'flight').length} vuelos · {trip.legs.filter((l) => l.type === 'ferry').length} ferries · trasbordo propio</div></span>
         <span style={{ fontSize: '1.3em', color: 'var(--muted)' }}>›</span>
       </Link>
+      <Link to="/hoteles" className="card tight" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span><strong>🏨 Alojamientos</strong><div style={{ fontSize: '.82em', color: 'var(--muted)' }}>{trip.accommodations.length} hoteles · {trip.accommodations.reduce((s, a) => s + a.nights, 0)} noches · todos reservados</div></span>
+        <span style={{ fontSize: '1.3em', color: 'var(--muted)' }}>›</span>
+      </Link>
+      <Link to="/maleta" className="card tight" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span><strong>🧳 Maleta</strong><div style={{ fontSize: '.82em', color: 'var(--muted)' }}>checklist adaptada al recorrido · solo equipaje de mano · plan de lavandería</div></span>
+        <span style={{ fontSize: '1.3em', color: 'var(--muted)' }}>›</span>
+      </Link>
 
       {/* Progreso */}
       <div className="card tight">
