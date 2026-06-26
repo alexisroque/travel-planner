@@ -23,6 +23,8 @@ interface PlannerState {
   isPackDone: (id: string) => boolean
   vaultText: Record<string, string> // campos editables de la bóveda (seguro, contactos, niños…)
   setVaultText: (key: string, value: string) => void
+  mapPacks: Record<string, { tiles: number; ts: number }> // destId -> mapa offline descargado
+  setMapPack: (destId: string, tiles: number, ts: number) => void
   toggleTask: (id: string) => void
   toggleStatus: (dayId: string, index: number) => void
   isTaskDone: (id: string, fallback: boolean) => boolean
@@ -52,6 +54,9 @@ export const usePlanner = create<PlannerState>()(
       vaultText: {},
       setVaultText: (key, value) =>
         set((s) => ({ vaultText: { ...s.vaultText, [key]: value } })),
+      mapPacks: {},
+      setMapPack: (destId, tiles, ts) =>
+        set((s) => ({ mapPacks: { ...s.mapPacks, [destId]: { tiles, ts } } })),
       toggleTask: (id) =>
         set((s) => ({ taskDone: { ...s.taskDone, [id]: !s.taskDone[id] } })),
       toggleStatus: (dayId, index) =>

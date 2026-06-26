@@ -22,6 +22,7 @@ function flightStats() {
 }
 import { usePlanner } from '../store'
 import TripMap, { type MapPoint } from '../components/TripMap'
+import OfflineMaps from '../components/OfflineMaps'
 import { DEST_HEX } from '../components/DayView'
 
 export default function Summary() {
@@ -115,6 +116,10 @@ export default function Summary() {
         <div className="prog-label" style={{ marginTop: 10 }}><span>Presupuesto pagado</span><span>{eur(paid)} / {eur(total)}</span></div>
         <div className="prog"><i style={{ width: `${(paid / total) * 100}%`, background: 'var(--ok)' }} /></div>
       </div>
+
+      {/* Mapas sin conexión */}
+      <div className="section-title">🗺️ Mapas sin conexión</div>
+      <OfflineMaps />
 
       {/* Ruta paso a paso */}
       <div className="section-title">La ruta</div>
