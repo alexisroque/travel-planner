@@ -173,19 +173,23 @@ export default function DayView({ day }: { day: Day }) {
         </>
       )}
 
-      {/* Plan por franjas (texto detallado) */}
-      <div className="section-title">Detalle por franjas</div>
-      <div className="card">
-        {day.slots.map((s, i) => (
-          <div className="slot" key={i}>
-            <div className="ic">{s.icon ?? '•'}</div>
-            <div className="body">
-              <div className="when">{s.time ?? SLOT_LABEL[s.key] ?? s.key}</div>
-              <div className="txt">{s.text}</div>
-            </div>
+      {/* Si no hay paradas detalladas, mostrar el plan por franjas */}
+      {(!day.stops || day.stops.length === 0) && (
+        <>
+          <div className="section-title">Plan del día</div>
+          <div className="card">
+            {day.slots.map((s, i) => (
+              <div className="slot" key={i}>
+                <div className="ic">{s.icon ?? '•'}</div>
+                <div className="body">
+                  <div className="when">{s.time ?? SLOT_LABEL[s.key] ?? s.key}</div>
+                  <div className="txt">{s.text}</div>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
 
       {/* Cómo moverse */}
       {day.transport && (
