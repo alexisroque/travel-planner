@@ -53,6 +53,38 @@ export function daysUntilTrip(today: Date = new Date()): number {
 
 export const eur = (n: number) => '€' + n.toLocaleString('es-ES')
 
+// Distancia total (km) recorriendo en orden una lista de coordenadas (haversine).
+export function distanceKm(pts: { lat: number; lon: number }[]): number {
+  let total = 0
+  for (let i = 1; i < pts.length; i++) {
+    const a = pts[i - 1], b = pts[i]
+    const R = 6371
+    const dLat = ((b.lat - a.lat) * Math.PI) / 180
+    const dLon = ((b.lon - a.lon) * Math.PI) / 180
+    const s = Math.sin(dLat / 2) ** 2 + Math.cos((a.lat * Math.PI) / 180) * Math.cos((b.lat * Math.PI) / 180) * Math.sin(dLon / 2) ** 2
+    total += 2 * R * Math.asin(Math.sqrt(s))
+  }
+  return total
+}
+
+const NON_VISIT = ['Aeropuerto', 'Hotel', 'Puerto']
+export function visitStops(day: Day) {
+  return (day.stops ?? []).filter((s) => !NON_VISIT.includes(s.category))
+}
+
+// Frase de "guía del día" según el tipo de jornada y sus highlights.
+const OPENER: Record<string, string> = {
+  travel: 'Hoy toca moverse',
+  rest: 'Hoy, día tranquilo',
+  activation: 'Hoy te espera un día grande',
+  exploration: 'Hoy, a explorar',
+}
+export function dayIntro(day: Day): string {
+  const base = OPENER[day.kind] ?? 'Hoy'
+  const hl = (day.highlights ?? []).join(' · ')
+  return hl ? `${base}: ${hl}` : `${base}. ${day.headline}`
+}
+
 export const KIND_LABEL: Record<string, string> = {
   travel: 'Día de viaje',
   exploration: 'Exploración',

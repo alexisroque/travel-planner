@@ -16,14 +16,29 @@ const TRANSIT_LABEL: Record<TransitMode, string> = {
 }
 
 function Transit({ t }: { t: NonNullable<Stop['transitToNext']> }) {
+  const [open, setOpen] = useState(false)
   const bits = [TRANSIT_LABEL[t.mode]]
   if (t.min) bits.push(t.min >= 60 ? `${Math.floor(t.min / 60)}h${t.min % 60 ? ' ' + (t.min % 60) + 'm' : ''}` : `${t.min} min`)
   if (t.km) bits.push(`${t.km} km`)
+  const hasInfo = t.line || t.board || t.alight || t.fare || t.freq || t.tip
   return (
-    <div className="transit">
-      <span className="tx-ic">{TRANSIT_ICON[t.mode]}</span>
-      <span>{bits.join(' · ')}{t.note ? ` · ${t.note}` : ''}</span>
-      <span className="tx-line" />
+    <div className="transit-wrap">
+      <div className="transit">
+        <span className="tx-ic">{TRANSIT_ICON[t.mode]}</span>
+        <span>{bits.join(' · ')}{t.note ? ` · ${t.note}` : ''}</span>
+        {hasInfo && <button className="tx-info" onClick={() => setOpen((v) => !v)}>{open ? 'ocultar' : 'ⓘ cómo'}</button>}
+        <span className="tx-line" />
+      </div>
+      {open && hasInfo && (
+        <div className="transit-info">
+          {t.line && <div><b>Línea:</b> {t.line}</div>}
+          {t.board && <div><b>Coger en:</b> {t.board}</div>}
+          {t.alight && <div><b>Bajar en:</b> {t.alight}</div>}
+          {t.fare && <div><b>Tarifa:</b> {t.fare}</div>}
+          {t.freq && <div><b>Frecuencia:</b> {t.freq}</div>}
+          {t.tip && <div className="ti-tip">💡 {t.tip}</div>}
+        </div>
+      )}
     </div>
   )
 }
@@ -75,6 +90,7 @@ export default function DayView({ day }: { day: Day }) {
         </div>
         <h2 style={{ fontSize: '1.3em', fontWeight: 800, letterSpacing: '-.3px' }}>{day.emoji} {day.title}</h2>
         <div className="dc-headline" style={{ marginTop: 5 }}>{day.headline}</div>
+        {dest.sun && <div style={{ marginTop: 8, fontSize: '.78em', color: 'var(--muted)' }}>🌅 Amanece {dest.sun.rise} · 🌇 Anochece {dest.sun.set}</div>}
         <div style={{ display: 'flex', gap: 8, marginTop: 10, flexWrap: 'wrap' }}>
           <span className="badge free">{KIND_LABEL[day.kind]}</span>
           {day.accommodation && <span className={`badge ${day.accommodation.status}`}>🛏️ {day.accommodation.name}</span>}

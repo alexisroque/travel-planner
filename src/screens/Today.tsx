@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { trip } from '../data/trip'
-import { activeDay, daysUntilTrip, destById, destStyle, eur } from '../lib/utils'
+import { activeDay, daysUntilTrip, destById, destStyle, dayIntro, distanceKm, visitStops } from '../lib/utils'
 import { usePlanner } from '../store'
 import { useWeather, weatherEmoji } from '../lib/weather'
 import { useGeo } from '../lib/useGeo'
@@ -14,7 +14,6 @@ export default function Today() {
   const until = daysUntilTrip(now)
   // Pre-viaje: clima/contexto de la primera parada (Singapur). En ruta: el destino del día.
   const focusDest = until > 0 ? destById('sin') : destById(today.destinationId === 'travel' ? 'sin' : today.destinationId)
-  const totalBudget = trip.budget.reduce((s, b) => s + b.amount, 0)
   const isStatusDone = usePlanner((s) => s.isStatusDone)
   const toggleStatus = usePlanner((s) => s.toggleStatus)
   const isTaskDoneSel = usePlanner((s) => s.isTaskDone)
@@ -31,20 +30,44 @@ export default function Today() {
 
   const tempShown = live && wx ? wx.tempC : focusDest.climate?.tempDay
   const wxIcon = live && wx ? weatherEmoji(wx.code) : '🌡️'
+  const sun = focusDest.sun
+
+  // Stats de la cabecera, adaptadas a la fase del día (estilo "guía del día")
+  const nVisit = visitStops(today).length
+  const kmToday = Math.round(distanceKm((today.stops ?? []).filter((s) => s.coords).map((s) => s.coords!)))
+  const isTravel = today.kind === 'travel'
+  const legCount = (today.legIds ?? []).length
 
   return (
     <div className="fadein">
       <div className="hero" style={{ ...destStyle(focusDest.id), background: destColor }}>
-        <h1>{trip.name}</h1>
+        <div className="hero-date">{until > 0 ? `Faltan ${until} días para volar` : `${today.weekday} · ${today.date} · ${until === 0 ? 'día 1' : `día ${today.dayNumber}`} de ${trip.stats.days}`}</div>
         <div className="big">{focusDest.emoji} {focusDest.name}</div>
-        <div className="meta">{until > 0 ? `Primera parada · ${trip.subtitle}` : trip.subtitle}</div>
+        <div className="hero-guide">{until > 0 ? `Tu gran viaje por Asia: ${trip.subtitle}` : dayIntro(today)}</div>
         <div className="countdown">
-          {until > 0
-            ? <div className="cd"><div className="n">{until}</div><div className="l">días para salir</div></div>
-            : <div className="cd"><div className="n">{today.dayNumber ?? 0}</div><div className="l">de {trip.stats.days} días</div></div>}
-          <div className="cd"><div className="n">{tempShown ? `${tempShown}°` : '—'}</div><div className="l">{live ? `${wxIcon} ahora` : '🌡️ típico jul'}</div></div>
-          <div className="cd"><div className="n">{eur(totalBudget)}</div><div className="l">presupuesto</div></div>
+          {until > 0 ? (
+            <>
+              <div className="cd"><div className="n">✈️</div><div className="l">sale 12 Jul</div></div>
+              <div className="cd"><div className="n">{tempShown}°</div><div className="l">{wxIcon} Singapur</div></div>
+              <div className="cd"><div className="n">{trip.stats.days}</div><div className="l">días de viaje</div></div>
+            </>
+          ) : isTravel ? (
+            <>
+              <div className="cd"><div className="n">✈️ {legCount}</div><div className="l">{legCount === 1 ? 'vuelo' : 'vuelos'} hoy</div></div>
+              <div className="cd"><div className="n">{tempShown}°</div><div className="l">{wxIcon} {focusDest.name}</div></div>
+              {sun && <div className="cd"><div className="n">🌅</div><div className="l">{sun.rise}–{sun.set}</div></div>}
+            </>
+          ) : (
+            <>
+              <div className="cd"><div className="n">{nVisit}</div><div className="l">🗺️ sitios hoy</div></div>
+              {kmToday > 0 && <div className="cd"><div className="n">{kmToday}</div><div className="l">🚗 km del día</div></div>}
+              <div className="cd"><div className="n">{tempShown}°</div><div className="l">{wxIcon} {live ? 'ahora' : 'típico'}</div></div>
+            </>
+          )}
         </div>
+        {sun && !isTravel && until <= 0 && (
+          <div className="hero-sun">🌅 Amanece {sun.rise} · 🌇 Anochece {sun.set}</div>
+        )}
       </div>
 
       {/* Agenda contextual de hoy */}

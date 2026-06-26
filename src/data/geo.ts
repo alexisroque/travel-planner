@@ -1,14 +1,14 @@
 import type { Climate, Stop } from '../types'
 
 // Coordenadas y clima por destino (normales de julio-agosto).
-export const destGeo: Record<string, { coords?: { lat: number; lon: number }; climate?: Climate }> = {
-  sin: { coords: { lat: 1.2897, lon: 103.8501 }, climate: { tempDay: 31, tempNight: 26, label: 'Cálido y muy húmedo', advice: 'Chubascos posibles. Hidratarse, buscar AC al mediodía.' } },
-  sepilok: { coords: { lat: 5.8740, lon: 117.9460 }, climate: { tempDay: 32, tempNight: 24, label: 'Selva húmeda, lluvias', advice: 'Manga larga al amanecer/anochecer. DEET siempre.' } },
-  kinabatangan: { coords: { lat: 5.5170, lon: 118.2950 }, climate: { tempDay: 32, tempNight: 24, label: 'Tropical húmedo', advice: 'Aguas bajas en julio = mejor fauna. Bolsas estancas en barca.' } },
-  kl: { coords: { lat: 3.1539, lon: 101.7120 }, climate: { tempDay: 32, tempNight: 25, label: 'Cálido, chubascos tarde', advice: 'Tormentas a media tarde. Aprovechar mañanas y malls con AC.' } },
-  ubud: { coords: { lat: -8.5069, lon: 115.2625 }, climate: { tempDay: 29, tempNight: 22, label: 'Seco, noches frescas', advice: 'Estación seca en Bali. Mañanas frescas, sol fuerte al mediodía.' } },
-  gili: { coords: { lat: -8.3560, lon: 116.0840 }, climate: { tempDay: 30, tempNight: 25, label: 'Seco y soleado', advice: 'Sol intenso sobre el agua. Protector biodegradable y sombra.' } },
-  sanur: { coords: { lat: -8.6878, lon: 115.2620 }, climate: { tempDay: 29, tempNight: 24, label: 'Seco, brisa marina', advice: 'Época seca. Brisa agradable. Sol fuerte 11-15h.' } },
+export const destGeo: Record<string, { coords?: { lat: number; lon: number }; climate?: Climate; sun?: { rise: string; set: string } }> = {
+  sin: { coords: { lat: 1.2897, lon: 103.8501 }, sun: { rise: '07:05', set: '19:11' }, climate: { tempDay: 31, tempNight: 26, label: 'Cálido y muy húmedo', advice: 'Chubascos posibles. Hidratarse, buscar AC al mediodía.' } },
+  sepilok: { coords: { lat: 5.8740, lon: 117.9460 }, sun: { rise: '05:58', set: '18:20' }, climate: { tempDay: 32, tempNight: 24, label: 'Selva húmeda, lluvias', advice: 'Manga larga al amanecer/anochecer. DEET siempre.' } },
+  kinabatangan: { coords: { lat: 5.5170, lon: 118.2950 }, sun: { rise: '05:55', set: '18:22' }, climate: { tempDay: 32, tempNight: 24, label: 'Tropical húmedo', advice: 'Aguas bajas en julio = mejor fauna. Bolsas estancas en barca.' } },
+  kl: { coords: { lat: 3.1539, lon: 101.7120 }, sun: { rise: '07:08', set: '19:25' }, climate: { tempDay: 32, tempNight: 25, label: 'Cálido, chubascos tarde', advice: 'Tormentas a media tarde. Aprovechar mañanas y malls con AC.' } },
+  ubud: { coords: { lat: -8.5069, lon: 115.2625 }, sun: { rise: '06:30', set: '18:08' }, climate: { tempDay: 29, tempNight: 22, label: 'Seco, noches frescas', advice: 'Estación seca en Bali. Mañanas frescas, sol fuerte al mediodía.' } },
+  gili: { coords: { lat: -8.3560, lon: 116.0840 }, sun: { rise: '06:25', set: '18:05' }, climate: { tempDay: 30, tempNight: 25, label: 'Seco y soleado', advice: 'Sol intenso sobre el agua. Protector biodegradable y sombra.' } },
+  sanur: { coords: { lat: -8.6878, lon: 115.2620 }, sun: { rise: '06:31', set: '18:09' }, climate: { tempDay: 29, tempNight: 24, label: 'Seco, brisa marina', advice: 'Época seca. Brisa agradable. Sol fuerte 11-15h.' } },
 }
 
 type Enrich = { stops?: Stop[]; highlights?: string[]; quickTips?: string[] }
@@ -23,24 +23,43 @@ export const dayEnrich: Record<string, Enrich> = {
     ],
   },
   d1: {
-    highlights: ['🏖️ Playa Palawan', '🚡 Cable car', '😴 Recuperar jetlag'],
-    quickTips: ['No forzar: día de recuperación.', 'Sentosa es ideal con jetlag — playa sin horarios.'],
+    highlights: ['🌧️ Jewel Rain Vortex', '🌳 Botanic Gardens', '💧 Spectra (show agua+luz)'],
+    quickTips: [
+      'Check-in real del hotel a las ~14:00 — por la mañana solo dejáis maletas en recepción.',
+      'Con maletas y niños cansados, el Grab del aeropuerto (~25 SGD) compensa frente a 2 transbordos de MRT.',
+      '💧 Spectra es GRATIS: 20:00 y 21:00 en Marina Bay Sands. 🌇 Atardece a las 19:11.',
+    ],
     stops: [
-      { n: 1, name: 'Changi Airport', category: 'Aeropuerto', emoji: '🛬', coords: { lat: 1.3564, lon: 103.9876 }, time: '06:55', transitToNext: { mode: 'train', min: 30, note: 'MRT a Orchard' } },
-      { n: 2, name: 'Holiday Inn Orchard', category: 'Hotel', emoji: '🛏️', coords: { lat: 1.3048, lon: 103.8318 }, time: '09:00', note: 'Check-in + descanso 2-3h', transitToNext: { mode: 'train', min: 25, note: 'MRT + Sentosa Express' } },
-      { n: 3, name: 'Playa Palawan (Sentosa)', category: 'Playa', emoji: '🏖️', coords: { lat: 1.2496, lon: 103.8226 }, time: 'Tarde', note: 'Arena, agua calmada, cable car opcional', transitToNext: { mode: 'train', min: 15 } },
-      { n: 4, name: 'VivoCity', category: 'Comida', emoji: '🍽️', coords: { lat: 1.2643, lon: 103.8222 }, time: 'Cena', note: 'Food court con AC' },
+      { n: 1, name: 'Changi + Jewel (Rain Vortex)', category: 'Mirador', emoji: '🌧️', coords: { lat: 1.3601, lon: 103.9890 }, time: '07:30', note: 'Antes de salir del aeropuerto: la cascada interior más alta del mundo (gratis) + desayuno en Jewel (kaya toast, dim sum). Primer wow sin esfuerzo mientras espabiláis.',
+        transitToNext: { mode: 'car', min: 25, note: 'Grab al hotel', line: 'Grab / taxi', board: 'Parada de taxis o punto Grab en T3', alight: 'Holiday Inn Orchard', fare: '~25 SGD (~17€) los 4', tip: "Pon 'Holiday Inn Express Singapore Orchard' en Grab. Alternativa barata: MRT (East-West verde, cambio en Tanah Merah → North-South roja hasta Orchard), ~45-60 min y ~2 SGD/persona, pero con maletas es incómodo." } },
+      { n: 2, name: 'Holiday Inn Orchard', category: 'Hotel', emoji: '🛏️', coords: { lat: 1.3048, lon: 103.8318 }, time: '09:30', note: 'Dejar maletas en recepción (check-in a las 14:00). Aseo, agua y a por la mañana.', status: 'booked',
+        transitToNext: { mode: 'car', min: 12, note: 'Grab al Botanic Gardens', line: 'Grab', fare: '~8 SGD', tip: 'También en MRT: línea Downtown (azul) hasta Botanic Gardens, ~10 min.' } },
+      { n: 3, name: 'Singapore Botanic Gardens + Orchid Garden', category: 'Naturaleza', emoji: '🌳', coords: { lat: 1.3138, lon: 103.8159 }, time: '10:30', hours: 'Abre 5:00 · Orchid Garden ~5 SGD', note: 'Patrimonio UNESCO, gratis. Mañana suave y a la sombra: lago de cisnes, ardillas, césped donde corren los niños y el jardín de orquídeas. Perfecto para el jet lag sin quedarse parados.',
+        transitToNext: { mode: 'car', min: 12, note: 'Grab a comer' } },
+      { n: 4, name: 'Comida: Casa Verde / Tiong Bahru', category: 'Comida', emoji: '🍜', coords: { lat: 1.3135, lon: 103.8166 }, time: '13:00', note: 'Comer dentro de los jardines (Casa Verde: pizzas + local, kid-friendly) o, si os animáis, hawker en Tiong Bahru Market (chwee kueh, lor mee) — barrio bonito.',
+        transitToNext: { mode: 'car', min: 12, note: 'Vuelta al hotel' } },
+      { n: 5, name: 'Holiday Inn — check-in + siesta', category: 'Hotel', emoji: '😴', coords: { lat: 1.3048, lon: 103.8318 }, time: '14:30', note: 'Check-in real, maletas a la habitación. Siesta o piscina 2h: ESTE es el reset del jet lag antes de la noche.', status: 'booked',
+        transitToNext: { mode: 'train', min: 18, note: 'MRT a Marina Bay', line: 'MRT North-South (roja) + Downtown (azul)', board: 'Orchard (línea roja)', alight: 'Bayfront (salida Marina Bay Sands)', fare: '~1,5 SGD/persona', freq: 'cada 3-5 min' } },
+      { n: 6, name: 'Merlion Park + waterfront', category: 'Mirador', emoji: '🦁', coords: { lat: 1.2868, lon: 103.8545 }, time: '17:00', note: 'Paseo por la bahía, foto con el Merlion y vistas a Marina Bay Sands. Atardecer ~19:11.',
+        transitToNext: { mode: 'walk', min: 12, note: 'Paseo por el waterfront' } },
+      { n: 7, name: 'Cena: Makansutra Gluttons Bay', category: 'Comida', emoji: '🍢', coords: { lat: 1.2895, lon: 103.8556 }, time: '18:45', note: 'Hawker al aire libre junto al agua: satay, chili crab, char kway teow. Cena fácil y rica antes del show.',
+        transitToNext: { mode: 'walk', min: 8, note: 'Hasta el Event Plaza de MBS' } },
+      { n: 8, name: 'Spectra — show de agua y luz', category: 'Show', emoji: '💧', coords: { lat: 1.2834, lon: 103.8607 }, time: '20:00', hours: 'Gratis · 20:00 y 21:00', note: 'Show de agua, láser y música en el Event Plaza de Marina Bay Sands. Sentaos en las gradas junto al agua. Grab de vuelta al hotel.' },
     ],
   },
   d2: {
-    highlights: ['🌿 Cloud Forest', '🦁 Night Safari', '🌳 Supertrees'],
-    quickTips: ['⚠️ Reservar Cloud Forest y Night Safari online — se agotan.', 'Supertrees show gratis 19:45 antes del safari.'],
+    highlights: ['🌿 Cloud Forest', '🏖️ Sentosa', '🌳 Garden Rhapsody'],
+    quickTips: [
+      'Cloud Forest a primera hora: con AC, escapáis del calor del mediodía.',
+      '🌳 Garden Rhapsody GRATIS: 19:45 y 20:45 en los Supertrees.',
+      'Mañana (15 Jul) vuelos a Borneo: preparad la mochila y dejad lista la maleta esta noche.',
+    ],
     stops: [
-      { n: 1, name: 'Cloud Forest + Flower Dome', category: 'Naturaleza', emoji: '🌿', coords: { lat: 1.2816, lon: 103.8636 }, time: 'Mañana', hours: 'Abierto 9:00–21:00', note: 'Cascada interior con AC', status: 'pending', transitToNext: { mode: 'walk', min: 12 } },
-      { n: 2, name: 'Maxwell Food Centre', category: 'Comida', emoji: '🍜', coords: { lat: 1.2807, lon: 103.8447 }, time: 'Mediodía', note: 'Tian Tian chicken rice', transitToNext: { mode: 'walk', min: 15 } },
-      { n: 3, name: 'Merlion + Marina Bay', category: 'Mirador', emoji: '📸', coords: { lat: 1.2868, lon: 103.8545 }, time: 'Tarde', transitToNext: { mode: 'walk', min: 10 } },
-      { n: 4, name: 'Supertree Grove (light show)', category: 'Show', emoji: '🌳', coords: { lat: 1.2820, lon: 103.8645 }, time: '19:45', note: 'Show gratis', transitToNext: { mode: 'car', min: 25, note: 'Grab a Mandai' } },
-      { n: 5, name: 'Night Safari Mandai', category: 'Naturaleza', emoji: '🦁', coords: { lat: 1.4029, lon: 103.7886 }, time: '21:00', hours: 'Abre 19:30', note: 'Tram nocturno', status: 'pending' },
+      { n: 1, name: 'Cloud Forest + Flower Dome', category: 'Naturaleza', emoji: '🌿', coords: { lat: 1.2816, lon: 103.8636 }, time: '09:00', hours: 'Abre 9:00', note: 'Cascada interior con AC', status: 'pending', transitToNext: { mode: 'walk', min: 8 } },
+      { n: 2, name: 'Satay by the Bay', category: 'Comida', emoji: '🍢', coords: { lat: 1.2812, lon: 103.8669 }, time: '12:00', note: 'Hawker dentro de los jardines', transitToNext: { mode: 'train', min: 25, note: 'MRT a Sentosa' } },
+      { n: 3, name: 'Sentosa — Playa Palawan', category: 'Playa', emoji: '🏖️', coords: { lat: 1.2496, lon: 103.8226 }, time: '13:30', note: 'Agua calmada, cable car opcional. Plan B con calor: S.E.A. Aquarium', transitToNext: { mode: 'train', min: 30, note: 'Vuelta a Gardens by the Bay' } },
+      { n: 4, name: 'OCBC Skyway (Supertrees)', category: 'Mirador', emoji: '🌉', coords: { lat: 1.2825, lon: 103.8640 }, time: '18:45', note: 'Pasarela entre Supertrees al atardecer (~19:11)', transitToNext: { mode: 'walk', min: 3 } },
+      { n: 5, name: 'Garden Rhapsody — show de luz', category: 'Show', emoji: '🌳', coords: { lat: 1.2820, lon: 103.8645 }, time: '19:45', hours: 'Gratis · 19:45 y 20:45', note: 'Supertree Grove' },
     ],
   },
   d3: {

@@ -33,6 +33,7 @@ export interface Destination {
   summary: string
   coords?: { lat: number; lon: number }
   climate?: Climate
+  sun?: { rise: string; set: string } // amanecer/atardecer típico (jul-ago, hora local)
   logistics: { currency?: string; plug?: string; transport?: string; tipping?: string; water?: string; notes?: string }
   alerts: string[]
   emergency?: { insurance?: string; hotel?: string; embassy?: string }
@@ -63,7 +64,15 @@ export interface Stop {
   note?: string
   status?: BookingStatus
   audience?: Audience
-  transitToNext?: { mode: TransitMode; min?: number; km?: number; note?: string }
+  transitToNext?: {
+    mode: TransitMode; min?: number; km?: number; note?: string
+    line?: string // p.ej. "MRT North-South (roja)"
+    board?: string // dónde subir: "Changi T3 → cambio en Tanah Merah"
+    alight?: string // dónde bajar
+    fare?: string // tarifa aprox
+    freq?: string // frecuencia
+    tip?: string // consejo práctico
+  }
 }
 
 export interface Day {

@@ -37,7 +37,10 @@ ul { list-style: none; }
 .hero h1 { font-size: 1.35em; font-weight: 300; letter-spacing: 1px; }
 .hero .big { font-size: 2.1em; font-weight: 800; margin: 6px 0 2px; letter-spacing: -.5px; }
 .hero .meta { opacity: .9; font-size: .9em; }
-.hero .countdown { margin-top: 14px; display: flex; gap: 16px; }
+.hero-date { font-size: .76em; text-transform: uppercase; letter-spacing: 1.5px; opacity: .8; font-weight: 700; }
+.hero-guide { font-size: .98em; opacity: .95; margin-top: 6px; line-height: 1.4; }
+.hero-sun { margin-top: 12px; font-size: .76em; opacity: .85; background: rgba(255,255,255,.14); display: inline-block; padding: 5px 11px; border-radius: 999px; }
+.hero .countdown { margin-top: 16px; display: flex; gap: 14px; flex-wrap: wrap; }
 .hero .cd { background: rgba(255,255,255,.16); border-radius: 12px; padding: 8px 14px; backdrop-filter: blur(4px); }
 .hero .cd .n { font-size: 1.5em; font-weight: 800; line-height: 1; }
 .hero .cd .l { font-size: .62em; text-transform: uppercase; letter-spacing: 1px; opacity: .8; margin-top: 3px; }
@@ -205,6 +208,10 @@ nav.bottom a.active .ni { transform: translateY(-1px); }
 .transit { display: flex; align-items: center; gap: 7px; font-size: .74em; color: var(--muted); padding: 3px 0 9px; }
 .transit .tx-ic { font-size: 1.05em; }
 .transit .tx-line { flex: 1; height: 1px; border-top: 1px dashed var(--line); }
+.transit .tx-info { font-size: .92em; font-weight: 700; color: var(--sa); background: var(--sa-l); padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.transit-info { background: #f3f6fa; border-left: 3px solid var(--sin); border-radius: 9px; padding: 9px 11px; margin: 0 0 10px; font-size: .8em; line-height: 1.6; }
+.transit-info b { color: var(--ink); }
+.transit-info .ti-tip { margin-top: 4px; color: #555; }
 
 /* ===== Climate chip ===== */
 .climate { display: flex; align-items: center; gap: 12px; }
