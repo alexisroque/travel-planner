@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { packPeople, appGroups, laundryPlan, luggageStrategy, itemCount, PackItem, PackPerson } from '../data/packing'
+import { packPeople, appGroups, laundryPlan, luggageStrategy, phaseGuide, itemCount, PackItem, PackPerson } from '../data/packing'
 import { usePlanner } from '../store'
 import Celebrate from '../components/Celebrate'
 
@@ -135,9 +135,20 @@ export default function Packing() {
         })}
       </div>
 
-      {/* Estrategia + lavandería + apps: solo en la pestaña Común */}
+      {/* Estrategia + guía de uso + lavandería + apps: solo en la pestaña Común */}
       {active === 'comun' && (
         <>
+          <div className="section-title">🧭 ¿Cuándo usas cada cosa?</div>
+          <div className="pack-intro">Guía por tramo del viaje: qué sacar y tener a mano en cada momento.</div>
+          {phaseGuide.map((ph) => (
+            <div className="card phase-card" key={ph.phase}>
+              <div className="phase-head"><span className="phase-emoji">{ph.icon}</span><div><div className="phase-title">{ph.phase}</div><div className="phase-when">{ph.when}</div></div></div>
+              <ul className="phase-items">
+                {ph.items.map((it, i) => <li key={i}>{it}</li>)}
+              </ul>
+            </div>
+          ))}
+
           <div className="section-title">🧳 Estrategia: solo equipaje de mano</div>
           <div className="card pack-strat">
             <div className="ps-row"><span className="ps-k">Bultos</span><span>{luggageStrategy.bags}</span></div>

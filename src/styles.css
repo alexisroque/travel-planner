@@ -463,6 +463,16 @@ nav.bottom a.active .ni { transform: translateY(-1px); }
 @keyframes dot-pop { 0% { transform: scale(.5); } 60% { transform: scale(1.18); } 100% { transform: scale(1); } }
 .leo-reading .pack-row { padding: 14px 0; }
 
+/* Guía de uso por tramo del viaje */
+.phase-card { padding: 14px 16px; }
+.phase-head { display: flex; align-items: center; gap: 11px; margin-bottom: 8px; }
+.phase-emoji { font-size: 1.6em; line-height: 1; }
+.phase-title { font-weight: 800; font-size: .98em; }
+.phase-when { font-size: .76em; color: var(--muted); margin-top: 1px; }
+.phase-items { list-style: none; margin: 0; padding: 0; }
+.phase-items li { position: relative; padding: 5px 0 5px 18px; font-size: .88em; line-height: 1.4; border-top: 1px solid var(--line); }
+.phase-items li::before { content: '·'; position: absolute; left: 4px; top: 4px; color: var(--sa); font-weight: 900; }
+
 /* ============ Checklist imprimible (niños) ============ */
 .print-btn { width: 100%; padding: 12px; background: var(--sa); color: #fff; border-radius: 12px; font-weight: 800; font-size: .95em; }
 .print-btn:active { opacity: .8; }
