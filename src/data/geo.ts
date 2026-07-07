@@ -111,12 +111,78 @@ export const dayEnrich: Record<string, Enrich> = {
       { n: 1, name: 'Desayuno: Ya Kun Kaya Toast', category: 'Comida', emoji: '🍞', coords: { lat: 1.3040, lon: 103.8320 }, time: '08:15', note: 'Kaya toast con huevo pasado por agua y kopi — desayuno singapurense clásico cerca del hotel.',
         transitToNext: { mode: 'train', min: 20, note: 'MRT a Gardens by the Bay', line: 'Downtown (azul)', alight: 'Bayfront', fare: '~1,5 SGD' } },
       { n: 2, name: 'Cloud Forest + Flower Dome', category: 'Naturaleza', emoji: '🌿', coords: { lat: 1.2816, lon: 103.8636 }, time: '09:00', hours: 'Abre 9:00', note: 'Cascada interior con AC. Pasarela entre la niebla. Reservar online. Combo con Flower Dome. Empezad pronto para escapar del calor del mediodía.', status: 'pending',
+        guide: {
+          intro: 'Gardens by the Bay es la carta de presentación futurista de Singapur: dos domos climatizados y los famosos "Supertrees". El Cloud Forest tiene la cascada interior más alta del mundo dentro de una montaña de niebla. Con el calor de fuera, entrar aquí es un respiro literal.',
+          time: '2–2½ h los dos domos', bestTime: 'Nada más abrir (9:00): fresco y sin los grupos, que llegan a media mañana.',
+          route: [
+            'Entra primero al Cloud Forest: te recibe la cascada de 35 m. Coge el ascensor ARRIBA del todo y baja a pie por la pasarela entre la niebla — así es cuesta abajo.',
+            'Cruza al Flower Dome (el invernadero de flores más grande del mundo): jardines por regiones y baobabs. Más tranquilo, para bajar el ritmo.',
+            'Fuera, guarda los Supertrees para volver al anochecer: aquí mismo es el show Garden Rhapsody y la cena en Satay by the Bay (ya en el plan de la tarde).',
+          ],
+          tips: [
+            'Compra el combo de los dos domos ONLINE (Klook) antes de ir: más barato y te saltas la cola de taquilla.',
+            'Lleva una capa fina: dentro está a ~23° y con el calor de fuera se agradece.',
+            'El OCBC Skyway (pasarela entre Supertrees, ~12 SGD) se disfruta mejor al atardecer, no ahora.',
+          ],
+          family: [
+            'La cascada del Cloud Forest y el ascensor de cristal los dejan boquiabiertos nada más entrar.',
+            'Explicadles que los Supertrees son árboles "de mentira" que recogen agua de lluvia y energía del sol — de noche se iluminan y "cantan".',
+          ],
+          eat: [
+            { name: 'Satay by the Bay', dish: 'satay, fideos, marisco hawker', note: 'Hawker dentro de los propios jardines: os pilla de camino y es donde cenaréis antes del show. Local y barato.' },
+          ],
+        },
         transitToNext: { mode: 'walk', min: 12, note: 'Paseo por el waterfront hasta el Merlion', tip: 'Cruzando la pasarela del helix y por delante de Marina Bay Sands.' } },
       { n: 3, name: 'Marina Bay Sands + Merlion Park', category: 'Mirador', emoji: '🦁', coords: { lat: 1.2868, lon: 103.8545 }, time: '11:30', note: 'Foto con el Merlion, vistas al hotel-barco y paseo por el waterfront de la bahía. El corazón postalero de Singapur.',
+        guide: {
+          intro: 'Marina Bay es la postal de Singapur: el Merlion (medio león, medio pez, símbolo de la ciudad) escupiendo agua frente al hotel-barco Marina Bay Sands. Un paseo corto que conecta lo antiguo (el río) con lo nuevo (los rascacielos).',
+          time: '1–1½ h de paseo', bestTime: 'Media mañana para las fotos; al anochecer para el show Spectra (ya en el plan de noche).',
+          route: [
+            'Empieza en Merlion Park: la foto clásica "bebiendo" del chorro del Merlion, con Marina Bay Sands detrás.',
+            'Bordea el paseo de la bahía (Jubilee Bridge) hacia el Esplanade (el edificio "durian").',
+            'Cruza el puente helicoidal (Helix Bridge) hasta Marina Bay Sands: mira dentro al vestíbulo y las tiendas con su canal interior.',
+          ],
+          tips: [
+            'Hay DOS Merlions pegados: el grande y su "cría" detrás — buscad los dos.',
+            'A mediodía pega mucho el sol y hay poca sombra: gorra, agua y crema. Guarda el mirador (SkyPark) o el show para cuando refresque.',
+            'Del Merlion a Chinatown hay 10 min en MRT (línea roble/Downtown) o un Grab corto: encaja con la comida de Maxwell.',
+          ],
+          family: [
+            'Cuéntales la leyenda: un príncipe vio un león al llegar a la isla y la llamó "Singapura" (ciudad del león); el pez recuerda que era un pueblo de pescadores.',
+            'Foto divertida: colocarse para "beber" o "recoger" el chorro de agua del Merlion.',
+          ],
+          eat: [
+            { name: 'Makansutra Gluttons Bay', dish: 'char kway teow, BBQ stingray, satay', note: 'Hawker icónico junto al agua, a 5 min andando por el paseo. Local, barato y con vistas a la bahía.' },
+            { name: 'Satay Street — Lau Pa Sat', dish: 'satay a la brasa', note: 'A un paseo hacia el CBD; brutal de noche cuando cortan la calle. Buen plan si acabáis por la zona.' },
+          ],
+        },
         transitToNext: { mode: 'train', min: 12, note: 'MRT a Chinatown', line: 'Downtown (azul)', board: 'Bayfront', alight: 'Chinatown', fare: '~1,5 SGD', freq: 'cada 3-5 min' } },
       { n: 4, name: 'Comida: Maxwell — Tian Tian Chicken Rice', category: 'Comida', emoji: '🍜', coords: { lat: 1.2807, lon: 103.8447 }, time: '13:00', note: 'El chicken rice nº1 de Singapur en el hawker más famoso, en plena Chinatown. Rápido, barato y eligen ellos.',
         transitToNext: { mode: 'walk', min: 4, note: 'Subiendo a las calles de farolillos' } },
       { n: 5, name: 'Chinatown — Buddha Tooth + Sri Mariamman', category: 'Cultura', emoji: '🏮', coords: { lat: 1.2815, lon: 103.8443 }, time: '14:30', note: 'Templo del Diente de Buda (4 plantas, gratis), el templo hindú Sri Mariamman y las calles de farolillos y puestos. Colorido y muy fotogénico para los niños.',
+        guide: {
+          intro: 'El Chinatown de Singapur mezcla templos chinos, hindúes y una mezquita en cuatro calles — la mejor foto del "crisol" de la ciudad. Y es donde mejor y más barato se come: dos de los hawkers más famosos del mundo están aquí.',
+          time: '1½–2 h', bestTime: 'Por la tarde; al caer el sol se encienden los farolillos y es más fresco.',
+          route: [
+            'Empieza comiendo en el Maxwell Food Centre (Tian Tian chicken rice) — llegas con hambre y evitas el pico de mediodía.',
+            'Sube al Buddha Tooth Relic Temple: 4 plantas gratis, sala roja y dorada impresionante y una azotea con jardín y una rueda de oración gigante.',
+            'Camina por Pagoda St y Trengganu St (calles de farolillos y puestos de recuerdos) hasta el Sri Mariamman, el templo hindú más antiguo, con su torre de dioses de colores.',
+            'Termina en Chinatown Complex si quieres el pollo Michelin de Hawker Chan o un postre.',
+          ],
+          tips: [
+            'En los templos: hombros y rodillas cubiertos y quitarse los zapatos donde se indique. Se entra gratis; deja un pequeño donativo si quieres.',
+            'Regatea con cariño en los puestos de Pagoda St (imanes, abanicos, camisetas): es parte del juego.',
+            'Evita las "tiendas de suvenir" genéricas para comer; el sabor de verdad está en los hawkers (Maxwell / Chinatown Complex).',
+          ],
+          family: [
+            'En el Buddha Tooth, buscad la rueda de oración dorada de la azotea y hacedla girar (pide un deseo).',
+            'En el Sri Mariamman, retadles a contar cuántos dioses y animales de colores hay en la torre de la entrada (¡hay decenas!).',
+          ],
+          eat: [
+            { name: 'Tian Tian (Maxwell Food Centre)', dish: 'Hainanese chicken rice', note: 'El chicken rice nº1, dentro del recorrido. Bib Gourmand, ~5 SGD. Ya está en el plan como comida.' },
+            { name: 'Hawker Chan', dish: 'soya sauce chicken rice', note: 'Pollo en salsa de soja con estrella Michelin, a 2 min. El más barato del mundo con estrella.' },
+          ],
+        },
         transitToNext: { mode: 'train', min: 12, note: 'MRT de vuelta al hotel a descansar', line: 'North-East (morada) + roja', alight: 'Orchard', fare: '~1,5 SGD' } },
       { n: 6, name: 'Holiday Inn — ducha y descanso', category: 'Hotel', emoji: '😴', coords: { lat: 1.3048, lon: 103.8318 }, time: '16:00', note: 'Pausa para refrescarse antes de la noche de shows. Aprovechad para dejar la maleta casi lista (mañana vuelos a Borneo).', status: 'booked',
         transitToNext: { mode: 'train', min: 18, note: 'MRT de vuelta a Gardens by the Bay', line: 'roja + Downtown (azul)', board: 'Orchard', alight: 'Bayfront', fare: '~1,5 SGD' } },
