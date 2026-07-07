@@ -94,6 +94,26 @@ export const dayEnrich: Record<string, Enrich> = {
         },
         transitToNext: { mode: 'walk', min: 10, note: 'Beach tram / paseo a Beach Station' } },
       { n: 7, name: 'S.E.A. Aquarium', category: 'Naturaleza', emoji: '🐠', alt: 'B', coords: { lat: 1.2580, lon: 103.8208 }, time: '16:30', hours: '~30€/adulto', note: 'Plan cubierto y con AC en la misma Sentosa por si aprieta el calor o la lluvia: uno de los acuarios mayores del mundo, túnel de tiburones y manta rayas. Encanta a Leo y Aira.',
+        guide: {
+          intro: 'Uno de los acuarios más grandes del mundo, con más de 100.000 animales. Su joya es el "Open Ocean", una ventana gigante donde pasan mantas y tiburones — hipnotiza. Es el plan perfecto de aire acondicionado si el calor o la lluvia aprietan.',
+          time: '1½–2 h', bestTime: 'Media tarde: escapas del calor y llegas al show nocturno después.',
+          route: [
+            'Sigue el recorrido marcado: empieza por los naufragios y peces de arrecife.',
+            'Detente en el gran panel del "Open Ocean": siéntate en el suelo con los peques y esperad a que pasen las mantas gigantes.',
+            'Termina en el túnel de tiburones y la zona de medusas iluminadas.',
+          ],
+          tips: [
+            'Compra la entrada ONLINE (Klook): más barata y sin cola.',
+            'Combínalo con la Playa Palawan (opción A del mismo hueco) si el día acompaña: playa primero, acuario si refresca.',
+          ],
+          family: [
+            'Reto: encontrar a "Nemo" (pez payaso) y "Dory" (pez cirujano azul) entre los arrecifes.',
+            'En el panel gigante, contad juntos cuántas mantas pasan — a Leo le encantará.',
+          ],
+          eat: [
+            { name: 'Malaysian Food Street (Resorts World)', dish: 'chicken rice, char kway teow', note: 'Hawker con AC en el mismo complejo, sin salir de Sentosa.' },
+          ],
+        },
         transitToNext: { mode: 'walk', min: 10, note: 'Beach tram a Beach Station' } },
       { n: 8, name: 'Cena en Sentosa (Beach Station / FOC)', category: 'Comida', emoji: '🍤', coords: { lat: 1.2497, lon: 103.8186 }, time: '18:30', note: 'Cena con los pies casi en la arena: chiringuitos de Siloso (Coastes, FOC Sentosa) o food court de Beach Station. Sin prisa hasta el show.',
         transitToNext: { mode: 'walk', min: 6, note: 'Al anfiteatro de Wings of Time' } },
@@ -267,6 +287,26 @@ export const dayEnrich: Record<string, Enrich> = {
     ],
     stops: [
       { n: 1, name: 'Rainforest Discovery Centre', category: 'Naturaleza', emoji: '🌳', coords: { lat: 5.8780, lon: 117.9420 }, time: '07:30', hours: 'Abre 8:00 · ~8€', note: 'Canopy walkway a 26m por selva virgen. Torres para cálaos y águilas. Leo en hombros.',
+        guide: {
+          intro: 'El mejor sitio de Sepilok para "ver" la selva desde dentro: una pasarela suspendida a 26 m entre las copas, con torres de observación. Al amanecer es cuando cantan y vuelan las aves — un plan tranquilo antes de los orangutanes.',
+          time: '1½–2 h', bestTime: 'Nada más abrir (8:00): la actividad de aves y el fresco están al amanecer.',
+          route: [
+            'Sube a la primera torre de observación para las vistas sobre el dosel.',
+            'Recorre el canopy walkway (pasarela) buscando cálaos, ardillas voladoras y aves.',
+            'Baja a los senderos junto al lago si os quedan ganas antes de ir al centro de orangutanes.',
+          ],
+          tips: [
+            'Binoculares y paciencia: la fauna del dosel está alta y camuflada.',
+            'Repelente y calzado cerrado; las pasarelas resbalan con rocío/lluvia.',
+          ],
+          family: [
+            'Estáis literalmente a la altura de las copas: preguntadles qué animal creen que vive "en el ático" de la selva.',
+            'Leo en hombros para las barandillas altas de la pasarela.',
+          ],
+          eat: [
+            { name: 'Desayuno en el lodge de Sepilok', note: 'Volvéis a desayunar/comer al lodge, a un paso. Sin desviarse.' },
+          ],
+        },
         transitToNext: { mode: 'walk', min: 10, note: 'Desayuno en el resort' } },
       { n: 2, name: 'Desayuno + check-out Sepilok', category: 'Comida', emoji: '🍳', coords: { lat: 5.8740, lon: 117.9450 }, time: '10:00', note: 'Desayuno tardío, últimas compras (repelente, agua) y check-out.',
         transitToNext: { mode: 'car', min: 120, note: 'Transfer incluido a Sukau (~2h)' } },
@@ -393,6 +433,26 @@ export const dayEnrich: Record<string, Enrich> = {
     ],
     stops: [
       { n: 1, name: 'Petronas: foto + subir a la Skybridge', category: 'Mirador', emoji: '🏙️', alt: 'A', coords: { lat: 3.1578, lon: 101.7117 }, time: '09:30', hours: 'Reserva online', note: 'OPCIÓN A de mirador: Skybridge + observatorio de las torres más icónicas de Asia. Llegar 15 min antes del turno.', status: 'pending',
+        guide: {
+          intro: 'Las Torres Petronas fueron los edificios más altos del mundo (1998–2004) y siguen siendo EL símbolo de KL: dos torres gemelas de acero inspiradas en el arte islámico, unidas por un puente a 170 m. La subida te lleva a ese Skybridge y al observatorio de arriba.',
+          time: '1–1½ h la visita · foto exterior aparte', bestTime: 'Primer turno de la mañana (reserva online): mejor luz y menos cola.',
+          route: [
+            'Reserva ONLINE tu franja horaria: las entradas del día se agotan pronto.',
+            'La visita sube primero al Skybridge (piso 41) y luego al observatorio (piso 86).',
+            'Para la foto CLÁSICA de las dos torres enteras, ve al parque KLCC (detrás): a ras de suelo no caben en el encuadre.',
+          ],
+          tips: [
+            'Si no subís, la alternativa (opción B) es verlas de noche iluminadas desde el parque con el show de la fuente — gratis y espectacular.',
+            'Dentro está el centro comercial Suria KLCC con AC, aseos y comida: buen punto de encuentro.',
+          ],
+          family: [
+            'Contadles que se tardó 6 años en construirlas y que dos equipos compitieron, uno por torre.',
+            'En el parque KLCC hay zona de juegos y una fuente/piscina infantil para que se refresquen.',
+          ],
+          eat: [
+            { name: 'Madam Kwan\'s (Suria KLCC)', dish: 'nasi lemak, nasi bojari', note: 'Malayo cómodo con AC en el propio centro comercial, al pie de las torres.' },
+          ],
+        },
         transitToNext: { mode: 'walk', min: 8, note: 'A Suria KLCC' } },
       { n: 2, name: 'Comida: Madam Kwan\'s (Suria)', category: 'Comida', emoji: '🍽️', coords: { lat: 3.1580, lon: 101.7125 }, time: '12:30', note: 'Nasi lemak y laksa con vistas a las torres. Clásico familiar.',
         transitToNext: { mode: 'walk', min: 6, note: 'Bajo las torres' } },
@@ -527,6 +587,28 @@ export const dayEnrich: Record<string, Enrich> = {
       { n: 4, name: 'Comida: Sari Organik', category: 'Comida', emoji: '🥗', coords: { lat: -8.4900, lon: 115.2620 }, time: '12:00', note: 'Comida orgánica con vistas a los arrozales (se llega por un sendero bonito). Zumos frescos.',
         transitToNext: { mode: 'car', min: 15, note: 'Al Monkey Forest' } },
       { n: 5, name: 'Sacred Monkey Forest', category: 'Naturaleza', emoji: '🐒', coords: { lat: -8.5188, lon: 115.2585 }, time: '14:30', hours: '9:00–18:00 · ~5€', note: '700 macacos entre templos cubiertos de musgo y un río. Mágico (y respetuoso con las normas).',
+        guide: {
+          intro: 'Un bosque sagrado en pleno Ubud con tres templos hindúes cubiertos de musgo, un puente sobre un barranco y ~1.200 macacos de cola larga viviendo libres. Es precioso y salvaje a la vez: los monos mandan aquí, y hay que saber comportarse.',
+          time: '1–1½ h', bestTime: 'Temprano o última hora: a mediodía hace calor y los monos están más revoltosos.',
+          route: [
+            'Entra por la avenida principal de árboles gigantes hasta el templo central (Pura Dalem Agung).',
+            'Baja al puente y la fuente del "dragón" sobre el barranco — el rincón más fotogénico.',
+            'Sal por la zona del río y las estatuas de musgo.',
+          ],
+          tips: [
+            '⚠️ NADA de comida, bolsas abiertas, gafas colgando ni móvil en la mano suelto: los macacos roban al vuelo. Guárdalo todo cerrado.',
+            'No los mires fijamente a los ojos (lo leen como amenaza) ni los toques; no compres plátanos para darles.',
+            'Ropa que se pueda ensuciar; el suelo es de selva.',
+          ],
+          family: [
+            'Explica a Aira y Leo las reglas ANTES de entrar: manos vacías, tranquilos y sin chillar. Así lo viven como una aventura segura.',
+            'Buscad las crías agarradas a las madres — pero siempre desde la distancia.',
+          ],
+          eat: [
+            { name: 'Bebek Bengil (Dirty Duck)', dish: 'pato crujiente', note: 'Justo al lado del bosque, con vistas a arrozales. Kid-friendly.' },
+            { name: 'Warungs de Jl. Monkey Forest', dish: 'nasi/mie goreng, sate', note: 'La calle que sube al centro está llena de warungs locales de paso.' },
+          ],
+        },
         transitToNext: { mode: 'walk', min: 8, note: 'Al mercado y centro' } },
       { n: 6, name: 'Ubud Art Market + Palacio', category: 'Compras', emoji: '🧺', coords: { lat: -8.5069, lon: 115.2625 }, time: '16:00', note: 'Artesanía, telas y recuerdos; el Palacio Real de Ubud al lado. Helado o café.',
         transitToNext: { mode: 'car', min: 10, note: 'Al hotel a refrescarse' } },
@@ -542,6 +624,25 @@ export const dayEnrich: Record<string, Enrich> = {
     ],
     stops: [
       { n: 1, name: 'Campuhan Ridge Walk', category: 'Naturaleza', emoji: '🌿', coords: { lat: -8.5050, lon: 115.2530 }, time: '06:45', hours: 'Gratis', note: 'Loma de hierba entre valles al amanecer. Paseo suave y bonito antes del calor.',
+        guide: {
+          intro: 'Un sendero por una loma de hierba entre dos valles verdes, a un paso del centro de Ubud y GRATIS. Al amanecer, con la niebla y el fresco, es el paseo más bonito y tranquilo de la zona — ideal para empezar el día antes de que apriete el calor.',
+          time: '1–1½ h ida y vuelta', bestTime: 'Al amanecer (6:45–7:30): fresco, luz dorada y casi para vosotros solos.',
+          route: [
+            'Empieza junto al templo Gunung Lebah (puente de Campuhan) y sube a la cresta.',
+            'Camina por la loma de hierba (~1,5 km) con valles a ambos lados hasta los cafés del final.',
+            'Vuelta por el mismo camino, o sigue a los warungs de Bangkiang Sidem para desayunar.',
+          ],
+          tips: [
+            'Ve pronto: a partir de las 9:00 pega el sol de lleno (no hay sombra) y sube gente.',
+            'Zapatillas cómodas y agua; el firme es de cemento/hierba, fácil pero sin sombra.',
+          ],
+          family: [
+            'Paseo llano y seguro, apto para Leo caminando. Buscad libélulas y flores entre la hierba alta.',
+          ],
+          eat: [
+            { name: 'Cafés del final de la cresta / centro de Ubud', dish: 'desayuno, kopi, pisang goreng', note: 'Desayuno con vistas al valle o de vuelta en el centro, a un paseo.' },
+          ],
+        },
         transitToNext: { mode: 'car', min: 10, note: 'Desayuno en el hotel' } },
       { n: 2, name: 'Desayuno en el hotel', category: 'Comida', emoji: '🍳', coords: { lat: -8.5060, lon: 115.2620 }, time: '08:30', note: 'Desayuno sin prisa. Conductor a las 9:30.',
         transitToNext: { mode: 'car', min: 30, note: 'Coche privado a Tirta Empul' } },
@@ -550,6 +651,27 @@ export const dayEnrich: Record<string, Enrich> = {
       { n: 4, name: 'Comida: Warung Biah Biah', category: 'Comida', emoji: '🍲', coords: { lat: -8.5060, lon: 115.2600 }, time: '13:00', note: 'Cocina balinesa auténtica y barata, favorita de locales.',
         transitToNext: { mode: 'car', min: 15, note: 'A la clase de cocina o al hotel' } },
       { n: 5, name: 'Cascada Tegenungan', category: 'Naturaleza', emoji: '💦', coords: { lat: -8.5746, lon: 115.2889 }, time: '15:00', hours: '~1€', note: 'Cascada accesible con poza para chapotear (escaleras hasta la base). El baño refrescante tras la mañana de templos. Volvéis a Ubud por la zona sur.',
+        guide: {
+          intro: 'Una de las pocas cascadas de Bali que NO está en la montaña, así que se llega fácil desde Ubud. Cae con fuerza sobre una poza donde te puedes bañar entre la jungla — el chapuzón perfecto para refrescar a la familia por la tarde.',
+          time: '1–1½ h', bestTime: 'Media tarde entre semana: menos gente que a mediodía.',
+          route: [
+            'Desde el aparcamiento, mirador arriba para la foto panorámica de la cascada.',
+            'Baja las escaleras hasta la base (unos 5-10 min): abajo está la poza para bañarse.',
+            'Chapuzón cerca del salto (con cuidado de la corriente) y de vuelta arriba a secarse.',
+          ],
+          tips: [
+            'Llevad bañador puesto y chanclas de agua: las rocas resbalan y hay que bajar/subir escaleras.',
+            'Bolsa estanca para el móvil; el rocío de la cascada lo moja todo.',
+            'La bajada cansa a la vuelta (escaleras): dosifica con Leo.',
+          ],
+          family: [
+            'Poza poco profunda en los bordes para que Leo chapotee vigilado; Aira puede acercarse más al salto con un adulto.',
+            'Juego: sentir la "lluvia" de la cascada de lejos antes de meterse.',
+          ],
+          eat: [
+            { name: 'Warungs con vista a la cascada', dish: 'nasi goreng, zumos, coco', note: 'Arriba, junto al mirador, para reponer tras el baño sin moverse.' },
+          ],
+        },
         transitToNext: { mode: 'car', min: 25, note: 'A cenar en Ubud centro' } },
       { n: 6, name: 'Cena: Bebek Bengil (Dirty Duck)', category: 'Comida', emoji: '🦆', coords: { lat: -8.5147, lon: 115.2625 }, time: '19:30', note: 'Pato crujiente entre arrozales. Última cena en Ubud; preparar maletas para Gili.' },
     ],
