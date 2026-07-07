@@ -1204,7 +1204,11 @@ export const dayEnrich: Record<string, Enrich> = {
             'Aviso claro a Aira y Leo: nada en las manos ni en la cabeza cerca de los monos.',
           ],
           eat: [
-            { name: 'Cena de marisco en Jimbaran (de camino a Sanur)', dish: 'pescado y marisco a la brasa', note: 'Justo después, en la playa de Jimbaran con mesas en la arena (ver siguiente parada).' },
+            { name: '🥐 Suka Espresso (desayuno/brunch)', dish: 'huevos, bowls, café', note: 'En Pecatu/Uluwatu, popular y con opciones para peques. Para empezar el día en la zona.' },
+            { name: '🍜 Warung Local / Warung Men Yeni (comida)', dish: 'nasi/mie goreng, nasi campur', note: 'Warungs baratos cerca del templo: comida balinesa sin volver al hotel.' },
+            { name: '🍹 Single Fin (atardecer / tomar algo)', dish: 'bebidas, pizzas, vistas de acantilado', note: 'El bar-mirador de Uluwatu: atardecer brutal sobre el océano. Llega pronto los fines de semana.' },
+            { name: '🥤 Nalu Bowls (postre/merienda)', dish: 'açaí y smoothie bowls', note: 'Bowls de fruta y helado sano: el capricho perfecto para Aira y Leo en la zona.' },
+            { name: '🦐 Cena de marisco en Jimbaran', dish: 'pescado a la brasa en la arena', note: 'De camino de vuelta a Sanur, con los pies en la arena y velas al atardecer.' },
           ],
         },
         transitToNext: { mode: 'walk', min: 5, note: 'Al anfiteatro del Kecak' } },

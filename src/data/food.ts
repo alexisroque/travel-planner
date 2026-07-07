@@ -1,3 +1,5 @@
+import type { Place } from '../types'
+
 // Curación foodie por destino: los platos que NO te puedes ir sin probar
 // (qué son y por qué) + restaurantes/hawkers reales y curados, separando
 // los que están CERCA de una actividad de los que MERECEN un viaje aparte.
@@ -247,4 +249,29 @@ export const gastronomy: Record<string, Gastronomy> = {
       { name: 'Warung Blanjong', dish: 'nasi campur, sate lilit caseros', area: 'Sur de Sanur', price: '€', why: 'Warung de barrio muy querido, baratísimo y auténtico. Para el día a día en Sanur.', near: 'Sanur sur' },
     ],
   },
+}
+
+// Convierte los restaurantes curados en "Places" del catálogo, para que salgan
+// en Explorar → Restaurantes y se puedan AÑADIR al itinerario como cualquier sitio.
+export function gastronomyPlaces(): Place[] {
+  const out: Place[] = []
+  for (const [destId, g] of Object.entries(gastronomy)) {
+    g.spots.forEach((s, i) => {
+      out.push({
+        id: `food-${destId}-${i}`,
+        destinationId: destId,
+        kind: 'food',
+        category: s.worthTrip ? 'Comida · vale el viaje' : 'Comida',
+        name: s.name,
+        emoji: '🍽️',
+        zone: s.area,
+        price: s.price,
+        rank: 100 + i,
+        must: !!s.badge,
+        blurb: `${s.dish}. ${s.why}${s.near ? ` · A mano en: ${s.near}` : ''}`,
+        provider: s.badge,
+      })
+    })
+  }
+  return out
 }

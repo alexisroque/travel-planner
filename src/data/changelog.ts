@@ -2,12 +2,12 @@
 // La primera entrada es la versión actual (debe coincidir con package.json).
 export const changelog: { v: string; date: string; title: string; notes: string[] }[] = [
   {
-    v: '1.12.0', date: 'Jul 2026', title: 'Guías de local + foodie a tope + icono nuevo',
+    v: '1.12.3', date: 'Jul 2026', title: 'Restaurantes foodie ya en Explorar (y añadibles)',
     notes: [
-      '🧭 Guía de local en todas las visitas (recorrido, trucos, wow para peques y dónde comer cerca).',
-      '🍜 Sabores muy ampliado y curado: Singapur ~37, KL ~20, Ubud ~16, Sanur ~16, Gili y Borneo — platos imprescindibles + restaurantes reales por categoría.',
-      '📍 Tocar un sitio en Explorar/Itinerario lo resalta y hace ZOOM en el mapa.',
-      '🎨 Icono nuevo de la app (tríptico Singapur–Borneo–Bali).',
+      '🍽️ Los restaurantes curados de "Sabores" ahora salen en Explorar → Restaurantes y se pueden AÑADIR al día (antes estaban escondidos).',
+      '🧭 Guía de local en todas las visitas + dónde comer cerca por momento (desayuno/comida/cena/postre/copa), p. ej. Uluwatu.',
+      '🍜 Platos típicos + restaurantes por destino: Singapur ~37, KL ~20, Ubud ~16, Sanur ~16.',
+      '📍 Tocar un sitio en Explorar/Itinerario lo resalta y hace zoom en el mapa · 🎨 icono nuevo.',
     ],
   },
   {

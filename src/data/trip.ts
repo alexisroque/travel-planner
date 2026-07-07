@@ -1,6 +1,11 @@
 import type { Trip } from '../types'
 import { destGeo, dayEnrich } from './geo'
-import { catalog } from './places'
+import { catalog as basePlaces } from './places'
+import { gastronomyPlaces } from './food'
+
+// Catálogo de Explorar = sitios base + restaurantes curados de "Sabores" (así
+// los restaurantes foodie salen en Explorar → Restaurantes y se pueden añadir al día).
+const catalog = [...basePlaces, ...gastronomyPlaces()]
 
 // Fuente canónica: docx Marco v1.0 + HTML (Sukau Greenview, trasbordo KUL, con Gili Air).
 // 12 Jul – 5 Ago 2026 · 23 días · Familia Roque.

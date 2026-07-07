@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { trip } from '../data/trip'
+import { gastronomy } from '../data/food'
 import { destById } from '../lib/utils'
 import { DEST_HEX } from '../components/DayView'
 import DayPicker from '../components/DayPicker'
@@ -101,6 +103,12 @@ export default function Explore() {
           </select>
         </div>
       </div>
+
+      {gastronomy[destId] && (
+        <Link to="/gastronomia" className="pack-print-link" style={{ marginTop: 4, marginBottom: 6 }}>
+          🍜 Guía foodie de {dest.name.replace(/^[^—]*—\s*/, '')}: platos típicos + restaurantes curados →
+        </Link>
+      )}
 
       <div className="section-title" style={{ ['--dest' as string]: DEST_HEX[dest.colorVar] }}>
         {dest.emoji} {dest.name} · {VIEWS.find((v) => v.key === view)?.label} ({filtered.length})
