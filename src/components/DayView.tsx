@@ -99,7 +99,7 @@ export default function DayView({ day }: { day: Day }) {
 
   const mapPointsResolved: MapPoint[] = agenda.filter((i) => i.coords).map((i, idx) => ({
     lat: i.coords!.lat, lon: i.coords!.lon, n: idx + 1, label: i.name,
-    color: i.kind === 'added' ? '#d4900a' : destColor,
+    color: i.kind === 'added' ? '#d4900a' : destColor, key: i.key,
   }))
   // Sitios del catálogo de este destino que NO están ya en la agenda → pins "por explorar"
   const agendaCoordKeys = new Set(agenda.filter((i) => i.coords).map((i) => `${i.coords!.lat.toFixed(3)},${i.coords!.lon.toFixed(3)}`))
@@ -180,7 +180,7 @@ export default function DayView({ day }: { day: Day }) {
       {/* Mapa del día */}
       {mapPointsResolved.length > 0 && (
         <div className="map-wrap">
-          <TripMap points={mapPointsResolved} height={190} caption={`🗺️ ${day.title}`} extraPoints={extraPoints} anchors={[...dayAnchors(day), ...dayAtms(day)]} />
+          <TripMap points={mapPointsResolved} height={190} caption={`🗺️ ${day.title}`} extraPoints={extraPoints} anchors={[...dayAnchors(day), ...dayAtms(day)]} highlight={highlight} onPointClick={(k) => setHighlight(highlight === k ? null : k)} />
           <span className="map-cap">🗺️ Recorrido del día · {mapPointsResolved.length} paradas</span>
         </div>
       )}

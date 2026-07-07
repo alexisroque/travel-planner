@@ -127,10 +127,16 @@ export default function TripMap({ points, height = 200, showRoute = true, routeC
     if (!map) return
     // Quitar énfasis previo de todos los pines
     Object.values(markersRef.current).forEach((m) => m.getElement()?.querySelector('.map-pin')?.classList.remove('pin-hi'))
-    if (!highlight) return
+    if (!highlight) {
+      // Al deseleccionar, volver a encuadrar todos los puntos
+      const valid = points.filter((p) => typeof p.lat === 'number' && typeof p.lon === 'number')
+      if (valid.length) map.flyToBounds(L.latLngBounds(valid.map((p) => [p.lat, p.lon] as [number, number])), { padding: [fitPadding, fitPadding], maxZoom: 14, duration: 0.5 })
+      return
+    }
     const m = markersRef.current[highlight]
     if (!m) return
-    map.panTo(m.getLatLng(), { animate: true })
+    // Vuela y hace ZOOM IN al punto (no solo pan)
+    map.flyTo(m.getLatLng(), Math.max(map.getZoom(), 16), { animate: true, duration: 0.6 })
     m.openPopup()
     m.getElement()?.querySelector('.map-pin')?.classList.add('pin-hi')
     // eslint-disable-next-line react-hooks/exhaustive-deps

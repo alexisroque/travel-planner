@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { trip } from '../data/trip'
 import { destStyle, eur, distanceKm } from '../lib/utils'
@@ -26,6 +27,22 @@ import OfflineMaps from '../components/OfflineMaps'
 import { DEST_HEX } from '../components/DayView'
 
 export default function Summary() {
+  // Estado de actualización de la PWA (lo gestiona UpdatePrompt; aquí solo el botón/aviso)
+  const [needRefresh, setNeedRefresh] = useState(false)
+  const [checkMsg, setCheckMsg] = useState('')
+  useEffect(() => {
+    const onState = (e: Event) => setNeedRefresh(!!(e as CustomEvent).detail?.needRefresh)
+    const onChecked = (e: Event) => {
+      const nr = !!(e as CustomEvent).detail?.needRefresh
+      setNeedRefresh(nr)
+      setCheckMsg(nr ? '' : 'Estás en la última versión ✓')
+      setTimeout(() => setCheckMsg(''), 4000)
+    }
+    window.addEventListener('pwa:state', onState)
+    window.addEventListener('pwa:checked', onChecked)
+    return () => { window.removeEventListener('pwa:state', onState); window.removeEventListener('pwa:checked', onChecked) }
+  }, [])
+
   const dests = trip.destinations.filter((d) => d.id !== 'travel')
   const taskDone = usePlanner((s) => s.taskDone)
   const doneCount = trip.tasks.filter((t) => (taskDone[t.id] === undefined ? t.done : taskDone[t.id])).length
@@ -186,10 +203,19 @@ export default function Summary() {
         )
       })}
 
-      {/* Sello de versión: ayuda a comprobar que tienes lo último publicado */}
+      {/* Sello de versión + actualización de la PWA */}
       <div className="version-stamp">
         🧳 Travel Planner Roque · <strong>v{__APP_VERSION__}</strong><br />
-        Última versión: {new Date(__BUILD_TIME__).toLocaleString('es-ES', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+        Instalada: {new Date(__BUILD_TIME__).toLocaleString('es-ES', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+        <div className="vs-actions">
+          {needRefresh ? (
+            <button className="vs-btn hot" onClick={() => window.dispatchEvent(new Event('pwa:notes'))}>✨ ¡Nueva versión! Ver y actualizar</button>
+          ) : (
+            <button className="vs-btn" onClick={() => window.dispatchEvent(new Event('pwa:check'))}>🔄 Buscar actualización</button>
+          )}
+          <button className="vs-btn ghost" onClick={() => window.dispatchEvent(new Event('pwa:notes'))}>📋 Novedades</button>
+        </div>
+        {checkMsg && <div className="vs-msg">{checkMsg}</div>}
       </div>
       <div style={{ height: 12 }} />
     </div>

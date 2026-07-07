@@ -17,6 +17,7 @@ import Gastronomy from './screens/Gastronomy'
 import Tasks from './screens/Tasks'
 import Budget from './screens/Budget'
 import SideMap from './components/SideMap'
+import UpdatePrompt from './components/UpdatePrompt'
 
 const NAV = [
   { to: '/hoy', icon: '🏠', label: 'Hoy' },
@@ -77,6 +78,8 @@ export default function App() {
       <aside className="side-map">
         <SideMap />
       </aside>
+
+      <UpdatePrompt />
     </div>
   )
 }
