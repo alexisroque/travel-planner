@@ -30,8 +30,8 @@ export default function Tasks() {
   const TaskRow = ({ t }: { t: Task }) => {
     const on = isTaskDone(t.id, t.done)
     return (
-      <button className={`task ${on ? 'on' : ''}`} style={{ width: '100%', textAlign: 'left' }} onClick={() => toggleTask(t.id)}>
-        <span className="tbox">{on ? '✓' : ''}</span>
+      <div className={`task ${on ? 'on' : ''}`} style={{ width: '100%', textAlign: 'left' }}>
+        <button className="tbox tbox-btn" onClick={() => toggleTask(t.id)} aria-label={on ? 'Marcar como pendiente' : 'Marcar como hecha'}>{on ? '✓' : ''}</button>
         <span className="tmain">
           <span className="tt">{t.icon} {t.title}</span>
           {t.detail && <span className="td">{t.detail}</span>}
@@ -40,7 +40,7 @@ export default function Tasks() {
             {t.cost && <span className="tcost">{t.cost}</span>}
           </span>
         </span>
-      </button>
+      </div>
     )
   }
 
