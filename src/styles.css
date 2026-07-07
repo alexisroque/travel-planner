@@ -193,6 +193,10 @@ nav.bottom a.active .ni { transform: translateY(-1px); }
 .pc-locate { font-size: .82em; opacity: .55; }
 .place-card.hi, .stop-card.hi { box-shadow: 0 0 0 2px var(--sa), 0 2px 10px rgba(0,0,0,.12); }
 
+/* Checkbox de tarea: solo el cuadrito marca (no toda la fila) */
+.tbox-btn { background: transparent; padding: 0; cursor: pointer; }
+.tbox-btn:active { transform: scale(.85); }
+
 /* ============ Actualización de la PWA ============ */
 .update-bar { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--nav-h) + var(--safe-b) + 10px); width: min(92%, 520px); z-index: 300; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #1a1a2a; color: #fff; border-radius: 14px; padding: 10px 12px; box-shadow: 0 8px 24px rgba(0,0,0,.3); animation: ub-in .3s ease; }
 @keyframes ub-in { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
