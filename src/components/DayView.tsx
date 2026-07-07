@@ -108,6 +108,23 @@ export default function DayView({ day }: { day: Day }) {
     .filter((p) => !agendaCoordKeys.has(`${p.coords!.lat.toFixed(3)},${p.coords!.lon.toFixed(3)}`))
     .map((p) => ({ lat: p.coords!.lat, lon: p.coords!.lon, emoji: p.emoji, label: p.name }))
 
+  // Todas las sugerencias de "comer cerca" de las paradas del día, en un solo bloque visible
+  const dayEats = (() => {
+    const seen = new Set<string>()
+    const out: { name: string; dish?: string; note?: string }[] = []
+    const norm = (n: string) => n.toLowerCase().replace(/^[^a-zà-ÿ0-9]+/, '').replace(/\s*\(.*?\)\s*/g, ' ').replace(/[^a-zà-ÿ0-9]/g, '').trim()
+    for (const it of agenda) {
+      for (const e of it.guide?.eat ?? []) {
+        const k = norm(e.name)
+        if (seen.has(k)) continue
+        seen.add(k)
+        out.push(e)
+      }
+    }
+    return out
+  })()
+  const eatQuery = (name: string) => name.replace(/^[^A-Za-zÀ-ÿ0-9]+/, '').replace(/\s*\(.*?\)\s*/g, ' ').trim()
+
   function moveItemTo(item: AgendaItem, targetDay: string) {
     if (item.kind === 'base' && item.origDayId && item.n != null) moveBaseToDay(item.origDayId, item.n, targetDay)
     else if (item.kind === 'added' && item.placeId) addPlace(targetDay, item.placeId)
@@ -189,6 +206,22 @@ export default function DayView({ day }: { day: Day }) {
       )}
       {mapPointsResolved.length > 0 && (
         <Link to="/explorar" onClick={() => { setExploreDest(day.destinationId); setExploreView('all') }} className="map-explore-link">🔍 Explorar y añadir sitios en {dest.name.replace(/^.*— /, '')} →</Link>
+      )}
+
+      {/* Dónde comer por la zona hoy (agregado de las guías de las paradas, visible directamente) */}
+      {dayEats.length > 0 && (
+        <>
+          <div className="section-title">🍽️ Dónde comer por la zona hoy</div>
+          <div className="card" style={{ paddingTop: 6, paddingBottom: 6 }}>
+            {dayEats.map((e, i) => (
+              <a key={i} className="sg-eat" style={{ marginTop: i === 0 ? 0 : 6 }} href={gmapsUrl(eatQuery(e.name), dest.name.replace(/^[^—]*—\s*/, ''))} target="_blank" rel="noreferrer">
+                <span className="sge-name">{e.name}{e.dish && <span className="sge-dish"> · {e.dish}</span>}</span>
+                {e.note && <span className="sge-note">{e.note}</span>}
+                <span className="sge-go">🗺️</span>
+              </a>
+            ))}
+          </div>
+        </>
       )}
 
       {/* Reservas / estado */}
