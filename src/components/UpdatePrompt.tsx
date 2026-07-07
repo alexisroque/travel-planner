@@ -24,6 +24,17 @@ export default function UpdatePrompt() {
     },
   })
 
+  // Actualizar con respaldo: en iOS/PWA standalone updateServiceWorker no siempre
+  // recarga solo (el evento controllerchange no dispara), así que forzamos recarga.
+  const doUpdate = async () => {
+    try {
+      // Ordena al SW en espera que tome el control
+      swRef.current?.waiting?.postMessage({ type: 'SKIP_WAITING' })
+      await updateServiceWorker(true)
+    } catch { /* ignore */ }
+    setTimeout(() => window.location.reload(), 1500)
+  }
+
   // Al detectar versión nueva, abre las novedades y avisa a Resumen (badge)
   useEffect(() => {
     if (needRefresh) {
@@ -53,7 +64,7 @@ export default function UpdatePrompt() {
           <span className="ub-txt">✨ Nueva versión disponible</span>
           <div className="ub-actions">
             <button className="ub-notes" onClick={() => setShowNotes(true)}>Novedades</button>
-            <button className="ub-go" onClick={() => updateServiceWorker(true)}>Actualizar</button>
+            <button className="ub-go" onClick={doUpdate}>Actualizar</button>
             <button className="ub-x" onClick={() => setNeedRefresh(false)} aria-label="Cerrar">✕</button>
           </div>
         </div>
@@ -78,7 +89,7 @@ export default function UpdatePrompt() {
               ))}
             </div>
             {needRefresh
-              ? <button className="notes-go" onClick={() => updateServiceWorker(true)}>Actualizar ahora</button>
+              ? <button className="notes-go" onClick={doUpdate}>Actualizar ahora</button>
               : <button className="notes-go ghost" onClick={() => setShowNotes(false)}>Cerrar</button>}
           </div>
         </div>
