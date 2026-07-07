@@ -107,6 +107,9 @@ export const gastronomy: Record<string, Gastronomy> = {
       { name: 'Banana leaf rice', emoji: '🍛', what: 'Arroz sobre hoja de plátano con currys vegetales, papadum y curry de carne/pescado. Del sur de India.', tip: 'Con la mano derecha; rellenan el arroz gratis. Muy veggie-friendly.' },
       { name: 'Nasi kandar', emoji: '🍛', what: 'Arroz con surtido de currys mezclados ("banjir", inundado de salsas). De Penang, brutal en KL.', tip: 'Señala los currys que quieras; pide que te "inunden" el arroz.' },
       { name: 'Cendol / ABC', emoji: '🍧', what: 'Hielo picado con leche de coco, azúcar de palma y gusanitos de pandan (cendol) o toppings (ABC).', tip: 'El chute dulce perfecto a media tarde.' },
+      { name: 'Pan mee', emoji: '🍜', what: 'Fideos caseros ("board noodles") en sopa con carne picada, anchoas fritas, verdura y huevo. Especialidad chino-malaya de KL.', tip: 'Pídelo "chili pan mee" (seco con chili) para probar la versión estrella.' },
+      { name: 'Bak kut teh de Klang', emoji: '🥣', what: 'La versión malaya (más oscura y herbal que la de Singapur), de Klang, cuna del plato.', tip: 'Desayuno de fin de semana; con youtiao y té chino.' },
+      { name: 'Chee cheong fun', emoji: '🍥', what: 'Rollos de arroz al vapor con salsa dulce y sésamo (estilo KL) o con curry (estilo Ipoh).', tip: 'Desayuno de mercado, en Imbi.' },
     ],
     spots: [
       // Cerca de las visitas
@@ -124,6 +127,13 @@ export const gastronomy: Record<string, Gastronomy> = {
       { name: 'Nasi Kandar Pelita', dish: 'nasi kandar', area: 'Jln Ampang', price: '€', why: 'Nasi kandar 24 h muy popular: arroz "inundado" de currys. Abierto siempre.', worthTrip: true },
       { name: 'Soong Kee Beef Noodles', dish: 'fideos con bolas de ternera', area: 'centro (Jln Tun H.S. Lee)', price: '€', why: 'Desde 1945: fideos secos con carne picada y sopa de bolas de ternera.', worthTrip: true, badge: 'leyenda local' },
       { name: 'Rebung (Chef Ismail)', dish: 'bufé malayo tradicional', area: 'Bangsar', price: '€€', why: 'Bufé de cocina malaya casera para probar MUCHOS platos de una vez. Ideal foodies.', worthTrip: true },
+      { name: 'Wong Ah Wah (WAW)', dish: 'alitas de pollo a la brasa', area: 'Jalan Alor', price: '€', why: 'Las alitas legendarias de Jalan Alor: crujientes y jugosas. Cena nocturna de calle.', near: 'Jalan Alor (noche)', badge: 'leyenda local' },
+      { name: 'Imbi Market (ICC Pudu)', dish: 'chee cheong fun, sang har mee, desayunos', area: 'Pudu', price: '€', why: 'Mercado de desayunos chino, un ritual matutino de KL. Muchos puestos con solera.', worthTrip: true },
+      { name: 'Kim Lian Kee', dish: 'Hokkien mee (desde 1927)', area: 'Petaling Street · Chinatown', price: '€', why: 'La casa del Hokkien mee de KL, en plena Petaling St. De paso con el Central Market.', near: 'Central Market / Chinatown', badge: 'leyenda local' },
+      { name: 'Ho Kow Hainam Kopitiam', dish: 'kaya toast, nasi lemak, curry mee', area: 'centro (Jln Tun H.S. Lee)', price: '€', why: 'Kopitiam hainanés con encanto retro; desayuno malayo de toda la vida cerca de Chinatown.', near: 'Central Market / Chinatown' },
+      { name: 'Sek Yuen', dish: 'cantonés clásico (pato asado)', area: 'Pudu', price: '€€', why: 'Restaurante de 1948 con cocina de leña: cantonés de otra época. Para una comida con historia.', worthTrip: true, badge: 'leyenda local' },
+      { name: 'Bunn Choon', dish: 'egg tarts (tartaletas de huevo)', area: 'Petaling Street', price: '€', why: 'Las mejores egg tarts de KL, de una familia desde 1893. Merienda dulce en Chinatown.', near: 'Central Market / Chinatown' },
+      { name: 'Sup Hameed', dish: 'sup tulang, mee goreng mamak', area: 'Jln Tuanku Abdul Rahman', price: '€', why: 'Mamak nocturno famoso por la sopa de huesos (sup tulang) roja. Muy local.', worthTrip: true },
     ],
   },
 
@@ -163,6 +173,8 @@ export const gastronomy: Record<string, Gastronomy> = {
       { name: 'Sate lilit', emoji: '🍢', what: 'Brocheta de pescado o pollo picado con coco y especias, moldeado en caña de limón y a la brasa.', tip: 'Aromática y suave: gusta a los niños.' },
       { name: 'Lawar', emoji: '🥗', what: 'Ensalada balinesa de verduras, coco rallado y especias (a veces con carne). Guarnición típica.', tip: 'Pide el "lawar putih" (sin sangre) si te da respeto la versión tradicional.' },
       { name: 'Pisang goreng + kopi/jamu', emoji: '🍌', what: 'Plátano frito de merienda, con café balinés o jamu (cúrcuma y jengibre).', tip: 'En cualquier warung con vistas a los arrozales.' },
+      { name: 'Nasi ayam bali', emoji: '🍗', what: 'Arroz con pollo balinés especiado (a la brasa o desmenuzado), sate lilit, verduras y sambal matah.', tip: 'El de Kedewatan (Ibu Mangku) es institución.' },
+      { name: 'Jaje bali (dulces)', emoji: '🍡', what: 'Dulces tradicionales de arroz, coco y azúcar de palma (klepon, dadar gulung, laklak).', tip: 'En los mercados de mañana; los klepon "explotan" con gula melaka dentro.' },
     ],
     spots: [
       // Cerca de las visitas
@@ -178,6 +190,11 @@ export const gastronomy: Record<string, Gastronomy> = {
       { name: 'Warung Bu Mi', dish: 'nasi campur casero', area: 'Ubud', price: '€', why: 'De los nasi campur más queridos por locales y viajeros: barato y sabroso.', worthTrip: true },
       { name: 'Locavore', dish: 'menú degustación indonesio moderno', area: 'Ubud centro', price: '€€€', why: 'De los mejores de Asia: alta cocina con producto balinés. Reserva con MUCHA antelación.', worthTrip: true, badge: 'top mundial' },
       { name: 'Mozaic', dish: 'alta cocina franco-balinesa', area: 'Sanggingan', price: '€€€', why: 'Fine dining con estrellas: menú degustación en jardín. Otra opción de cena especial.', worthTrip: true },
+      { name: 'Warung Teges', dish: 'babi guling + nasi campur', area: 'Peliatan (afueras de Ubud)', price: '€', why: 'Para muchos locales, mejor babi guling que Ibu Oka y sin colas de turistas. Barato y auténtico.', worthTrip: true, badge: 'joya local' },
+      { name: 'Bebek Tepi Sawah', dish: 'pato crujiente con vistas a arrozales', area: 'Peliatan', price: '€€', why: 'Pato balinés en pabellones sobre los arrozales; precioso para una comida en familia.', worthTrip: true },
+      { name: 'Casa Luna', dish: 'balinesa (Janet DeNeefe)', area: 'Ubud centro (Jl. Raya)', price: '€€', why: 'Cocina balinesa con alma, de la fundadora del festival gastronómico de Ubud. Céntrico y cómodo.', near: 'Centro de Ubud' },
+      { name: 'Warung Makan Bu Rus', dish: 'nasi campur, bebek betutu', area: 'Ubud (Jl. Suweta)', price: '€', why: 'Warung familiar muy querido junto a un estanque; betutu que hay que encargar.', near: 'Centro de Ubud' },
+      { name: 'Room4Dessert', dish: 'menú de postres (Will Goldfarb)', area: 'Sayan', price: '€€€', why: 'Bar de postres de fama mundial (Chef\'s Table): experiencia dulce única para foodies. Reserva.', worthTrip: true, badge: 'top mundial' },
     ],
   },
 
@@ -195,6 +212,8 @@ export const gastronomy: Record<string, Gastronomy> = {
       { name: 'Pituq Waroeng', dish: 'sano, veggie, local', area: 'Gili Air', price: '€', why: 'Warung sencillo muy querido, con opciones veganas y zumos. Bueno para los peques.', near: 'Centro de Gili Air' },
       { name: 'Chiringuitos costa oeste (sunset)', dish: 'ikan bakar al atardecer', area: 'Playa oeste', price: '€€', why: 'Cena con los pies en la arena y el Rinjani/Bali de fondo. La estampa de Gili.', near: 'Snorkel / playa' },
       { name: 'Ruby\'s / beach BBQ', dish: 'parrillada de pescado y marisco', area: 'Playa este', price: '€€', why: 'Barbacoa de playa al atardecer, ambiente relajado con música.', near: 'Playa este' },
+      { name: 'Gili Air Santay', dish: 'satay y curry sasak', area: 'Gili Air (este)', price: '€', why: 'Warung con encanto de bambú: satay y curries de Lombok bien de precio.', near: 'Centro de Gili Air' },
+      { name: 'Coffee & Thyme / bakery', dish: 'desayuno, café, bollería', area: 'Gili Air', price: '€', why: 'Para el desayuno y el café de media mañana antes del snorkel. Opciones para peques.', near: 'Centro de Gili Air' },
     ],
   },
 
@@ -217,6 +236,15 @@ export const gastronomy: Record<string, Gastronomy> = {
       // Merecen la excursión
       { name: 'Nasi Ayam Bu Oki', dish: 'nasi ayam (pollo balinés especiado)', area: 'Denpasar (cerca de Sanur)', price: '€', why: 'Pollo balinés legendario con arroz y sambal, a un paso de Sanur. Otra joya local.', worthTrip: true, badge: 'leyenda local' },
       { name: 'Cena de marisco en Jimbaran', dish: 'pescado a la brasa en la arena', area: 'Muaya Beach, Jimbaran', price: '€€€', why: 'La cena clásica con los pies en la arena y velas al atardecer (día de Uluwatu).', worthTrip: true },
+      // 6 noches en Sanur dan para mucho: más joyas locales
+      { name: 'Warung Kolega', dish: 'nasi campur javanés (eliges en vitrina)', area: 'Sanur', price: '€', why: 'Warung de comida javanesa al peso, baratísimo y buenísimo. Favorito de locales y expats.', near: 'Sanur centro', badge: 'joya local' },
+      { name: 'Warung Babi Guling Pande Egi', dish: 'babi guling', area: 'Sanur', price: '€', why: 'Para comer el cerdo asado balinés sin ir hasta Ubud: crujiente y a mediodía.', near: 'Sanur centro' },
+      { name: 'Char Ming', dish: 'balinesa-asiática frente al mar', area: 'Sanur (paseo marítimo)', price: '€€', why: 'Casa de madera preciosa a pie de playa; pato y pescado con un toque más elaborado para una cena especial.', near: 'Playa de Sanur' },
+      { name: 'Sari Bundo', dish: 'nasi padang (rendang)', area: 'Sanur / Denpasar', price: '€', why: 'Padang 24 h: señala guisos en la vitrina. Rápido, contundente y muy local.', near: 'Sanur' },
+      { name: 'Three Monkeys Sanur', dish: 'desayunos, brunch, café', area: 'Sanur (Danau Tamblingan)', price: '€€', why: 'Buen desayuno/brunch con opciones para peques cuando queráis variar del warung. Céntrico.', near: 'Sanur centro' },
+      { name: 'Massimo (gelato)', dish: 'helado italiano artesano', area: 'Sanur', price: '€', why: 'El gelato más famoso de Bali (sí, italiano, pero es EL capricho de los niños en Sanur). Prueba el de coco.', near: 'Sanur centro' },
+      { name: 'Pasar Sindhu (mercado de mañana)', dish: 'bubur, jaja, frutas', area: 'Sindhu, Sanur', price: '€', why: 'El mercado matutino: gachas de arroz (bubur), dulces balineses y fruta. Desayuno de inmersión total.', near: 'Sanur centro (mañana)' },
+      { name: 'Warung Blanjong', dish: 'nasi campur, sate lilit caseros', area: 'Sur de Sanur', price: '€', why: 'Warung de barrio muy querido, baratísimo y auténtico. Para el día a día en Sanur.', near: 'Sanur sur' },
     ],
   },
 }
