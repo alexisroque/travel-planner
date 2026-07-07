@@ -247,6 +247,22 @@ export const gastronomy: Record<string, Gastronomy> = {
       { name: 'Massimo (gelato)', dish: 'helado italiano artesano', area: 'Sanur', price: '€', why: 'El gelato más famoso de Bali (sí, italiano, pero es EL capricho de los niños en Sanur). Prueba el de coco.', near: 'Sanur centro' },
       { name: 'Pasar Sindhu (mercado de mañana)', dish: 'bubur, jaja, frutas', area: 'Sindhu, Sanur', price: '€', why: 'El mercado matutino: gachas de arroz (bubur), dulces balineses y fruta. Desayuno de inmersión total.', near: 'Sanur centro (mañana)' },
       { name: 'Warung Blanjong', dish: 'nasi campur, sate lilit caseros', area: 'Sur de Sanur', price: '€', why: 'Warung de barrio muy querido, baratísimo y auténtico. Para el día a día en Sanur.', near: 'Sanur sur' },
+
+      // ===== Zonas de las EXCURSIONES desde Sanur (Uluwatu, Kuta, Nusa Penida, Este de Bali) =====
+      // Uluwatu / Bukit
+      { name: 'Suka Espresso', dish: 'desayuno/brunch, huevos, bowls', area: 'Uluwatu (Pecatu)', price: '€€', why: 'DESAYUNO/BRUNCH en Uluwatu, con opciones para peques. Para empezar el día del templo sin volver.', near: 'Día de Uluwatu', worthTrip: true },
+      { name: 'Warung Local Uluwatu', dish: 'nasi/mie goreng, nasi campur', area: 'Uluwatu', price: '€', why: 'COMIDA barata y balinesa cerca del templo de Uluwatu.', near: 'Día de Uluwatu', worthTrip: true },
+      { name: 'Single Fin', dish: 'bebidas + pizzas con vistas de acantilado', area: 'Uluwatu (Cliff)', price: '€€', why: 'TOMAR ALGO al ATARDECER: el bar-mirador icónico sobre el océano. Llega pronto los findes.', near: 'Día de Uluwatu', worthTrip: true, badge: 'vistas top' },
+      { name: 'Nalu Bowls', dish: 'açaí y smoothie bowls', area: 'Uluwatu', price: '€', why: 'POSTRE/MERIENDA: bowls de fruta y helado sano, perfectos para Aira y Leo.', near: 'Día de Uluwatu', worthTrip: true },
+      { name: 'Menega Café', dish: 'marisco a la brasa en la arena', area: 'Muaya Beach, Jimbaran', price: '€€€', why: 'CENA clásica de Jimbaran con los pies en la arena y velas (de camino de vuelta a Sanur).', near: 'Día de Uluwatu', worthTrip: true, badge: 'leyenda local' },
+      // Kuta / Seminyak (día de Waterbom)
+      { name: 'Made\'s Warung', dish: 'nasi campur, sate, clásicos balineses', area: 'Kuta / Seminyak', price: '€€', why: 'Institución desde 1969: buen punto para COMER el día de Waterbom (Kuta), tourist-friendly.', near: 'Día de Waterbom (Kuta)', worthTrip: true, badge: 'leyenda local' },
+      // Nusa Penida
+      { name: 'Penida Colada', dish: 'bar de playa, bowls, bebidas', area: 'Nusa Penida (Toya Pakeh)', price: '€€', why: 'Chiringuito de playa para COMER/tomar algo tras Kelingking, con hamacas.', near: 'Día de Nusa Penida', worthTrip: true },
+      { name: 'Warungs de Crystal Bay / Kelingking', dish: 'nasi goreng, coco, pescado', area: 'Nusa Penida', price: '€', why: 'Puestos junto a los miradores y la playa: COMIDA sencilla local sin perder tiempo en la isla.', near: 'Día de Nusa Penida', worthTrip: true },
+      // Este de Bali (Tirta Gangga / Lempuyang / Karangasem)
+      { name: 'Tirta Ayu Restaurant', dish: 'balinés con vistas a los estanques', area: 'Dentro de Tirta Gangga (Karangasem)', price: '€€', why: 'COMIDA con vistas al palacio del agua: justo donde estáis en el este de Bali.', near: 'Día de Tirta Gangga / Lempuyang', worthTrip: true },
+      { name: 'Warungs con vista a arrozales (Ababi)', dish: 'nasi campur, mie goreng', area: 'Ababi (junto a Tirta Gangga)', price: '€', why: 'Terrazas locales mirando a los arrozales de Karangasem, baratas y con encanto.', near: 'Día de Tirta Gangga / Lempuyang', worthTrip: true },
     ],
   },
 }
