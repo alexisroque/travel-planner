@@ -274,6 +274,27 @@ export const dayEnrich: Record<string, Enrich> = {
       { n: 4, name: 'Comida: Sepilok Bistro / lodge', category: 'Comida', emoji: '🍛', coords: { lat: 5.8745, lon: 117.9460 }, time: '12:30', note: 'Arroz nasi goreng, fideos, fruta. Después, descanso/piscina en el resort (calor de mediodía).',
         transitToNext: { mode: 'car', min: 35, note: 'Grab a Labuk Bay', fare: '~40 MYR' } },
       { n: 5, name: 'Labuk Bay Proboscis Sanctuary', category: 'Naturaleza', emoji: '🐒', coords: { lat: 5.9667, lon: 118.1500 }, time: '16:00', hours: 'Feeding 16:30', note: 'Monos narigudos endémicos sobre el manglar. Las narices enormes hacen reír. Plataforma A para fotos.',
+        guide: {
+          intro: 'Una reserva privada en el manglar donde ver de cerca al mono narigudo (proboscis), que SOLO vive en Borneo. Con sus narices enormes y barrigas, son de los animales más divertidos del viaje — llegan en grupo a las plataformas de alimentación.',
+          time: '1½ h (una sesión de feeding)', bestTime: 'Feeding de las 16:30: llega 20-30 min antes para sitio en la plataforma A.',
+          route: [
+            'Ve a la Plataforma A (la principal) para el feeding de la tarde: es donde mejor se ven y fotografían.',
+            'Espera en silencio: van llegando por los árboles y bajan a por la fruta.',
+            'Si hay tiempo, la Plataforma B suele tener también macacos de cola larga (plateados).',
+          ],
+          tips: [
+            'Cámara con zoom y nada de flash. No se les da comida ni se les toca.',
+            'Vigila mochilas y gafas con los macacos plateados, que son más ladrones que los narigudos.',
+            'Repelente: es manglar y al atardecer salen mosquitos.',
+          ],
+          family: [
+            'Contadles que el macho tiene la nariz enorme para hacer más ruido y atraer a las hembras — se ríen seguro.',
+            'Reto: distinguir al "jefe" del grupo (el de nariz y barriga más grandes).',
+          ],
+          eat: [
+            { name: 'Comidas en el lodge de Sepilok', note: 'Se vuelve a cenar al lodge; sin desviarse. En ruta a Sandakan, marisco de Sim Sim.' },
+          ],
+        },
         transitToNext: { mode: 'car', min: 35, note: 'Vuelta a Sepilok' } },
       { n: 6, name: 'Cena en el resort', category: 'Comida', emoji: '🍽️', coords: { lat: 5.8740, lon: 117.9450 }, time: '19:30', note: 'Cena tranquila. Preparar mochila: mañana Rainforest Discovery al alba y transfer a Sukau.' },
     ],
@@ -790,6 +811,27 @@ export const dayEnrich: Record<string, Enrich> = {
       { n: 1, name: 'Fast boat Sanur → Nusa Penida', category: 'Puerto', emoji: '🚤', coords: { lat: -8.6850, lon: 115.2680 }, time: '08:00', hours: '~80€ (4 pax)', note: 'Desayuno temprano y barco (45 min). Mar a veces movido: antimareos.', status: 'pending',
         transitToNext: { mode: 'car', min: 45, note: 'Conductor a Kelingking' } },
       { n: 2, name: 'Kelingking Beach (mirador)', category: 'Mirador', emoji: '🦕', coords: { lat: -8.7510, lon: 115.4720 }, time: '10:00', note: 'El acantilado en forma de T-Rex sobre agua turquesa. Vista desde arriba: una de las más espectaculares de Asia.',
+        guide: {
+          intro: 'La foto más famosa de Bali: un acantilado con forma de cabeza de T-Rex sobre una playa de arena blanca y agua turquesa. Nusa Penida es más salvaje y seca que Bali — carreteras malas y polvo, pero paisajes de otro planeta.',
+          time: 'Medio día / día completo en Nusa Penida', bestTime: 'Llegar pronto (primer barco): el mirador se llena y el sol y el polvo aprietan a mediodía.',
+          route: [
+            'Desde el puerto, coche con conductor contratado para el día (imprescindible; las distancias engañan por el mal firme).',
+            'Kelingking primero: mirador del "T-Rex". La bajada a la playa es MUY dura (escaleras casi verticales, 45-60 min) — con Leo, quedaos arriba en el mirador.',
+            'Combinad con Broken Beach y Angel\'s Billabong (al oeste), o Crystal Bay para bañarse/snorkel tranquilos.',
+          ],
+          tips: [
+            'Contrata coche+conductor al llegar (no scooter con niños): las carreteras son malas y con curvas.',
+            'Agua, gorra y calzado bueno; hay poca sombra y mucho polvo. Antimareos para el barco y el coche.',
+            'NO intentéis bajar a la playa de Kelingking con los peques: es peligrosa y agotadora. La vista de arriba ya es EL momento.',
+          ],
+          family: [
+            'Buscad juntos la forma del T-Rex en el acantilado: se ve clarísima y les encanta.',
+            'Para bañarse, mejor Crystal Bay (arena y aguas más calmadas) que las calas de acantilado.',
+          ],
+          eat: [
+            { name: 'Warungs de los miradores / Crystal Bay', dish: 'nasi goreng, coco, pescado', note: 'Puestos sencillos junto a los puntos turísticos; comida básica local para no perder tiempo.' },
+          ],
+        },
         transitToNext: { mode: 'car', min: 25, note: 'A Crystal Bay' } },
       { n: 3, name: 'Comida cerca de Crystal Bay', category: 'Comida', emoji: '🍤', coords: { lat: -8.7180, lon: 115.4530 }, time: '12:30', note: 'Warung sencillo junto a la playa. Sombra y reponer fuerzas.',
         transitToNext: { mode: 'walk', min: 5 } },
@@ -809,6 +851,28 @@ export const dayEnrich: Record<string, Enrich> = {
       { n: 1, name: 'Grab Sanur → Waterbom (Kuta)', category: 'Parque', emoji: '🚗', coords: { lat: -8.7000, lon: 115.2400 }, time: '08:30', note: 'Desayuno y Grab (~20 min, ~8€). Llevar bañadores puestos.',
         transitToNext: { mode: 'car', min: 20, note: 'A Kuta' } },
       { n: 2, name: 'Waterbom Bali', category: 'Parque', emoji: '💦', coords: { lat: -8.7220, lon: 115.1720 }, time: '09:00', hours: 'Abre 9:00 · ~120€', note: 'El mejor parque acuático de Asia, entre jardines tropicales. Toboganes para todas las edades.', status: 'pending',
+        guide: {
+          intro: 'Considerado el mejor parque acuático de Asia: toboganes de vértigo para Aira y papá, río lento y piscinas de olas suaves para Leo, todo entre jardines tropicales enormes. Un día de pura diversión familiar a mitad del tramo de playa.',
+          time: 'Día completo (9:00–16:00)', bestTime: 'Nada más abrir (9:00): sin colas en los toboganes buenos las primeras 2 horas.',
+          route: [
+            'Al entrar, alquila una taquilla y coge tumbonas a la sombra como "campamento base".',
+            'Primera hora, a los toboganes grandes (poca cola). Aira y adultos al Climax/Boomerang.',
+            'Con Leo: río lento (Lazy River), piscina de olas y la zona infantil Funtastic.',
+            'Comida en el food court de dentro para no salir, y tarde más relajada.',
+          ],
+          tips: [
+            'Compra entradas ONLINE (más barato). Alquila taquilla y toalla allí.',
+            'Hay altura mínima en los toboganes grandes: mira los carteles con Leo para elegir los suyos.',
+            'Protector solar reef-safe y camiseta de licra: se está todo el día al sol.',
+          ],
+          family: [
+            'Marcaos un "tobogán en familia" (los hay para bajar juntos en flotador) — el momentazo del día.',
+            'Zona Funtastic pensada para los peques: Leo tiene sus propios toboganes seguros.',
+          ],
+          eat: [
+            { name: 'Food court de Waterbom', dish: 'nasi goreng, satay, burgers, fruta', note: 'Dentro del parque, variado y decente: no merece la pena salir a comer.' },
+          ],
+        },
         transitToNext: { mode: 'walk', min: 3, note: 'Food court interior' } },
       { n: 3, name: 'Comida dentro de Waterbom', category: 'Comida', emoji: '🍔', coords: { lat: -8.7222, lon: 115.1722 }, time: '13:00', note: 'Buen food court; no perder tiempo saliendo. Seguir hasta ~15:30-16:00.',
         transitToNext: { mode: 'car', min: 20, note: 'Grab al hotel' } },
@@ -830,10 +894,52 @@ export const dayEnrich: Record<string, Enrich> = {
       { n: 2, name: 'Comida: Kayu Api / en Sanur', category: 'Comida', emoji: '🍴', coords: { lat: -8.6900, lon: 115.2620 }, time: '13:00', note: 'Brunch-comida en Sanur antes del traslado. Salir hacia Uluwatu a las 15:00.',
         transitToNext: { mode: 'car', min: 60, note: 'A Uluwatu' } },
       { n: 3, name: 'Uluwatu Temple', category: 'Templo', emoji: '🏯', coords: { lat: -8.8291, lon: 115.0849 }, time: '16:30', hours: '~5€', note: 'Templo al filo de un acantilado de 70m sobre el Índico. Paseo por el borde (cuidado con los monos).',
+        guide: {
+          intro: 'Uno de los seis templos sagrados que "protegen" Bali, colgado en un acantilado de 70 m sobre el Índico. Al atardecer es mágico, y hay danza kecak (el "canto de los monos", cien hombres a coro) con el sol cayendo al mar de fondo.',
+          time: '1½–2 h (más si veis la danza kecak)', bestTime: 'Media tarde para la luz; la danza kecak es a las ~18:00 con la puesta de sol.',
+          route: [
+            'Ponte el sarong (lo prestan en la entrada) y pasea por el sendero del acantilado: vistas brutales a ambos lados.',
+            'Acércate al templo (el interior es solo para fieles) y quédate en los miradores.',
+            'Si os cuadra, coged entradas para la danza kecak del anfiteatro al atardecer.',
+          ],
+          tips: [
+            '⚠️ Los macacos de Uluwatu son famosos por ROBAR gafas, gorras y móviles para "canjearlos" por comida. Guarda todo y agárralo fuerte.',
+            'Hombros y rodillas cubiertos (sarong incluido en la entrada).',
+            'Llega con margen a la kecak: se llena. Reserva si puedes.',
+          ],
+          family: [
+            'La danza kecak les fascina: cien hombres haciendo "chak-chak-chak" y fuego — como una peli.',
+            'Aviso claro a Aira y Leo: nada en las manos ni en la cabeza cerca de los monos.',
+          ],
+          eat: [
+            { name: 'Cena de marisco en Jimbaran (de camino a Sanur)', dish: 'pescado y marisco a la brasa', note: 'Justo después, en la playa de Jimbaran con mesas en la arena (ver siguiente parada).' },
+          ],
+        },
         transitToNext: { mode: 'walk', min: 5, note: 'Al anfiteatro del Kecak' } },
       { n: 4, name: 'Kecak Fire Dance', category: 'Show', emoji: '🔥', coords: { lat: -8.8295, lon: 115.0855 }, time: '18:00', hours: '~15€/persona', note: '50 hombres cantando en círculo alrededor del fuego con el sol hundiéndose en el mar. Espectáculo inolvidable.', status: 'pending',
         transitToNext: { mode: 'car', min: 25, note: 'A cenar a Jimbaran' } },
-      { n: 5, name: 'Cena: marisco en Jimbaran', category: 'Comida', emoji: '🦐', coords: { lat: -8.7905, lon: 115.1620 }, time: '20:00', note: 'Pescado y marisco a la brasa con mesas en la arena y velas. Vuelta a Sanur ~21:30.' },
+      { n: 5, name: 'Cena: marisco en Jimbaran', category: 'Comida', emoji: '🦐', coords: { lat: -8.7905, lon: 115.1620 }, time: '20:00', note: 'Pescado y marisco a la brasa con mesas en la arena y velas. Vuelta a Sanur ~21:30.',
+        guide: {
+          intro: 'La bahía de Jimbaran es LA cena con los pies en la arena de Bali: hileras de mesas en la playa, velas, y marisco fresco que eliges en hielo y te hacen a la brasa de cáscara de coco mientras el sol se pone. Cliché por algo — funciona.',
+          time: '1½–2 h de cena', bestTime: 'Al atardecer (~19:00): reserva mesa en primera línea para ver la puesta de sol.',
+          route: [
+            'Elige uno de los "cafés" de la playa (fila de Muaya Beach): Menega Café y Lia Café son de los clásicos.',
+            'Escoge el pescado/marisco al peso en el mostrador de hielo y cómo lo quieres.',
+            'Mesa en la arena, y a esperar el combo mientras cae el sol.',
+          ],
+          tips: [
+            'Pregunta el PRECIO POR PESO antes de pedir (se paga por gramos): así evitas sorpresas.',
+            'Reserva mesa en primera línea al atardecer; llega con luz para elegir bien el marisco.',
+            'Lleva repelente: al anochecer en la arena pican.',
+          ],
+          family: [
+            'Para los peques: gambas o pescado sencillo a la brasa y arroz; suele gustar aunque no sean de marisco.',
+            'Que elijan ellos la pieza en el hielo — les hace ilusión "pescar" la cena.',
+          ],
+          eat: [
+            { name: 'Menega Café / Lia Café (Muaya Beach, Jimbaran)', dish: 'marisco a la brasa al peso', note: 'Los clásicos de la playa de Jimbaran; pide precio por peso y mesa al atardecer.' },
+          ],
+        } },
     ],
   },
   d22: {
@@ -845,6 +951,27 @@ export const dayEnrich: Record<string, Enrich> = {
     ],
     stops: [
       { n: 1, name: 'Clase de surf en Sanur', category: 'Actividad', emoji: '🏄', coords: { lat: -8.6850, lon: 115.2680 }, time: '08:30', hours: '~30€', note: 'Olas suaves para aprender; Leo juega en la orilla. Escuelas locales en la playa.',
+        guide: {
+          intro: 'Sanur tiene olas suaves y protegidas por el arrecife — el sitio ideal para una primera clase de surf en familia, sin las olas grandes del sur. Aira puede probar de pie y Leo jugar en la orilla con el monitor de apoyo.',
+          time: '2 h de clase', bestTime: 'Temprano (8:30): mar más plano, menos viento y menos calor.',
+          route: [
+            'Reserva con una escuela local de la playa de Sanur (tabla + monitor + licra incluidos).',
+            'Calentamiento y práctica en la arena (ponerse de pie) antes de entrar.',
+            'Al agua con el monitor empujando las olas; turnos para que todos lo prueben.',
+          ],
+          tips: [
+            'Elige escuela con buenas reseñas y monitor por niño; confirma que hay tabla blanda (foam) para principiantes.',
+            'Protector reef-safe waterproof y licra de manga larga: dos horas al sol reflejado queman.',
+            'Marea: pregunta la mejor franja a la escuela (con marea alta rompe mejor para aprender).',
+          ],
+          family: [
+            'Leo con chaleco y en la orilla con un monitor: se lo pasa igual de bien "surfeando" tumbado.',
+            'Celebrad la primera vez de pie de Aira — ¡sello de "surfer" en el pasaporte!',
+          ],
+          eat: [
+            { name: 'Warung Mak Beng / warungs de la playa de Sanur', dish: 'pescado frito, nasi campur', note: 'Desayuno-comida local justo al salir del agua, sin moverse de Sanur.' },
+          ],
+        },
         transitToNext: { mode: 'walk', min: 6, note: 'A comer' } },
       { n: 2, name: 'Comida: Kayu Api Smoke Grill', category: 'Comida', emoji: '☕', coords: { lat: -8.6900, lon: 115.2620 }, time: '12:30', note: 'BBQ y café de especialidad, favorito de Sanur. Tarde para hacer maletas y descansar.',
         transitToNext: { mode: 'car', min: 45, note: 'Grab a Tanah Lot (salir 15:30)' } },
