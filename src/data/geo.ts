@@ -225,6 +225,29 @@ export const dayEnrich: Record<string, Enrich> = {
       { n: 1, name: 'Desayuno en el resort', category: 'Comida', emoji: '🍳', coords: { lat: 5.8740, lon: 117.9450 }, time: '08:00', note: 'Desayuno tropical en el lodge. Ropa fresca, repelente DEET y gorra.',
         transitToNext: { mode: 'walk', min: 5, note: 'Al Orangutan Centre' } },
       { n: 2, name: 'Sepilok Orangutan Centre', category: 'Naturaleza', emoji: '🦧', coords: { lat: 5.8740, lon: 117.9492 }, time: '09:30', hours: 'Feeding 10:00', note: 'Plataforma de alimentación: orangutanes en semilibertad llegando por las cuerdas. Nursery con crías tras cristal.', status: 'pending',
+        guide: {
+          intro: 'Sepilok es el centro de rehabilitación de orangutanes más famoso del mundo: aquí reeducan a huérfanos para devolverlos a la selva. No es un zoo — son animales semisalvajes que vienen (o no) a la plataforma. Verlos columpiarse por las cuerdas a un metro es de los momentos del viaje.',
+          time: '2–3 h (con el Sun Bear al lado)', bestTime: 'Feeding de las 10:00: llega 30–40 min antes para sitio en primera fila.',
+          route: [
+            'Deja mochila y comida en las taquillas: los orangutanes y macacos roban (es obligatorio).',
+            'Ve primero a la Nursery (guardería): crías tras un cristal aprendiendo a trepar — puro "wow".',
+            'A las 10:00, a la plataforma de alimentación del bosque: llegan por las cuerdas a por fruta.',
+            'Combina con el Sun Bear Conservation Centre de al lado (los osos más pequeños del mundo) y, si hay tiempo, el Rainforest Discovery Centre.',
+          ],
+          tips: [
+            'Compra la entrada e incluye el permiso de cámara. Nada de flash ni tocar/dar comida.',
+            'Puede que NO aparezcan (buena señal: significa que encuentran comida solos en la selva). La Nursery casi siempre tiene actividad.',
+            'Repelente antes de entrar y ropa clara; hay pasarelas de madera que pueden resbalar con lluvia.',
+          ],
+          family: [
+            'Contadles que "orang hutan" significa "persona del bosque" en malayo, y que comparten el 97% de su ADN con nosotros.',
+            'En la Nursery, jugad a encontrar la cría más pequeña y ver cómo aprende a trepar como un bebé humano.',
+          ],
+          eat: [
+            { name: 'Cafés del centro / lodge de Sepilok', note: 'Se come en el propio centro o en el lodge, sin desplazarse. Sencillo pero de paso.' },
+            { name: 'Sim Sim Seafood (Sandakan)', dish: 'marisco sobre el agua', note: 'Si volvéis por Sandakan, el mejor marisco de la zona.' },
+          ],
+        },
         transitToNext: { mode: 'walk', min: 5 } },
       { n: 3, name: 'Bornean Sun Bear Centre', category: 'Naturaleza', emoji: '🐻', coords: { lat: 5.8732, lon: 117.9480 }, time: '11:00', hours: '~6€', note: 'El único centro del mundo de osos de sol. Pequeños y trepadores, encantan a los niños.',
         transitToNext: { mode: 'walk', min: 8, note: 'Al restaurante' } },
@@ -250,6 +273,29 @@ export const dayEnrich: Record<string, Enrich> = {
       { n: 3, name: 'Sukau Greenview Lodge', category: 'Hotel', emoji: '🛏️', coords: { lat: 5.5170, lon: 118.2950 }, time: '14:00', note: 'Check-in 2× Twin Deluxe. Pasarela de madera sobre el río Kinabatangan. Almuerzo incluido.', status: 'booked',
         transitToNext: { mode: 'boat', min: 5, note: 'Al embarcadero' } },
       { n: 4, name: 'Crucero río (tarde)', category: 'Naturaleza', emoji: '🚤', coords: { lat: 5.5200, lon: 118.3050 }, time: '15:30', note: 'Primer safari fluvial: proboscis, macacos, cocodrilos, cálaos. Guía Orang Sungai. Calibrar prismáticos.',
+        guide: {
+          intro: 'El Kinabatangan es el "Amazonas de Borneo": el río con más fauna del sudeste asiático. En una lancha pequeña, con guía local Orang Sungai (gente del río), vais buscando animales en las orillas. Cada salida es distinta — es safari de verdad, no está garantizado, y por eso emociona.',
+          time: '2–3 h por crucero', bestTime: 'Amanecer (6:00) y última hora de tarde (15:30): cuando la fauna sale a las orillas.',
+          route: [
+            'Salida en lancha desde el embarcadero del lodge; sentaos repartidos para ver a ambas orillas.',
+            'El guía navega despacio pegado a la vegetación buscando movimiento en las copas.',
+            'Fijaos en las ramas altas (monos y cálaos) y en los troncos de las orillas (varanos, cocodrilos).',
+            'Volvéis al lodge al caer el sol — llevad linterna para el night walk opcional.',
+          ],
+          tips: [
+            'Binoculares imprescindibles (uno por adulto): la fauna suele estar lejos. Cámara con zoom.',
+            'Ropa de colores apagados, manga larga y repelente: al atardecer salen los mosquitos.',
+            'Silencio y movimientos lentos: hablar espanta a los animales. Haz caso al guía, que "lee" el río.',
+            'Bolsa estanca para el móvil/cámara: puede salpicar o caer un chaparrón.',
+          ],
+          family: [
+            'Convertidlo en un juego de "quién ve primero": narigudos (esos monos de nariz enorme y barriga), cálaos, cocodrilos y, con suerte, elefantes pigmeos.',
+            'Contadles que el mono narigudo (proboscis) solo vive en Borneo y que su nariz gigante le sirve para hacer más ruido y presumir.',
+          ],
+          eat: [
+            { name: 'Pensión completa en el lodge (Sukau)', note: 'No hay restaurantes en el río: el lodge da todas las comidas entre cruceros. Aquí el foodie es comer rodeados de jungla.' },
+          ],
+        },
         transitToNext: { mode: 'boat', min: 5 } },
       { n: 5, name: 'Cena en el lodge + night walk', category: 'Naturaleza', emoji: '🦎', coords: { lat: 5.5170, lon: 118.2950 }, time: '19:30', note: 'Cena incluida y paseo nocturno con frontal: ranas, insectos palo, ojos de cocodrilo. Aventura de exploradores.' },
     ],
@@ -366,6 +412,29 @@ export const dayEnrich: Record<string, Enrich> = {
     ],
     stops: [
       { n: 1, name: 'Batu Caves', category: 'Templo', emoji: '🙏', coords: { lat: 3.2379, lon: 101.6840 }, time: '08:00', hours: 'Gratis', note: 'Estatua dorada de 43m y escalera arcoíris a la cueva-templo. Macacos por todos lados. Llegar pronto, antes del calor y los grupos.',
+        guide: {
+          intro: 'Batu Caves es el templo hindú más importante fuera de la India: una estatua dorada de 43 m del dios Murugan y 272 escalones de colores que suben a una cueva de piedra caliza con santuarios dentro. Gratis, espectacular y muy fotogénico — la estampa de KL.',
+          time: '1½–2 h', bestTime: 'A las 8:00, nada más abrir: fresco, luz suave y sin los autobuses de turistas.',
+          route: [
+            'Foto con la estatua dorada de Murugan y la escalera arcoíris de fondo.',
+            'Sube los 272 escalones sin prisa (hay barandilla) — parad a mirar atrás las vistas.',
+            'Arriba, la Temple Cave: santuarios hindúes bajo una bóveda abierta al cielo con monos y palomas.',
+            'Si os quedáis con ganas, la Dark Cave / Ramayana Cave (esta última, de pago, con figuras de colores) están al lado.',
+          ],
+          tips: [
+            'Hombros y rodillas cubiertos para entrar (llevad un pañuelo/sarong); en la entrada alquilan si hace falta.',
+            '⚠️ Macacos MUY atrevidos: no lleves comida ni bolsas abiertas a la vista, agarra bien gafas y móvil. No los mires fijamente ni les des de comer.',
+            'Súbelo pronto: a media mañana el sol pega de lleno en la escalera y se llena.',
+          ],
+          family: [
+            'Reto de contar los 272 escalones subiendo (y buscar las estatuas de colores en cada tramo).',
+            'Explicadles que es un templo vivo: mucha gente sube a rezar, así que hablamos bajito y respetamos.',
+            'Ojo con los monos: divertidos de ver, pero se les mira desde lejos y no se les toca.',
+          ],
+          eat: [
+            { name: 'Puestos indios al pie de Batu Caves', dish: 'thosai, teh tarik, banana leaf', note: 'Puestos vegetarianos del sur de India junto a la entrada: desayuno barato y auténtico sin moverse.' },
+          ],
+        },
         transitToNext: { mode: 'car', min: 25, note: 'Grab de vuelta hacia KLCC', fare: '~25 MYR', tip: 'Kampung Baru está de camino al hotel, no hay que desviarse.' } },
       { n: 2, name: 'Brunch: Nasi Lemak Kampung Baru', category: 'Comida', emoji: '🍛', coords: { lat: 3.1665, lon: 101.7045 }, time: '10:15', note: 'El nasi lemak más auténtico de KL (Nasi Lemak Antarabangsa y puestos del barrio), en el pueblo malayo de casas de madera pegado a las Petronas. Al lado del hotel.',
         transitToNext: { mode: 'car', min: 12, note: 'Al hotel a descansar / a la tarde elegida', fare: '~10 MYR' } },
@@ -408,8 +477,52 @@ export const dayEnrich: Record<string, Enrich> = {
       { n: 1, name: 'Desayuno en el hotel', category: 'Comida', emoji: '🍳', coords: { lat: -8.5060, lon: 115.2620 }, time: '07:15', note: 'Desayuno temprano; conductor a las 7:45.',
         transitToNext: { mode: 'car', min: 25, note: 'Coche privado a Tegallalang' } },
       { n: 2, name: 'Tegallalang Rice Terraces', category: 'Naturaleza', emoji: '🌾', coords: { lat: -8.4318, lon: 115.2797 }, time: '08:00', hours: '~2€', note: 'Arrozales UNESCO al fresco de la mañana. Paseo entre bancales escalonados, antes de que lleguen los buses.',
+        guide: {
+          intro: 'Los arrozales de Tegallalang son la postal de Bali: bancales verdes escalonados regados por el "subak", el sistema de riego balinés de hace 1.000 años declarado UNESCO. Al amanecer, con la niebla y sin gente, son mágicos.',
+          time: '1–1½ h', bestTime: 'A las 8:00: fresco, verde intenso y antes de que lleguen los autobuses (y del calor).',
+          route: [
+            'Empieza arriba, por los miradores de la carretera (foto panorámica de los bancales).',
+            'Baja por los senderos entre las terrazas hasta el fondo del valle y sube por el otro lado.',
+            'De camino verás los famosos columpios y el cartel "Bali" — la zona enlaza con el Bali Swing.',
+          ],
+          tips: [
+            'Hay pequeños "donativos" (~10–20k IDR) que piden algunos tramos y columpios privados: lleva efectivo suelto.',
+            'Calzado que agarre: los escalones de barro resbalan. Baja con calma con los peques.',
+            'Los cafés del borde (Tis Café, D\'Tukad) tienen las mejores vistas para un zumo/kopi.',
+          ],
+          family: [
+            'Explicadles el "subak": los balineses comparten el agua ladera abajo, campo por campo, en comunidad — llevan mil años haciéndolo.',
+            'Buscad los patos y espantapájaros entre los arrozales y las ofrendas (canang sari) de flores.',
+          ],
+          eat: [
+            { name: 'Cafés con vistas de Tegallalang (Tis Café, D\'Tukad)', dish: 'nasi/mie goreng, zumos', note: 'Comer mirando los bancales, sin moverse. Algo más turístico pero la vista lo vale.' },
+            { name: 'Nasi Ayam Kedewatan Ibu Mangku', dish: 'pollo betutu con nasi campur', note: 'De camino de vuelta a Ubud: pollo betutu de institución, local y barato.' },
+          ],
+        },
         transitToNext: { mode: 'car', min: 10, note: 'Al Bali Swing (misma zona de Tegallalang)' } },
       { n: 3, name: 'Bali Swing', category: 'Actividad', emoji: '🌴', coords: { lat: -8.4480, lon: 115.2540 }, time: '09:30', hours: '~30€', note: 'Columpios gigantes sobre la jungla y los arrozales (con arnés para los niños), aquí mismo en la zona de Tegallalang. Fotos y adrenalina suave. El columpio lo hacemos HOY; la cascada queda para mañana.',
+        guide: {
+          intro: 'Los columpios gigantes de Bali sobre el valle de la jungla son puro Instagram… pero también una experiencia divertidísima en familia. Vas atado con arnés y te lanzan sobre los arrozales. Hay columpios a distintas alturas para elegir según el valiente.',
+          time: '1½–2 h', bestTime: 'Temprano (9:30): menos cola para cada columpio y mejor luz para las fotos.',
+          route: [
+            'Al llegar te ponen el arnés de seguridad y eliges columpio por altura (los hay suaves para los peques).',
+            'Empieza por uno bajo para coger confianza y ve subiendo.',
+            'Aprovecha los "nidos" y plataformas para fotos entre turno y turno.',
+            'Muchos parques incluyen vestidos volando y cafetería con vistas: remátalo con un zumo.',
+          ],
+          tips: [
+            'Reserva online un paquete (incluye varios columpios): sale mejor que pagar suelto y evitas sorpresas de precio.',
+            'Hay peso mínimo/edad para los columpios grandes: Leo (4) irá en los suaves o acompañado — pregunta al llegar.',
+            'Sujeta bien móvil y gafas; deja lo demás en las taquillas. Un adulto abajo para fotos/vídeo.',
+          ],
+          family: [
+            'Los arneses hacen que sea seguro: explícaselo a Leo antes para que vaya tranquilo y disfrute.',
+            'Turno de "el más valiente": que cada uno elija su altura — se lo pasan en grande animándose.',
+          ],
+          eat: [
+            { name: 'Cafetería del propio parque / Tegallalang', dish: 'zumos, snacks, nasi goreng', note: 'Se come ahí mismo con vistas al valle; la zona es la misma de los arrozales.' },
+          ],
+        },
         transitToNext: { mode: 'car', min: 15, note: 'De vuelta hacia Ubud, a comer entre arrozales' } },
       { n: 4, name: 'Comida: Sari Organik', category: 'Comida', emoji: '🥗', coords: { lat: -8.4900, lon: 115.2620 }, time: '12:00', note: 'Comida orgánica con vistas a los arrozales (se llega por un sendero bonito). Zumos frescos.',
         transitToNext: { mode: 'car', min: 15, note: 'Al Monkey Forest' } },
@@ -473,6 +586,29 @@ export const dayEnrich: Record<string, Enrich> = {
       { n: 1, name: 'Desayuno + snorkel tortugas', category: 'Playa', emoji: '🐢', coords: { lat: -8.3490, lon: 116.0820 }, time: '08:30', note: 'Desayuno en el resort y snorkel con tortugas en la costa norte, con el mar más calmado.',
         transitToNext: { mode: 'boat', min: 10, note: 'Barca de snorkel' } },
       { n: 2, name: 'Snorkel trip 3 Gilis (glass-bottom)', category: 'Actividad', emoji: '🤿', coords: { lat: -8.3550, lon: 116.0700 }, time: '10:30', hours: '~12€/persona', note: 'Arrecifes y las estatuas sumergidas entre Meno y Air. Fondo de cristal para quien no quiera mojarse.',
+        guide: {
+          intro: 'El snorkel de las tres Gilis es EL plan de la isla: una barca de fondo de cristal os lleva por varios puntos — arrecifes con tortugas verdes, peces de colores y las famosas estatuas humanas sumergidas de Gili Meno. Agua cálida y transparente, ideal para peques.',
+          time: '3–4 h (varias paradas)', bestTime: 'Salida de media mañana (10:30): mar más calmado y buena luz bajo el agua.',
+          route: [
+            'Primera parada, el "Turtle Point": zona tranquila para nadar con tortugas verdes.',
+            'Segunda, las estatuas sumergidas de Gili Meno (el círculo de figuras): impresionan y son poco profundas.',
+            'Tercera, un arrecife de coral con peces de colores; el guía va indicando dónde mirar.',
+            'Comida/parada en Gili Meno o vuelta a Gili Air a comer.',
+          ],
+          tips: [
+            'Lleva TUS gafas de snorkel (más cómodas e higiénicas, sobre todo para los niños); las de alquiler ajustan mal.',
+            'Camiseta de licra + protector reef-safe: el sol reflejado en el agua quema muchísimo.',
+            'Elige barca con chalecos y fondo de cristal: así Leo puede ver sin meterse. Pulseras de mareo si sois sensibles.',
+            'Respeta las tortugas y el coral: mirar sin tocar, no ponerse encima ni perseguirlas.',
+          ],
+          family: [
+            'Buscad juntos las tortugas verdes: contadles que respiran aire como nosotros y suben a la superficie cada rato.',
+            'Las estatuas sumergidas parecen un tesoro perdido — a Aira y Leo les encanta "descubrirlas".',
+          ],
+          eat: [
+            { name: 'Warungs de Gili Meno / Gili Air', dish: 'nasi campur, pescado a la brasa', note: 'Comida local en la parada o al volver; de noche, el mercado nocturno de Gili Air.' },
+          ],
+        },
         transitToNext: { mode: 'walk', min: 5, note: 'A comer' } },
       { n: 3, name: 'Comida en chiringuito', category: 'Comida', emoji: '🦞', coords: { lat: -8.3560, lon: 116.0850 }, time: '13:00', note: 'Langosta y pescado fresco, barato. Siesta/sombra en las horas de más sol.',
         transitToNext: { mode: 'walk', min: 5 } },
