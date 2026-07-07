@@ -49,7 +49,9 @@ export const gastronomy: Record<string, Gastronomy> = {
       { name: 'Fish head curry', emoji: '🐟', what: 'Cabeza de pescado en curry con quingombó y berenjena. Herencia india-singapurense; para compartir.', tip: 'En Little India (Muthu\'s, The Banana Leaf Apolo).' },
       { name: 'Nasi padang', emoji: '🍛', what: 'Arroz con surtido de guisos malayos/indonesios que señalas en la vitrina (rendang, ayam, verduras).', tip: 'Hjh Maimunah en Kampong Glam es el rey (Bib Gourmand).' },
       { name: 'Dim sum', emoji: '🥟', what: 'Bocaditos al vapor/fritos cantoneses: har gow, siew mai, bollos de cerdo, custard bun.', tip: 'Swee Choon abre hasta de madrugada; un clásico de after.' },
-      { name: 'Durian', emoji: '👑', what: 'El "rey de las frutas": cremosa, olor intenso, sabor único.', tip: 'Cómprala abierta en Geylang. Prohibida en metro y hoteles por el olor.' },
+      { name: 'Chendol / ice kachang', emoji: '🍧', what: 'Postre de hielo con leche de coco, azúcar de palma (gula melaka) y gelatina de pandan (chendol) o con toppings (ice kachang). Salva del calor.', tip: 'De postre en cualquier hawker; Ah Chiew\'s borda los de la vieja escuela (mango sago).' },
+      { name: 'BBQ stingray (sambal)', emoji: '🌶️', what: 'Raya a la brasa en hoja de plátano cubierta de sambal picante, con lima. Marisco callejero por excelencia.', tip: 'En East Coast Lagoon o Newton, de noche.' },
+      { name: 'Durian', emoji: '👑', what: 'El "rey de las frutas": cremosa, olor intenso, sabor único.', tip: 'Cómprala abierta en Geylang o reserva en Ah Di (Dempsey). Prohibida en metro y hoteles por el olor.' },
     ],
     spots: [
       // Cerca de las visitas
@@ -82,6 +84,15 @@ export const gastronomy: Record<string, Gastronomy> = {
       { name: 'Springleaf Prata Place', dish: 'roti prata (creativas)', area: 'Upper Thomson', price: '€', why: 'Prata clásica y de autor (con queso, plátano...). Desayuno-merienda para toda la familia.', worthTrip: true },
       { name: 'Bismillah Biryani', dish: 'biryani (Bib Gourmand)', area: 'Kampong Glam (Dunlop St)', price: '€', why: 'Biryani de cordero/pollo que se agota a diario, en Little India/Kampong Glam.', worthTrip: true, badge: 'Bib Gourmand' },
       { name: 'Tekka Centre', dish: 'biryani, prata, comida india', area: 'Little India', price: '€', why: 'El hawker de Little India: la mejor inmersión en la comida india de Singapur, colorido y barato.', worthTrip: true },
+      // Joyas locales de la lista de Reddit (curadas: solo lo auténtico, sin brunch/burgers)
+      { name: 'East Coast Lagoon Food Village', dish: 'satay, BBQ stingray, alitas, chili crab', area: 'East Coast Park (a pie de playa)', price: '€', why: 'Hawker al aire libre junto al mar, con brisa: marisco a la brasa y alitas mejores que Newton. Muy familiar.', worthTrip: true, badge: 'joya local' },
+      { name: 'Chef Kang\'s Noodle House', dish: 'wanton mee (el mejor de SG)', area: 'Toa Payoh', price: '€', why: 'Para muchos el mejor wanton mee de Singapur: fideos "QQ" y char siu grueso. Bib Gourmand.', worthTrip: true, badge: 'Bib Gourmand' },
+      { name: 'JB Ah Meng', dish: 'zi char (san lou hor fun, sambal)', area: 'Geylang', price: '€€', why: 'El zi char de after favorito de los locales: platos wok potentes, lleno hasta tarde.', worthTrip: true, badge: 'leyenda local' },
+      { name: 'Ah Chiew\'s Dessert', dish: 'postres de la vieja escuela (mango sago)', area: 'centro', price: '€', why: 'Postres chinos tradicionales para rematar: mango sago, tau suan. Dulce y refrescante para los peques.', worthTrip: true },
+      { name: 'Charlie\'s Peranakan (Golden Mile FC)', dish: 'nyonya barato (ayam buah keluak)', area: 'Golden Mile Food Centre', price: '€', why: 'Cocina Peranakan de hawker (la versión asequible de Candlenut): platos nyonya caseros.', worthTrip: true, badge: 'joya local' },
+      { name: 'Tambuah Mas', dish: 'comida indonesia casera', area: 'Orchard (Paragon/Thomson)', price: '€€', why: 'Indonesio auténtico (rendang, ayam, sambal) — buen aperitivo del viaje a Bali. Cerca del hotel.', near: 'Orchard / hotel día 1' },
+      { name: 'Tea Chapter', dish: 'ceremonia de té chino + snacks', area: 'Chinatown (Neil Rd)', price: '€€', why: 'Casa de té tradicional donde tomó té la Reina Isabel II. Experiencia cultural tranquila en pleno Chinatown.', near: 'Chinatown (día 2)' },
+      { name: 'Moghul Sweet Shop', dish: 'samosas (¡salta los dulces!)', area: 'Little India', price: '€', why: 'Las mejores samosas de la ciudad, con relleno especiado y chutney dulce. Snack barato en Little India.', worthTrip: true, badge: 'joya local' },
     ],
   },
 
