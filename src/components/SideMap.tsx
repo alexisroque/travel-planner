@@ -8,10 +8,8 @@ import { usePlanner, useUI } from '../store'
 import TripMap, { type MapPoint, type MapAnchor } from './TripMap'
 import { DEST_HEX } from './DayView'
 import { passportCategories } from '../data/passport'
-import type { Place } from '../types'
-
-const VIEW_LABEL: Record<string, string> = { all: '🗂️ Todo', must: '⭐ Imprescindibles', activity: '🎒 Actividades', food: '🍽️ Restaurantes', kids: '🧒 Ideal niños' }
-const matchView = (p: Place, v: string) => (v === 'all' ? true : v === 'must' ? !!p.must : v === 'food' ? p.kind === 'food' : v === 'kids' ? !!p.forKids : p.kind === 'activity')
+import { VIEW_LABEL, filteredExplorePlaces, type ExploreSort, type ExploreView } from '../lib/explore'
+import { findPlaceInPlan } from '../lib/agenda'
 
 // Mapa lateral persistente (iPad/desktop). Es contextual según la pestaña:
 //  · Itinerario / Hoy / detalle de día → mapa del día (con scroll a la parada)
@@ -23,12 +21,15 @@ export default function SideMap() {
 
   const focusDayId = useUI((s) => s.focusDayId)
   const exploreDest = useUI((s) => s.exploreDest)
-  const exploreView = useUI((s) => s.exploreView)
+  const exploreView = useUI((s) => s.exploreView) as ExploreView
+  const exploreSort = useUI((s) => s.exploreSort) as ExploreSort
+  const exploreDayId = useUI((s) => s.exploreDayId)
+  const setHighlight = useUI((s) => s.setHighlight)
   const passportKid = useUI((s) => s.passportKid)
   const highlight = useUI((s) => s.highlight)
   const passportGeo = usePlanner((s) => s.passportGeo)
-  const { addedByDay, movedBase, hiddenBase, order } = usePlanner((s) => ({
-    addedByDay: s.addedByDay, movedBase: s.movedBase, hiddenBase: s.hiddenBase, order: s.order,
+  const { addedByDay, movedBase, hiddenBase, order, addPlace } = usePlanner((s) => ({
+    addedByDay: s.addedByDay, movedBase: s.movedBase, hiddenBase: s.hiddenBase, order: s.order, addPlace: s.addPlace,
   }))
 
   // ===== Pasaporte: mapa de sellos conseguidos por el niño activo =====
@@ -73,8 +74,36 @@ export default function SideMap() {
   if (mode === 'explore') {
     const dest = destById(exploreDest)
     const destColor = DEST_HEX[dest.colorVar] ?? '#1a1a2a'
-    const places = trip.catalog.filter((p) => p.destinationId === exploreDest && p.coords && matchView(p, exploreView))
-    const points: MapPoint[] = places.map((p) => ({ lat: p.coords!.lat, lon: p.coords!.lon, emoji: p.emoji, label: p.name, color: destColor, key: p.id }))
+    const filtered = filteredExplorePlaces(exploreDest, exploreView, exploreSort)
+    const places = filtered.filter((p) => p.coords)
+    const destDays = trip.days.filter((d) => d.destinationId === exploreDest && d.dayNumber !== null)
+    const selectedDay = destDays.find((d) => d.id === exploreDayId) ?? destDays[0]
+    const dayAgenda = selectedDay ? buildAgenda(selectedDay.id, { addedByDay, movedBase, hiddenBase, order }).filter((i) => i.coords) : []
+    const typeClassFromCategory = (category: string) => /comida|restaurante/i.test(category) ? 'food' : 'activity'
+    const points: MapPoint[] = places.map((p) => {
+      const inPlan = findPlaceInPlan(p, { addedByDay, movedBase, hiddenBase })
+      const isSelectedDay = inPlan?.dayId === selectedDay?.id
+      const color = inPlan ? (inPlan.source === 'added' ? '#d4900a' : '#1a7a3a') : destColor
+      return {
+        lat: p.coords!.lat,
+        lon: p.coords!.lon,
+        n: filtered.findIndex((x) => x.id === p.id) + 1,
+        label: `${p.name}${inPlan ? ` · en itinerario (${inPlan.source === 'added' ? 'añadido' : 'base'}${isSelectedDay ? ` · día ${selectedDay?.dayNumber}` : ''})` : ' · por decidir'}`,
+        color,
+        key: p.id,
+        pinClass: `explore-pin ${p.must ? 'must' : p.kind === 'food' ? 'food' : 'activity'} ${inPlan ? `planned ${inPlan.source}` : 'candidate'} ${isSelectedDay ? 'selected-day' : ''}`,
+      }
+    })
+    const contextPoints: MapPoint[] = dayAgenda
+      .filter((i) => !places.some((p) => Math.abs(p.coords!.lat - i.coords!.lat) < 0.0005 && Math.abs(p.coords!.lon - i.coords!.lon) < 0.0005))
+      .map((i, idx) => ({
+        lat: i.coords!.lat,
+        lon: i.coords!.lon,
+        n: idx + 1,
+        label: `${i.name} · ya programado ${selectedDay ? `día ${selectedDay.dayNumber}` : ''}`,
+        color: i.kind === 'added' ? '#d4900a' : '#1a7a3a',
+        pinClass: `explore-pin day-context ${typeClassFromCategory(i.category)} planned ${i.kind} selected-day`,
+      }))
     const acc = trip.accommodations.find((a) => a.destinationId === exploreDest && a.coords)
     const anchors: MapAnchor[] = [
       ...(acc?.coords ? [{ lat: acc.coords.lat, lon: acc.coords.lon, kind: 'hotel' as const, label: acc.name }] : []),
@@ -82,15 +111,27 @@ export default function SideMap() {
     ]
     return (
       <div className="side-map-inner" style={{ ['--dest' as string]: destColor }}>
-        <div className="side-map-head">{dest.emoji} {dest.name.replace(/^.*— /, '')} · {VIEW_LABEL[exploreView]} ({places.length})</div>
+        <div className="side-map-head">{dest.emoji} {dest.name.replace(/^.*— /, '')} · {VIEW_LABEL[exploreView]} ({filtered.length}{places.length !== filtered.length ? ` · ${places.length} en mapa` : ''})</div>
         <div className="side-map-canvas">
           {points.length > 0 ? (
-            <TripMap key={`${exploreDest}-${exploreView}`} points={points} anchors={anchors} showRoute={false} height="100%" rounded={false} expandable={false} fitPadding={50} highlight={highlight} />
+            <TripMap
+              key={`${exploreDest}-${exploreView}-${exploreSort}-${selectedDay?.id ?? 'no-day'}`}
+              points={points}
+              extraPoints={contextPoints}
+              anchors={anchors}
+              showRoute={false}
+              height="100%"
+              rounded={false}
+              expandable={false}
+              fitPadding={50}
+              highlight={highlight}
+              onPointClick={(key) => setHighlight(key)}
+            />
           ) : (
             <div className="empty">Nada en esta categoría aquí.</div>
           )}
         </div>
-        <div className="side-map-foot">Sigue lo que filtras en Explorar · toca un pin para ver qué es · 🏨 hotel · 🏧 cajeros</div>
+        <div className="side-map-foot">Color: azul por decidir · verde en itinerario · dorado añadido. Icono: ⭐ imprescindible · 🎒 actividad · 🍽️ restaurante. Aro blanco = día {selectedDay?.dayNumber ?? 'seleccionado'}.</div>
       </div>
     )
   }
@@ -105,11 +146,19 @@ export default function SideMap() {
     lat: i.coords!.lat, lon: i.coords!.lon, n: idx + 1, label: i.name,
     color: i.kind === 'added' ? '#d4900a' : destColor, key: i.key,
   }))
-  const agendaKeys = new Set(agenda.filter((i) => i.coords).map((i) => `${i.coords!.lat.toFixed(3)},${i.coords!.lon.toFixed(3)}`))
-  const extraPoints: MapPoint[] = trip.catalog
-    .filter((p) => p.destinationId === day.destinationId && p.coords)
-    .filter((p) => !agendaKeys.has(`${p.coords!.lat.toFixed(3)},${p.coords!.lon.toFixed(3)}`))
-    .map((p) => ({ lat: p.coords!.lat, lon: p.coords!.lon, emoji: p.emoji, label: p.name }))
+    const agendaKeys = new Set(agenda.filter((i) => i.coords).map((i) => `${i.coords!.lat.toFixed(3)},${i.coords!.lon.toFixed(3)}`))
+    const extraPoints: MapPoint[] = trip.catalog
+      .filter((p) => p.destinationId === day.destinationId && p.coords)
+      .filter((p) => !agendaKeys.has(`${p.coords!.lat.toFixed(3)},${p.coords!.lon.toFixed(3)}`))
+      .map((p) => ({
+        lat: p.coords!.lat,
+        lon: p.coords!.lon,
+        n: '',
+        label: p.name,
+        color: destColor,
+        key: p.id,
+        pinClass: `explore-pin ${p.must ? 'must' : p.kind === 'food' ? 'food' : 'activity'} candidate`,
+      }))
 
   function scrollToStop(key: string) {
     const el = document.getElementById(`stop-${key}`)
@@ -123,12 +172,24 @@ export default function SideMap() {
       <div className="side-map-head">🗺️ {day.dayNumber === null ? 'Salida' : `Día ${day.dayNumber}`} · {day.date} · {dest.emoji} {day.title}</div>
       <div className="side-map-canvas">
         {points.length > 0 ? (
-          <TripMap key={day.id} points={points} extraPoints={extraPoints} anchors={[...dayAnchors(day), ...dayAtms(day)]} height="100%" rounded={false} expandable={false} onPointClick={scrollToStop} highlight={highlight} />
+          <TripMap
+            key={day.id}
+            points={points}
+            extraPoints={extraPoints}
+            anchors={[...dayAnchors(day), ...dayAtms(day)]}
+            height="100%"
+            rounded={false}
+            expandable={false}
+            onPointClick={(key) => { setHighlight(key); scrollToStop(key) }}
+            onExtraPointAction={(placeId) => addPlace(day.id, placeId)}
+            extraActionLabel={`Añadir al día ${day.dayNumber ?? ''}`.trim()}
+            highlight={highlight}
+          />
         ) : (
           <div className="empty">Sin mapa para este día.</div>
         )}
       </div>
-      <div className="side-map-foot">Toca un pin para ir a la actividad · ◌ = por explorar cerca · 🏧 cajeros · 🏨 hotel · ✈️ aeropuerto</div>
+      <div className="side-map-foot">Números = itinerario · azul por decidir · ⭐ imprescindible · 🎒 actividad · 🍽️ restaurante · popup para añadir al día</div>
     </div>
   )
 }

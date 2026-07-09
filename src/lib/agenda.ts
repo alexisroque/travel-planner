@@ -7,6 +7,36 @@ interface PlanOverrides {
   hiddenBase: Record<string, boolean>
 }
 
+const norm = (s: string) =>
+  s.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/&/g, ' y ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+function textKeysForPlace(place: Place) {
+  const raw = place.name
+  const parts = raw
+    .split(/\s+[—–-]\s+|\(|\)|\+|:/)
+    .map((x) => norm(x))
+    .filter((x) => x.length >= 6)
+  return Array.from(new Set([norm(raw), ...parts]))
+}
+
+function placeMentionedInDay(place: Place, dayId: string) {
+  const day = trip.days.find((d) => d.id === dayId)
+  if (!day) return false
+  const haystack = norm([
+    day.title,
+    day.headline,
+    day.transport,
+    day.tip,
+    ...(day.slots ?? []).map((s) => s.text),
+  ].filter(Boolean).join(' '))
+  return textKeysForPlace(place).some((k) => k.length >= 6 && haystack.includes(k))
+}
+
 // ¿Está este sitio del catálogo ya en el plan? (añadido por el usuario o como parada base por coordenadas)
 export function findPlaceInPlan(place: Place, ov: PlanOverrides):
   | { dayId: string; source: 'added' | 'base'; origDayId?: string; n?: number }
@@ -25,6 +55,10 @@ export function findPlaceInPlan(place: Place, ov: PlanOverrides):
         }
       }
     }
+  }
+  for (const d of trip.days) {
+    if (place.destinationId !== d.destinationId) continue
+    if (placeMentionedInDay(place, d.id)) return { dayId: d.id, source: 'base' }
   }
   return null
 }

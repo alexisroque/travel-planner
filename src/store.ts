@@ -2,9 +2,10 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 // Estado de UI no persistente: qué muestra el mapa lateral (iPad/desktop).
-// focusDayId = día en foco; exploreDest/exploreView = destino y filtro activos
-// en la pestaña Explorar (para que el mapa lateral los siga).
+// focusDayId = día en foco; exploreDest/exploreView/exploreSort/exploreDayId
+// = contexto activo de Explorar para que el mapa lateral siga la lista.
 type ExploreView = 'all' | 'must' | 'activity' | 'food' | 'kids'
+type ExploreSort = 'rank' | 'zone' | 'price' | 'alpha' | 'pop'
 interface UIState {
   focusDayId: string | null
   setFocusDay: (id: string) => void
@@ -12,6 +13,10 @@ interface UIState {
   setExploreDest: (id: string) => void
   exploreView: ExploreView
   setExploreView: (v: ExploreView) => void
+  exploreSort: ExploreSort
+  setExploreSort: (s: ExploreSort) => void
+  exploreDayId: string | null
+  setExploreDay: (id: string | null) => void
   passportKid: string // niño activo en el Pasaporte (compartido con el mapa lateral)
   setPassportKid: (id: string) => void
   highlight: string | null // punto resaltado en el mapa lateral (clic en la lista)
@@ -24,6 +29,10 @@ export const useUI = create<UIState>((set) => ({
   setExploreDest: (id) => set({ exploreDest: id }),
   exploreView: 'all',
   setExploreView: (v) => set({ exploreView: v }),
+  exploreSort: 'rank',
+  setExploreSort: (s) => set({ exploreSort: s }),
+  exploreDayId: null,
+  setExploreDay: (id) => set({ exploreDayId: id }),
   passportKid: 'aira',
   setPassportKid: (id) => set({ passportKid: id }),
   highlight: null,

@@ -183,12 +183,29 @@ nav.bottom a.active .ni { transform: translateY(-1px); }
 .leaflet-container { font-family: inherit; background: #dfe6e9; }
 .map-pin { width: 26px; height: 26px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,.35); border: 2px solid #fff; }
 .map-pin.extra { width: 22px; height: 22px; background: #fff; border: 2px dashed #c07000; font-size: 12px; opacity: .92; box-shadow: 0 1px 4px rgba(0,0,0,.25); }
+.map-pin.explore-pin { position: relative; border-width: 2px; }
+.map-pin.explore-pin::after { position: absolute; right: -8px; bottom: -8px; width: 17px; height: 17px; border-radius: 50%; background: #fff; border: 1px solid rgba(0,0,0,.18); display: flex; align-items: center; justify-content: center; font-size: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.22); }
+.map-pin.explore-pin.must::after { content: '⭐'; }
+.map-pin.explore-pin.food::after { content: '🍽️'; }
+.map-pin.explore-pin.activity::after { content: '🎒'; }
+.map-pin.explore-pin.planned { box-shadow: 0 0 0 3px rgba(255,255,255,.75), 0 0 0 6px rgba(26,122,58,.32), 0 2px 7px rgba(0,0,0,.35); }
+.map-pin.explore-pin.added { box-shadow: 0 0 0 3px rgba(255,255,255,.75), 0 0 0 6px rgba(212,144,10,.38), 0 2px 7px rgba(0,0,0,.35); }
+.map-pin.explore-pin.candidate { opacity: .9; }
+.map-pin.explore-pin.selected-day { border-color: #fff; outline: 3px solid rgba(255,255,255,.9); outline-offset: 3px; }
+.map-pin.day-context { width: 22px; height: 22px; font-size: 11px; opacity: .86; border-style: dashed; }
+.map-pin.extra.day-context { border-color: rgba(26,122,58,.65); box-shadow: 0 0 0 3px rgba(26,122,58,.15), 0 1px 4px rgba(0,0,0,.25); }
+.map-pin.extra.day-context.added { border-color: rgba(212,144,10,.72); box-shadow: 0 0 0 3px rgba(212,144,10,.18), 0 1px 4px rgba(0,0,0,.25); }
+.map-pin.extra.explore-pin { width: 24px; height: 24px; border-style: solid; border-color: #fff; }
+.map-popup-action { margin-top: 8px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: inherit; font-weight: 800; padding: 6px 10px; cursor: pointer; }
+.map-popup-action:active { transform: translateY(1px); }
 /* Pin resaltado al clicar en la lista */
 .map-pin.pin-hi { transform: scale(1.45); z-index: 500; box-shadow: 0 0 0 4px rgba(255,255,255,.7), 0 0 0 8px rgba(26,26,42,.35), 0 4px 12px rgba(0,0,0,.4); animation: pin-bounce .5s ease; }
 @keyframes pin-bounce { 0% { transform: scale(1); } 55% { transform: scale(1.7); } 100% { transform: scale(1.45); } }
 /* Nombre clicable para localizar en el mapa lateral */
 .pc-name-btn { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; }
 .pc-name-btn:active { opacity: .6; }
+.tap-map { cursor: pointer; touch-action: manipulation; }
+.tap-map:active { transform: translateY(1px); }
 .sc-name-btn { cursor: pointer; }
 .pc-locate { font-size: .82em; opacity: .55; }
 .place-card.hi, .stop-card.hi { box-shadow: 0 0 0 2px var(--sa), 0 2px 10px rgba(0,0,0,.12); }
@@ -360,8 +377,18 @@ nav.bottom a.active .ni { transform: translateY(-1px); }
 .rating-tag { background: #fff7e0; color: #8a6500; font-weight: 800; padding: 1px 8px; border-radius: 999px; font-size: .92em; }
 .sort-row { display: flex; align-items: center; gap: 8px; margin: 6px 16px 0; font-size: .82em; color: var(--muted); }
 .sort-row select { font: inherit; font-weight: 700; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 9px; padding: 5px 9px; }
+.explore-day-row { display: flex; align-items: center; gap: 8px; margin: 8px 16px 0; font-size: .78em; color: var(--muted); }
+.explore-day-row > span { flex: 0 0 auto; font-weight: 700; }
+.explore-day-pills { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.explore-day-pills::-webkit-scrollbar { display: none; }
+.explore-day-pills button { flex: 0 0 auto; font-size: .92em; font-weight: 800; color: var(--muted); background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; }
+.explore-day-pills button.on { color: #fff; background: var(--dest, var(--ink)); border-color: var(--dest, var(--ink)); }
 .place-card.in-plan { border-left-color: var(--ok); background: #f6fbf7; }
-.place-card.in-plan .pc-rank { background: var(--ok); }
+.place-card.in-plan.plan-added { border-left-color: var(--warn); background: #fffaf0; }
+.place-card.in-plan .pc-rank { background: var(--ok); box-shadow: 0 0 0 3px rgba(26,122,58,.18); }
+.place-card.in-plan.plan-added .pc-rank { background: var(--warn); box-shadow: 0 0 0 3px rgba(192,112,0,.18); }
+.pc-assigned.base { color: var(--ok); font-weight: 800; }
+.pc-assigned.added { color: var(--warn); font-weight: 800; }
 
 /* ===== Bottom sheet (day picker) ===== */
 .sheet-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1000; display: flex; align-items: flex-end; justify-content: center; animation: fadein .15s ease; }

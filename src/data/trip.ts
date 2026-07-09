@@ -103,12 +103,15 @@ const baseTrip: Trip = {
       accommodation: { name: 'Holiday Inn Orchard City Centre', note: 'Noche 1/2', status: 'booked' },
       progress: 50,
       statusItems: [{ label: 'Hotel confirmado', done: true }, { label: 'Tickets Wings of Time (~18 SGD) — opcional', done: false }],
+      stops: [
+        { n: 1, name: 'Skyline Luge Sentosa', category: 'Actividad', emoji: '🛷', coords: { lat: 1.2536, lon: 103.8190 }, time: '17:30 (opt.)', hours: 'Últimas bajadas antes de Wings of Time', note: 'Opción rápida si los niños tienen energía antes del show: luge + telesilla junto a Beach Station. Si hay cansancio de jet lag, saltarlo sin culpa.' },
+      ],
       slots: [
         { key: 'morning', icon: '🛬', time: '06:55–09:30', text: 'Llegada Changi T3, inmigración. Directos al Holiday Inn Orchard en Grab (~25 SGD con maletas) y dejarlas en recepción (check-in a las 14:00). El Jewel y su Rain Vortex los dejamos para la VUELTA, con la escala larga.' },
         { key: 'morning', icon: '🌳', time: '10:30', text: 'Singapore Botanic Gardens (UNESCO, gratis) + National Orchid Garden. Mañana suave y a la sombra: lago de cisnes, ardillas y césped para que los niños corran. Activa sin agobiar con el jet lag.' },
         { key: 'midday', icon: '🍜', time: '13:00', text: 'Comida en Casa Verde (dentro de los jardines, kid-friendly) o en el hawker de Tiong Bahru Market. Vuelta al hotel.' },
         { key: 'afternoon', icon: '😴', time: '14:30', text: 'Check-in real y siesta/piscina 2h. El reset clave del jet lag antes de la tarde de playa.' },
-        { key: 'afternoon', icon: '🏖️', time: '16:30', text: 'Grab a Sentosa. Playa Palawan: agua calmada, hamacas y puente al islote. Si aprieta el calor o la lluvia, plan B con AC en la misma isla: S.E.A. Aquarium.' },
+        { key: 'afternoon', icon: '🏖️', time: '16:30', text: 'Grab a Sentosa. Playa Palawan: agua calmada, hamacas y puente al islote. Si aprieta el calor o la lluvia, plan B con AC en la misma isla: S.E.A. Aquarium. Extra opcional antes del show: Skyline Luge Sentosa si queda energía.' },
         { key: 'night', icon: '✨', time: '18:30–19:40', text: 'Cena en los chiringuitos de Siloso/Beach Station y, a las 19:40, WINGS OF TIME — show de agua, láser y fuego sobre el mar en la playa de Sentosa (~18 SGD). Grab de vuelta y a dormir.' },
       ],
       transport: 'Grab Changi→Orchard (~25 SGD, con maletas) · Grab al Botanic Gardens (~8 SGD) · Grab Orchard→Sentosa (~15 SGD)',

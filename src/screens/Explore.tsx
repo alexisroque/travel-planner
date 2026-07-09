@@ -1,50 +1,27 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { trip } from '../data/trip'
-import { gastronomy } from '../data/food'
 import { destById } from '../lib/utils'
 import { DEST_HEX } from '../components/DayView'
 import DayPicker from '../components/DayPicker'
 import { findPlaceInPlan } from '../lib/agenda'
+import { EXPLORE_SORTS, EXPLORE_VIEWS, filteredExplorePlaces, placesForDestination, type ExploreSort, type ExploreView } from '../lib/explore'
 import { gmapsUrl, distanceFromHotel, fmtKm } from '../lib/places-helpers'
 import { usePlanner, useUI } from '../store'
 import type { Place } from '../types'
-
-type View = 'all' | 'must' | 'activity' | 'food' | 'kids'
-type Sort = 'rank' | 'zone' | 'price' | 'alpha' | 'pop'
-const SORTS: { key: Sort; label: string }[] = [
-  { key: 'rank', label: 'Recomendado' },
-  { key: 'pop', label: 'Popularidad' },
-  { key: 'zone', label: 'Zona' },
-  { key: 'price', label: 'Precio' },
-  { key: 'alpha', label: 'A-Z' },
-]
-const priceNum = (p: Place) => { if (!p.price) return 9999; if (/gratis/i.test(p.price)) return 0; const m = /(\d+)/.exec(p.price); return m ? +m[1] : 9999 }
-const SORTERS: Record<Sort, (a: Place, b: Place) => number> = {
-  rank: (a, b) => a.rank - b.rank,
-  pop: (a, b) => (b.rating ?? 0) - (a.rating ?? 0) || a.rank - b.rank,
-  zone: (a, b) => (a.zone ?? '').localeCompare(b.zone ?? '') || a.rank - b.rank,
-  price: (a, b) => priceNum(a) - priceNum(b) || a.rank - b.rank,
-  alpha: (a, b) => a.name.localeCompare(b.name),
-}
-const VIEWS: { key: View; label: string }[] = [
-  { key: 'all', label: '🗂️ Todo' },
-  { key: 'must', label: '⭐ Imprescindibles' },
-  { key: 'activity', label: '🎒 Actividades' },
-  { key: 'food', label: '🍽️ Restaurantes' },
-  { key: 'kids', label: '🧒 Ideal niños' },
-]
 
 export default function Explore() {
   const dests = trip.destinations.filter((d) => d.id !== 'travel')
   // Destino y filtro viven en el store para que el mapa lateral (iPad) los siga.
   const destId = useUI((s) => s.exploreDest)
   const setDestId = useUI((s) => s.setExploreDest)
-  const view = useUI((s) => s.exploreView) as View
+  const view = useUI((s) => s.exploreView) as ExploreView
   const setView = useUI((s) => s.setExploreView)
+  const sort = useUI((s) => s.exploreSort) as ExploreSort
+  const setSort = useUI((s) => s.setExploreSort)
+  const exploreDayId = useUI((s) => s.exploreDayId)
+  const setExploreDay = useUI((s) => s.setExploreDay)
   const highlight = useUI((s) => s.highlight)
   const setHighlight = useUI((s) => s.setHighlight)
-  const [sort, setSort] = useState<Sort>('rank')
   const [picker, setPicker] = useState<Place | null>(null)
 
   const { addedByDay, movedBase, hiddenBase } = usePlanner((s) => ({ addedByDay: s.addedByDay, movedBase: s.movedBase, hiddenBase: s.hiddenBase }))
@@ -53,16 +30,37 @@ export default function Explore() {
   const hideBase = usePlanner((s) => s.hideBase)
 
   const dest = destById(destId)
-  const all = trip.catalog.filter((p) => p.destinationId === destId)
-  const filtered = all
-    .filter((p) => (view === 'all' ? true : view === 'must' ? p.must : view === 'food' ? p.kind === 'food' : view === 'kids' ? p.forKids : p.kind === 'activity'))
-    .sort(SORTERS[sort])
+  const all = placesForDestination(destId)
+  const filtered = filteredExplorePlaces(destId, view, sort)
+  const mappedCount = filtered.filter((p) => p.coords).length
+  const destDays = trip.days.filter((d) => d.destinationId === destId && d.dayNumber !== null)
+  const activeExploreDay = destDays.find((d) => d.id === exploreDayId) ?? destDays[0]
+
+  useEffect(() => {
+    if (!destDays.length) {
+      if (exploreDayId) setExploreDay(null)
+      return
+    }
+    if (!destDays.some((d) => d.id === exploreDayId)) setExploreDay(destDays[0].id)
+  }, [destId, exploreDayId, setExploreDay, destDays])
+
+  useEffect(() => {
+    if (!highlight) return
+    const el = document.getElementById(`place-${highlight}`)
+    el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }, [highlight])
 
   const dayLabel = (dayId: string) => {
     const d = trip.days.find((x) => x.id === dayId)
     return d ? `Día ${d.dayNumber ?? 0} · ${d.date}` : ''
   }
-  const counts: Record<View, number> = {
+  const shouldIgnoreCardTap = (target: EventTarget | null) =>
+    target instanceof HTMLElement && !!target.closest('a,button,select,input,textarea,label')
+  const focusPlace = (p: Place) => {
+    if (!p.coords) return
+    setHighlight(highlight === p.id ? null : p.id)
+  }
+  const counts: Record<ExploreView, number> = {
     all: all.length,
     must: all.filter((p) => p.must).length,
     activity: all.filter((p) => p.kind === 'activity').length,
@@ -77,7 +75,7 @@ export default function Explore() {
         <div className="sub">Lo mejor de cada destino · ✓ = ya en tu plan</div>
       </div>
 
-      <div className="explore-filters">
+      <div className="explore-filters" style={{ ['--dest' as string]: DEST_HEX[dest.colorVar] }}>
         <div className="pill-row">
           {dests.map((d) => (
             <button key={d.id} className={`pill ${destId === d.id ? 'active' : ''}`}
@@ -89,7 +87,7 @@ export default function Explore() {
         </div>
 
         <div className="pill-row" style={{ paddingTop: 0 }}>
-          {VIEWS.map((v) => (
+          {EXPLORE_VIEWS.map((v) => (
             <button key={v.key} className={`pill ${view === v.key ? 'active' : ''}`} onClick={() => setView(v.key)}>
               {v.label} {counts[v.key] > 0 && <span style={{ opacity: 0.6 }}>{counts[v.key]}</span>}
             </button>
@@ -98,34 +96,48 @@ export default function Explore() {
 
         <div className="sort-row">
           <span>Ordenar:</span>
-          <select value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
-            {SORTS.map((s) => <option key={s.key} value={s.key}>{s.label}</option>)}
+          <select value={sort} onChange={(e) => setSort(e.target.value as ExploreSort)}>
+            {EXPLORE_SORTS.map((s) => <option key={s.key} value={s.key}>{s.label}</option>)}
           </select>
         </div>
+
+        {destDays.length > 0 && (
+          <div className="explore-day-row">
+            <span>Ver con:</span>
+            <div className="explore-day-pills">
+              {destDays.map((d) => (
+                <button key={d.id} className={activeExploreDay?.id === d.id ? 'on' : ''} onClick={() => setExploreDay(d.id)}>
+                  Día {d.dayNumber} · {d.date}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
-      {gastronomy[destId] && (
-        <Link to="/gastronomia" className="pack-print-link" style={{ marginTop: 4, marginBottom: 6 }}>
-          🍜 Guía foodie de {dest.name.replace(/^[^—]*—\s*/, '')}: platos típicos + restaurantes curados →
-        </Link>
-      )}
-
       <div className="section-title" style={{ ['--dest' as string]: DEST_HEX[dest.colorVar] }}>
-        {dest.emoji} {dest.name} · {VIEWS.find((v) => v.key === view)?.label} ({filtered.length})
+        {dest.emoji} {dest.name} · {EXPLORE_VIEWS.find((v) => v.key === view)?.label} ({filtered.length}{mappedCount !== filtered.length ? ` · ${mappedCount} en mapa` : ''})
       </div>
 
       {filtered.length === 0 && <div className="empty">Nada en esta categoría para {dest.name}.</div>}
 
-      {filtered.map((p) => {
+      {filtered.map((p, i) => {
         const inPlan = findPlaceInPlan(p, { addedByDay, movedBase, hiddenBase })
         const dist = distanceFromHotel(p)
+        const displayN = i + 1
         return (
-          <div key={p.id} className={`place-card ${inPlan ? 'in-plan' : ''} ${highlight === p.id ? 'hi' : ''}`} style={{ ['--dest' as string]: DEST_HEX[dest.colorVar], ['--dest-l' as string]: `var(${dest.colorVar}-l)` }}>
-            <div className="pc-rank">{inPlan ? '✓' : p.rank}</div>
+          <div
+            id={`place-${p.id}`}
+            key={p.id}
+            className={`place-card ${p.coords ? 'tap-map' : ''} ${inPlan ? `in-plan plan-${inPlan.source}` : ''} ${highlight === p.id ? 'hi' : ''}`}
+            style={{ ['--dest' as string]: DEST_HEX[dest.colorVar], ['--dest-l' as string]: `var(${dest.colorVar}-l)` }}
+            onClick={(e) => { if (!shouldIgnoreCardTap(e.target)) focusPlace(p) }}
+          >
+            <div className="pc-rank">{displayN}</div>
             <div className="pc-body">
               <div className="pc-top">
                 {p.coords
-                  ? <button className="pc-name pc-name-btn" onClick={() => setHighlight(highlight === p.id ? null : p.id)} title="Ver en el mapa">{p.emoji} {p.name} <span className="pc-locate">📍</span></button>
+                  ? <button className="pc-name pc-name-btn" onClick={() => focusPlace(p)} title="Ver en el mapa">{p.emoji} {p.name} <span className="pc-locate">📍</span></button>
                   : <span className="pc-name">{p.emoji} {p.name}</span>}
               </div>
               <div className="pc-meta">
@@ -137,6 +149,7 @@ export default function Explore() {
                 {p.forKids && <span className="badge" style={{ background: '#e6f4ff', color: '#1a5fa0' }}>🧒 niños</span>}
                 {p.hours && <span>🕒 {p.hours}</span>}
                 {p.price && <span>💶 {p.price}</span>}
+                {!p.coords && <span className="badge pending">sin mapa</span>}
               </div>
               <div className="pc-blurb">{p.blurb}</div>
               {p.kids && <div className="pc-kids">👧🧒 {p.kids}</div>}
@@ -145,7 +158,7 @@ export default function Explore() {
                 <a className="pc-btn ghost" href={gmapsUrl(p.name, p.zone, p.coords)} target="_blank" rel="noreferrer">🗺️ Maps</a>
                 {inPlan ? (
                   <>
-                    <span className="pc-assigned">✓ En el plan · {dayLabel(inPlan.dayId)}</span>
+                    <span className={`pc-assigned ${inPlan.source === 'added' ? 'added' : 'base'}`}>✓ En el plan · {dayLabel(inPlan.dayId)}</span>
                     {inPlan.source === 'added'
                       ? <button className="pc-btn ghost" onClick={() => setPicker(p)}>Cambiar día</button>
                       : null}

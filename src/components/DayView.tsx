@@ -106,24 +106,15 @@ export default function DayView({ day }: { day: Day }) {
   const extraPoints: MapPoint[] = trip.catalog
     .filter((p) => p.destinationId === day.destinationId && p.coords)
     .filter((p) => !agendaCoordKeys.has(`${p.coords!.lat.toFixed(3)},${p.coords!.lon.toFixed(3)}`))
-    .map((p) => ({ lat: p.coords!.lat, lon: p.coords!.lon, emoji: p.emoji, label: p.name }))
-
-  // Todas las sugerencias de "comer cerca" de las paradas del día, en un solo bloque visible
-  const dayEats = (() => {
-    const seen = new Set<string>()
-    const out: { name: string; dish?: string; note?: string }[] = []
-    const norm = (n: string) => n.toLowerCase().replace(/^[^a-zà-ÿ0-9]+/, '').replace(/\s*\(.*?\)\s*/g, ' ').replace(/[^a-zà-ÿ0-9]/g, '').trim()
-    for (const it of agenda) {
-      for (const e of it.guide?.eat ?? []) {
-        const k = norm(e.name)
-        if (seen.has(k)) continue
-        seen.add(k)
-        out.push(e)
-      }
-    }
-    return out
-  })()
-  const eatQuery = (name: string) => name.replace(/^[^A-Za-zÀ-ÿ0-9]+/, '').replace(/\s*\(.*?\)\s*/g, ' ').trim()
+    .map((p) => ({
+      lat: p.coords!.lat,
+      lon: p.coords!.lon,
+      n: '',
+      label: p.name,
+      color: destColor,
+      key: p.id,
+      pinClass: `explore-pin ${p.must ? 'must' : p.kind === 'food' ? 'food' : 'activity'} candidate`,
+    }))
 
   function moveItemTo(item: AgendaItem, targetDay: string) {
     if (item.kind === 'base' && item.origDayId && item.n != null) moveBaseToDay(item.origDayId, item.n, targetDay)
@@ -132,6 +123,12 @@ export default function DayView({ day }: { day: Day }) {
   function removeItem(item: AgendaItem) {
     if (item.kind === 'base' && item.origDayId && item.n != null) hideBase(item.origDayId, item.n)
     else if (item.kind === 'added' && item.placeId) removePlace(day.id, item.placeId)
+  }
+  const shouldIgnoreCardTap = (target: EventTarget | null) =>
+    target instanceof HTMLElement && !!target.closest('a,button,select,input,textarea,label')
+  const focusAgendaItem = (item: AgendaItem) => {
+    if (!item.coords) return
+    setHighlight(highlight === item.key ? null : item.key)
   }
   // Paradas clave que no se pueden quitar ni mover de día (solo reordenar).
   // Solo se editan actividades, restaurantes y sitios añadidos desde Explorar.
@@ -197,31 +194,25 @@ export default function DayView({ day }: { day: Day }) {
       {/* Mapa del día */}
       {mapPointsResolved.length > 0 && (
         <div className="map-wrap">
-          <TripMap points={mapPointsResolved} height={190} caption={`🗺️ ${day.title}`} extraPoints={extraPoints} anchors={[...dayAnchors(day), ...dayAtms(day)]} highlight={highlight} onPointClick={(k) => setHighlight(highlight === k ? null : k)} />
+          <TripMap
+            points={mapPointsResolved}
+            height={190}
+            caption={`🗺️ ${day.title}`}
+            extraPoints={extraPoints}
+            anchors={[...dayAnchors(day), ...dayAtms(day)]}
+            highlight={highlight}
+            onPointClick={(k) => setHighlight(highlight === k ? null : k)}
+            onExtraPointAction={(placeId) => addPlace(day.id, placeId)}
+            extraActionLabel={`Añadir al día ${day.dayNumber ?? ''}`.trim()}
+          />
           <span className="map-cap">🗺️ Recorrido del día · {mapPointsResolved.length} paradas</span>
         </div>
       )}
       {extraPoints.length > 0 && (
-        <div className="map-legend">● paradas del día · <span className="lg-extra">◌</span> por explorar cerca · 🏧 cajeros · 🏨 hotel · ✈️ aeropuerto</div>
+        <div className="map-legend">Números = itinerario · azul por decidir · ⭐ imprescindible · 🎒 actividad · 🍽️ restaurante · 🏧 cajeros · 🏨 hotel · ✈️ aeropuerto</div>
       )}
       {mapPointsResolved.length > 0 && (
         <Link to="/explorar" onClick={() => { setExploreDest(day.destinationId); setExploreView('all') }} className="map-explore-link">🔍 Explorar y añadir sitios en {dest.name.replace(/^.*— /, '')} →</Link>
-      )}
-
-      {/* Dónde comer por la zona hoy (agregado de las guías de las paradas, visible directamente) */}
-      {dayEats.length > 0 && (
-        <>
-          <div className="section-title">🍽️ Dónde comer por la zona hoy</div>
-          <div className="card" style={{ paddingTop: 6, paddingBottom: 6 }}>
-            {dayEats.map((e, i) => (
-              <a key={i} className="sg-eat" style={{ marginTop: i === 0 ? 0 : 6 }} href={gmapsUrl(eatQuery(e.name), dest.name.replace(/^[^—]*—\s*/, ''))} target="_blank" rel="noreferrer">
-                <span className="sge-name">{e.name}{e.dish && <span className="sge-dish"> · {e.dish}</span>}</span>
-                {e.note && <span className="sge-note">{e.note}</span>}
-                <span className="sge-go">🗺️</span>
-              </a>
-            ))}
-          </div>
-        </>
       )}
 
       {/* Reservas / estado */}
@@ -258,9 +249,12 @@ export default function DayView({ day }: { day: Day }) {
                   <div className="line" />
                 </div>
                 <div className="content">
-                  <div className={`stop-card ${highlight === item.key ? 'hi' : ''}`}>
+                  <div
+                    className={`stop-card ${item.coords ? 'tap-map' : ''} ${highlight === item.key ? 'hi' : ''}`}
+                    onClick={(e) => { if (!shouldIgnoreCardTap(e.target)) focusAgendaItem(item) }}
+                  >
                     <div className="sc-top">
-                      <span className={`sc-name ${item.coords ? 'sc-name-btn' : ''}`} onClick={() => item.coords && setHighlight(highlight === item.key ? null : item.key)}>{item.alt && <span className={`alt-badge alt-${item.alt}`}>Opción {item.alt}</span>}{item.emoji} {item.name}{item.coords && <span className="pc-locate"> 📍</span>}{item.kind === 'added' && <span className="added-tag"> ⭐ añadido</span>}</span>
+                      <span className={`sc-name ${item.coords ? 'sc-name-btn' : ''}`} onClick={(e) => { e.stopPropagation(); focusAgendaItem(item) }}>{item.alt && <span className={`alt-badge alt-${item.alt}`}>Opción {item.alt}</span>}{item.emoji} {item.name}{item.coords && <span className="pc-locate"> 📍</span>}{item.kind === 'added' && <span className="added-tag"> ⭐ añadido</span>}</span>
                       {item.time && <span className="sc-time">{item.time}</span>}
                     </div>
                     <div className="sc-meta">
