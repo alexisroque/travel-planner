@@ -141,6 +141,10 @@ export default function Summary() {
         <span><strong>🍜 Sabores del viaje</strong><div style={{ fontSize: '.82em', color: 'var(--muted)' }}>platos imprescindibles y restaurantes curados por destino</div></span>
         <span style={{ fontSize: '1.3em', color: 'var(--muted)' }}>›</span>
       </Link>
+      <Link to="/contactos" className="card tight" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span><strong>☎️ Agenda de contactos</strong><div style={{ fontSize: '.82em', color: 'var(--muted)' }}>teléfonos, WhatsApp, emails y direcciones de hoteles y proveedores</div></span>
+        <span style={{ fontSize: '1.3em', color: 'var(--muted)' }}>›</span>
+      </Link>
 
       {/* Progreso */}
       <div className="card tight">

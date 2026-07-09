@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Routes, Route, NavLink, Navigate } from 'react-router-dom'
+import { Routes, Route, NavLink, Navigate, useLocation } from 'react-router-dom'
 import Today from './screens/Today'
 import Summary from './screens/Summary'
 import Itinerary from './screens/Itinerary'
@@ -14,6 +14,7 @@ import Money from './screens/Money'
 import Phrases from './screens/Phrases'
 import Passport from './screens/Passport'
 import Gastronomy from './screens/Gastronomy'
+import Contacts from './screens/Contacts'
 import Tasks from './screens/Tasks'
 import Budget from './screens/Budget'
 import SideMap from './components/SideMap'
@@ -24,9 +25,17 @@ const NAV = [
   { to: '/itinerario', icon: '🗓️', label: 'Itinerario' },
   { to: '/explorar', icon: '🔍', label: 'Explorar' },
   { to: '/resumen', icon: '🧭', label: 'Resumen' },
-  { to: '/presupuesto', icon: '💶', label: 'Budget' },
+  { to: '/pasaporte', icon: '🛂', label: 'Pasaporte' },
   { to: '/pendientes', icon: '📋', label: 'Tareas' },
 ]
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0 })
+  }, [pathname])
+  return null
+}
 
 export default function App() {
   const [online, setOnline] = useState(navigator.onLine)
@@ -44,6 +53,7 @@ export default function App() {
         {!online && (
           <div className="offline-bar">📴 Sin conexión · plan e itinerario disponibles · los mapas usan lo ya descargado</div>
         )}
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Navigate to="/resumen" replace />} />
           <Route path="/hoy" element={<Today />} />
@@ -60,6 +70,7 @@ export default function App() {
           <Route path="/frases" element={<Phrases />} />
           <Route path="/pasaporte" element={<Passport />} />
           <Route path="/gastronomia" element={<Gastronomy />} />
+          <Route path="/contactos" element={<Contacts />} />
           <Route path="/pendientes" element={<Tasks />} />
           <Route path="/presupuesto" element={<Budget />} />
           <Route path="*" element={<Navigate to="/" replace />} />
