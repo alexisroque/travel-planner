@@ -273,10 +273,10 @@ export const dayEnrich: Record<string, Enrich> = {
     quickTips: [
       'Feeding orangutanes 10:00. Llegar 30 min antes; guardar mochilas (los macacos roban).',
       'Sun Bear a 5 min andando del Orangutan Centre — se hacen juntos.',
-      'Labuk Bay: feeding tarde 16:30, mejor luz y menos calor.',
+      'Labuk Bay: Platform A 9:30/14:30; Platform B 11:30/16:30. Para la tarde, ir a B 16:30 o adelantar mucho para A 14:30.',
     ],
     stops: [
-      { n: 1, name: 'Desayuno en el resort', category: 'Comida', emoji: '🍳', coords: { lat: 5.8740, lon: 117.9450 }, time: '08:00', note: 'Desayuno tropical en el lodge. Ropa fresca, repelente DEET y gorra.',
+      { n: 1, name: 'Desayuno en el resort', category: 'Comida', emoji: '🍳', coords: { lat: 5.8740, lon: 117.9450 }, time: '08:00', note: 'Desayuno incluido en Sepilok Jungle Resort. Ropa fresca, repelente DEET y gorra.',
         transitToNext: { mode: 'walk', min: 5, note: 'Al Orangutan Centre' } },
       { n: 2, name: 'Sepilok Orangutan Centre', category: 'Naturaleza', emoji: '🦧', coords: { lat: 5.8740, lon: 117.9492 }, time: '09:30', hours: 'Feeding 10:00', note: 'Plataforma de alimentación: orangutanes en semilibertad llegando por las cuerdas. Nursery con crías tras cristal.', status: 'pending',
         guide: {
@@ -325,16 +325,17 @@ export const dayEnrich: Record<string, Enrich> = {
           ],
         },
         transitToNext: { mode: 'walk', min: 8, note: 'Al restaurante' } },
-      { n: 4, name: 'Comida: Sepilok Bistro / lodge', category: 'Comida', emoji: '🍛', coords: { lat: 5.8745, lon: 117.9460 }, time: '12:30', note: 'Arroz nasi goreng, fideos, fruta. Después, descanso/piscina en el resort (calor de mediodía).',
-        transitToNext: { mode: 'car', min: 35, note: 'Grab a Labuk Bay', fare: '~40 MYR' } },
-      { n: 5, name: 'Labuk Bay Proboscis Sanctuary', category: 'Naturaleza', emoji: '🐒', coords: { lat: 5.9667, lon: 118.1500 }, time: '16:00', hours: 'Feeding 16:30', note: 'Monos narigudos endémicos sobre el manglar. Las narices enormes hacen reír. Plataforma A para fotos.',
+      { n: 4, name: 'Comida: Sepilok Bistro / lodge', category: 'Comida', emoji: '🍛', coords: { lat: 5.8745, lon: 117.9460 }, time: '12:30', note: 'Arroz nasi goreng, fideos, fruta. Comida de pago; el hotel solo incluye desayuno. Después, descanso/piscina en el resort.',
+        transitToNext: { mode: 'car', min: 35, note: 'Taxi/Grab pactado a Labuk Bay (22 km; no andando)', fare: 'pactar ida+espera+vuelta' } },
+      { n: 5, name: 'Labuk Bay Proboscis Sanctuary', category: 'Naturaleza', emoji: '🐒', coords: { lat: 5.9342, lon: 117.8081 }, time: '16:00', hours: 'A 9:30/14:30 · B 11:30/16:30', note: 'Monos narigudos endémicos sobre el manglar. Para este horario, objetivo Platform B 16:30; si queréis Platform A, salid tras comer para el feeding 14:30.',
         guide: {
           intro: 'Una reserva privada en el manglar donde ver de cerca al mono narigudo (proboscis), que SOLO vive en Borneo. Con sus narices enormes y barrigas, son de los animales más divertidos del viaje — llegan en grupo a las plataformas de alimentación.',
-          time: '1½ h (una sesión de feeding)', bestTime: 'Feeding de las 16:30: llega 20-30 min antes para sitio en la plataforma A.',
+          time: '1½ h (una sesión de feeding)', bestTime: 'Platform A alimenta a las 9:30 y 14:30; Platform B a las 11:30 y 16:30. Llegad 20-30 min antes.',
           route: [
-            'Ve a la Plataforma A (la principal) para el feeding de la tarde: es donde mejor se ven y fotografían.',
+            'Desde Sepilok, pedid taxi/Grab y pactad espera o recogida. Son unos 22 km por carretera; andando no tiene sentido.',
+            'Si mantenéis la tarde tranquila, id a Platform B para el feeding de las 16:30. Para Platform A hay que salir antes y apuntar al feeding de las 14:30.',
             'Espera en silencio: van llegando por los árboles y bajan a por la fruta.',
-            'Si hay tiempo, la Plataforma B suele tener también macacos de cola larga (plateados).',
+            'Si hay tiempo, preguntad al conductor/taquilla si compensa pasar por la otra plataforma antes de volver.',
           ],
           tips: [
             'Cámara con zoom y nada de flash. No se les da comida ni se les toca.',
@@ -349,8 +350,8 @@ export const dayEnrich: Record<string, Enrich> = {
             { name: 'Comidas en el lodge de Sepilok', note: 'Se vuelve a cenar al lodge; sin desviarse. En ruta a Sandakan, marisco de Sim Sim.' },
           ],
         },
-        transitToNext: { mode: 'car', min: 35, note: 'Vuelta a Sepilok' } },
-      { n: 6, name: 'Cena en el resort', category: 'Comida', emoji: '🍽️', coords: { lat: 5.8740, lon: 117.9450 }, time: '19:30', note: 'Cena tranquila. Preparar mochila: mañana Rainforest Discovery al alba y transfer a Sukau.' },
+        transitToNext: { mode: 'car', min: 35, note: 'Vuelta pactada a Sepilok' } },
+      { n: 6, name: 'Cena en el resort', category: 'Comida', emoji: '🍽️', coords: { lat: 5.8740, lon: 117.9450 }, time: '19:30', note: 'Cena tranquila en Banana Cafe / resort, de pago. Preparar mochila: mañana Rainforest Discovery al alba y transfer a Sukau.' },
     ],
   },
   d5: {
@@ -383,9 +384,9 @@ export const dayEnrich: Record<string, Enrich> = {
           ],
         },
         transitToNext: { mode: 'walk', min: 10, note: 'Desayuno en el resort' } },
-      { n: 2, name: 'Desayuno + check-out Sepilok', category: 'Comida', emoji: '🍳', coords: { lat: 5.8740, lon: 117.9450 }, time: '10:00', note: 'Desayuno tardío, últimas compras (repelente, agua) y check-out.',
+      { n: 2, name: 'Desayuno + check-out Sepilok', category: 'Comida', emoji: '🍳', coords: { lat: 5.8740, lon: 117.9450 }, time: '10:00', note: 'Desayuno incluido, últimas compras (repelente, agua) y check-out.',
         transitToNext: { mode: 'car', min: 120, note: 'Transfer incluido a Sukau (~2h)' } },
-      { n: 3, name: 'Sukau Greenview Lodge', category: 'Hotel', emoji: '🛏️', coords: { lat: 5.5170, lon: 118.2950 }, time: '14:00', note: 'Check-in 2× Twin Deluxe. Pasarela de madera sobre el río Kinabatangan. Almuerzo incluido.', status: 'booked',
+      { n: 3, name: 'Sukau Greenview Lodge', category: 'Hotel', emoji: '🛏️', coords: { lat: 5.5170, lon: 118.2950 }, time: '14:00', note: 'Check-in 2× Twin Deluxe. Pasarela de madera sobre el río Kinabatangan. Desde aquí, pensión completa: almuerzo, cena y desayunos incluidos.', status: 'booked',
         transitToNext: { mode: 'boat', min: 5, note: 'Al embarcadero' } },
       { n: 4, name: 'Crucero río (tarde)', category: 'Naturaleza', emoji: '🚤', coords: { lat: 5.5200, lon: 118.3050 }, time: '15:30', note: 'Primer safari fluvial: proboscis, macacos, cocodrilos, cálaos. Guía Orang Sungai. Calibrar prismáticos.',
         guide: {

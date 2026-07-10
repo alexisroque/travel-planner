@@ -140,7 +140,7 @@ export const gastronomy: Record<string, Gastronomy> = {
   },
 
   sepilok: {
-    blurb: 'En Sepilok se come sobre todo en los lodges (comida de selva, sencilla y correcta), pero Sandakan, a 30 min, es puerto y tiene marisco de primera y dulces coloniales. Aprovechad si pasáis por la ciudad.',
+    blurb: 'En Sepilok el hotel incluye desayuno, pero comidas y cenas van aparte: Banana Cafe / lodge o cafés cercanos. Sandakan, a 30 min, es puerto y tiene marisco de primera si pasáis por la ciudad.',
     dishes: [
       { name: 'Seafood de Sandakan', emoji: '🦐', what: 'Sandakan presume del marisco más barato y fresco de Malasia: gambas gigantes, cangrejo, vieiras al ajillo o al chili.', tip: 'Pedid "butter prawns" (gambas en salsa de mantequilla y hoja de curry).' },
       { name: 'Sang nyuk mien', emoji: '🍜', what: 'Sopa de fideos con cerdo marinado, típica de Sabah. Caldo claro y reconfortante.', tip: 'Desayuno o almuerzo local en Sandakan.' },
@@ -148,7 +148,7 @@ export const gastronomy: Record<string, Gastronomy> = {
       { name: 'Hinava', emoji: '🐟', what: 'Ceviche kadazan: pescado crudo curado en lima, chili y jengibre. El "sushi" de Sabah.', tip: 'Para paladares aventureros, en sitios de comida kadazan.' },
     ],
     spots: [
-      { name: 'Comidas en el lodge (Sepilok)', dish: 'buffet de selva', area: 'Sepilok', price: '€€', why: 'Junto a los centros de fauna casi todo se come en el lodge o cafés cercanos: cómodo y sin desplazarse.', near: 'Sepilok (orangutanes/sun bears)' },
+      { name: 'Banana Cafe / lodge (Sepilok)', dish: 'desayuno incluido; comidas de pago', area: 'Sepilok', price: '€€', why: 'Junto a los centros de fauna casi todo se come en el lodge o cafés cercanos: cómodo y sin desplazarse.', near: 'Sepilok (orangutanes/sun bears)' },
       { name: 'Sim Sim (Sandakan)', dish: 'marisco sobre el agua', area: 'Sandakan waterfront', price: '€€', why: 'Casas de pescadores sobre pilotes con marisquerías. La comida top si pasáis por Sandakan.', worthTrip: true },
       { name: 'Comfort Sang Nyuk Mee (Sandakan)', dish: 'sopa de fideos con cerdo', area: 'Sandakan centro', price: '€', why: 'El sang nyuk mee de referencia de la ciudad. Desayuno local de verdad.', worthTrip: true },
       { name: 'English Tea House (Sandakan)', dish: 'té colonial con vistas', area: 'Sandakan', price: '€€', why: 'Jardín colonial con vistas al mar de Sulu: parada bonita con niños.', worthTrip: true },

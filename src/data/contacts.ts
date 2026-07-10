@@ -14,7 +14,7 @@ export type ContactEntry = {
 
 export const contactAgenda: ContactEntry[] = [
   { id: 'c-sin', destinationId: 'sin', dates: '13-15 Jul', category: 'Alojamiento', name: 'Holiday Inn Singapore Orchard City Centre by IHG', phone: '+65 6733 8333', ref: 'Booking 6151.752.994 · PIN 8582', mapName: 'Holiday Inn Singapore Orchard City Centre' },
-  { id: 'c-sepilok', destinationId: 'sepilok', dates: '15-17 Jul', category: 'Alojamiento', name: 'Sepilok Jungle Resort', phone: '+60 89 533 071', ref: 'Booking 6182.784.304 · PIN 2242' },
+  { id: 'c-sepilok', destinationId: 'sepilok', dates: '15-17 Jul', category: 'Alojamiento', name: 'Sepilok Jungle Resort', phone: '+60 89 533 071', ref: 'Booking 6182.784.304 · PIN 2242', note: 'Desayuno incluido; comidas/cenas de pago en Banana Cafe. Confirmar taxi ida+vuelta a Labuk Bay.' },
   { id: 'c-sukau', destinationId: 'kinabatangan', dates: '17-20 Jul', category: 'Safari / lodge', name: 'Sukau Greenview Lodge', phone: '+60 13 869 6922', whatsapp: true, email: 'sukau_greenview@yahoo.com', ref: 'Seek Sophie 624695666', note: 'Usar primero para check-in, mensajes y transfers.' },
   { id: 'c-kl', destinationId: 'kl', dates: '20-24 Jul', category: 'Alojamiento', name: 'Star Suites KLCC, Kuala Lumpur', phone: '+60 17 753 0017', ref: 'Agoda 651641319', mapName: 'Star Suites KLCC' },
   { id: 'c-ubud', destinationId: 'ubud', dates: '24-27 Jul', category: 'Alojamiento', name: 'Green Field Hotel Ubud', phone: '+62 812 3633 8974', ref: 'Agoda 649576619' },

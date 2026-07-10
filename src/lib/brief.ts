@@ -41,8 +41,8 @@ export function todayBrief(now: Date, isTaskDone: (id: string, fallback: boolean
     const flight = trip.legs[0]
     items.push({ icon: '✈️', title: `Lo siguiente: vuelo ${flight.number}`, sub: `${flight.from}→${flight.to} · 12 Jul · sal de casa a las 9:00`, to: '/vuelos' })
     if (until <= 16) {
-      const checkin = pending.find((t) => t.id === 't18')
-      if (checkin) items.push({ icon: '📱', title: 'Pronto: check-in online AirAsia', sub: 'Se abre 14 días antes (28 Jun) · asientos gratis', to: '/pendientes', warn: true })
+      const checkin = pending.find((t) => /check-in/i.test(t.title))
+      if (checkin) items.push({ icon: '📱', title: checkin.title.split('·')[0].trim(), sub: checkin.detail?.split('.')[0], to: '/pendientes', warn: true })
     }
     const grp = (u: string) => pending.filter((t) => t.urgency === u)
     grp('urgent').forEach((t) => items.push({ icon: t.icon ?? '⚠️', title: t.title.split('—')[0].trim(), sub: t.cost, to: '/pendientes', warn: true }))

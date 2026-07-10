@@ -39,14 +39,14 @@ const baseTrip: Trip = {
     {
       id: 'sepilok', name: 'Borneo — Sepilok', emoji: '🦧', colorVar: '--bo', dates: '15–17 Jul', nights: 2,
       summary: 'El reino de los primates. Orangutanes y osos de sol en semilibertad. Primer contacto con la fauna.',
-      logistics: { currency: 'MYR (ringgit)', plug: 'Tipo G (UK)', transport: 'Grab', water: 'Agua embotellada', notes: 'Zona con riesgo de malaria — profilaxis y DEET.' },
+      logistics: { currency: 'MYR (ringgit)', plug: 'Tipo G (UK)', transport: 'Grab/taxi pactado', water: 'Agua embotellada', notes: 'Zona con riesgo de malaria. Sepilok Jungle Resort incluye desayuno; comidas/cenas en Banana Cafe o cafés cercanos, de pago.' },
       alerts: ['Zona de malaria: repelente DEET y profilaxis.', 'Señal móvil limitada — usar mapas offline.'],
       emergency: { insurance: 'Heymondo · urgencias 24h +34 913 536 323', hotel: 'Sepilok Jungle Resort' },
     },
     {
       id: 'kinabatangan', name: 'Borneo — Kinabatangan', emoji: '🌿', colorVar: '--bo', dates: '17–20 Jul', nights: 3,
       summary: 'El corazón emocional del viaje. Safari fluvial: orangutanes, proboscis, elefantes pigmeos, cocodrilos.',
-      logistics: { currency: 'MYR (ringgit)', transport: 'Barca del lodge (todo incluido)', water: 'Agua embotellada', notes: 'Todo incluido en el lodge (SeekSophie). Sin cobertura móvil.' },
+      logistics: { currency: 'MYR (ringgit)', transport: 'Barca del lodge (todo incluido)', water: 'Agua embotellada', notes: 'Pensión completa en Sukau Greenview: desayuno, comida y cena incluidos en el paquete. Sin cobertura móvil.' },
       alerts: ['Zona de malaria — DEET y profilaxis imprescindibles.', 'Sin cobertura: descargar todo offline antes de llegar.', 'Llevar binoculares y bolsas estancas para las barcas.'],
       emergency: { insurance: 'Heymondo · urgencias 24h +34 913 536 323', hotel: 'Sukau Greenview Lodge' },
     },
@@ -165,12 +165,12 @@ const baseTrip: Trip = {
       slots: [
         { key: 'morning', icon: '🦧', time: '9:30', text: 'Sepilok Orangutan Rehabilitation Centre — feeding platform a las 10am. Orangutanes en semilibertad. Aira y Leo fliparán.' },
         { key: 'midday', icon: '🐻', time: '11:00', text: 'Bornean Sun Bear Conservation Centre — el único centro de rehabilitación de osos de sol del mundo, a 5 minutos andando del Orangutan Centre.' },
-        { key: 'midday', icon: '🍽️', text: 'Almuerzo en la zona. Café Sepilok o hawker cercano. Descanso para los niños en el hotel.' },
-        { key: 'afternoon', icon: '🐒', time: '17:00', text: 'Grab a Labuk Bay Proboscis Monkey Sanctuary (~30min). Feeding de proboscis a las 17:30 — los monos de nariz más grandes del mundo. Plataforma sobre el manglar.' },
-        { key: 'night', icon: '🌙', text: 'Cena en Sepilok. Preparar mochila — mañana Rainforest Discovery al alba y luego transfer a Sukau Greenview.' },
+        { key: 'midday', icon: '🍽️', text: 'Almuerzo en la zona. Banana Cafe / Sepilok Bistro, de pago. Descanso para los niños en el hotel.' },
+        { key: 'afternoon', icon: '🐒', time: '15:35', text: 'Taxi/Grab pactado a Labuk Bay Proboscis Monkey Sanctuary (~35min, 22 km desde Sepilok). No ir andando. Feeding Platform B 16:30; si queréis Platform A, hay que adelantar salida para el feeding 14:30.' },
+        { key: 'night', icon: '🌙', text: 'Vuelta pactada a Sepilok. Cena en Banana Cafe / resort, de pago. Preparar mochila — mañana Rainforest Discovery al alba y transfer a Sukau Greenview.' },
       ],
-      transport: 'A pie Orangutan→Sun Bear (5min) · Grab Sepilok→Labuk Bay (~30min, ~8-10 MYR)',
-      tip: '💡 Labuk Bay: confirmar feeding en labukbay.com. Feeding tarde (17:30) tiene mejor luz para fotos.',
+      transport: 'A pie Orangutan→Sun Bear (5min) · Taxi/Grab pactado Sepilok→Labuk Bay (~22 km, 30-40 min). Pactar ida+espera+vuelta; Grab puede escasear al salir.',
+      tip: '💡 Labuk Bay: Platform A alimenta 9:30 y 14:30; Platform B 11:30 y 16:30. Confirmar el horario el día antes con el santuario.',
     },
     {
       id: 'd5', dayNumber: 5, date: '17 Jul', weekday: 'Vie', destinationId: 'kinabatangan',
@@ -184,7 +184,7 @@ const baseTrip: Trip = {
       ],
       slots: [
         { key: 'morning', icon: '🌳', time: '08:00', text: 'Rainforest Discovery Centre — madrugar merece la pena. Canopy walkway a 26m por selva virgen. Torres de observación: hornbills, águilas, monos. Leo en hombros. Abren a las 8am.' },
-        { key: 'morning', icon: '☀️', time: '10:30', text: 'Volver al hotel. Desayuno tardío, últimas compras. Check-out de Sepilok Jungle Resort. Preparar mochilas para Sukau.' },
+        { key: 'morning', icon: '☀️', time: '10:30', text: 'Volver al hotel. Desayuno incluido, últimas compras. Check-out de Sepilok Jungle Resort. Preparar mochilas para Sukau.' },
         { key: 'midday', icon: '🚐', time: '12:00', text: 'Transfer incluido a Sukau Greenview Lodge — ~2h en furgoneta por la selva de Borneo. Vistas al pasar los ríos y las palmeras.' },
         { key: 'afternoon', icon: '🛬', time: '14:30', text: 'Llegada al lodge. Check-in 2× Twin Deluxe. La pasarela de madera con el río Kinabatangan justo delante. Almuerzo incluido.' },
         { key: 'afternoon', icon: '🚤', time: '15:30', text: 'Primer crucero río tarde — primer avistamiento de proboscis salvajes, macacos, cocodrilos, hornbills. Guía Orang Sungai. Calibrar los binoculares.' },
@@ -542,8 +542,8 @@ const baseTrip: Trip = {
 
   accommodations: [
     { id: 'a-sin', destinationId: 'sin', name: 'Holiday Inn Orchard City Centre', coords: { lat: 1.3048, lon: 103.8318 }, checkIn: '13 Jul', checkOut: '15 Jul', nights: 2, ref: 'Confirmado', price: '~200€', status: 'booked', note: 'Orchard Rd · acceso directo al metro' },
-    { id: 'a-sepilok', destinationId: 'sepilok', name: 'Sepilok Jungle Resort', coords: { lat: 5.8740, lon: 117.9450 }, checkIn: '15 Jul', checkOut: '17 Jul', nights: 2, roomType: '2 Doble Deluxe', price: '~285€', status: 'booked', note: 'A 5 min andando del Orangutan Centre' },
-    { id: 'a-sukau', destinationId: 'kinabatangan', name: 'Sukau Greenview Lodge', coords: { lat: 5.5170, lon: 118.2950 }, checkIn: '17 Jul', checkOut: '20 Jul', nights: 3, roomType: '2× Twin Deluxe', ref: 'SeekSophie', price: '1.240€', status: 'booked', note: '4D3N + Gomantong · todo incluido (6 cruceros, night walk, transfers)' },
+    { id: 'a-sepilok', destinationId: 'sepilok', name: 'Sepilok Jungle Resort', coords: { lat: 5.8740, lon: 117.9450 }, checkIn: '15 Jul', checkOut: '17 Jul', nights: 2, roomType: '2 Doble Deluxe', price: '~285€', status: 'booked', note: 'A 5 min andando del Orangutan Centre · desayuno incluido; comidas/cenas de pago en Banana Cafe' },
+    { id: 'a-sukau', destinationId: 'kinabatangan', name: 'Sukau Greenview Lodge', coords: { lat: 5.5170, lon: 118.2950 }, checkIn: '17 Jul', checkOut: '20 Jul', nights: 3, roomType: '2× Twin Deluxe', ref: 'SeekSophie', price: '1.240€', status: 'booked', note: '4D3N + Gomantong · pensión completa + cruceros, night walk y transfers' },
     { id: 'a-kl', destinationId: 'kl', name: 'Star Suites KLCC', coords: { lat: 3.1577, lon: 101.7120 }, checkIn: '20 Jul', checkOut: '24 Jul', nights: 4, roomType: 'Suite con cocina', price: '~430€', status: 'booked', note: 'Andando a Petronas y KLCC Park' },
     { id: 'a-ubud', destinationId: 'ubud', name: 'Green Field Hotel Ubud', coords: { lat: -8.5060, lon: 115.2620 }, checkIn: '24 Jul', checkOut: '27 Jul', nights: 3, price: '396€', status: 'booked', note: 'Ubud centro · andando al Monkey Forest y mercado' },
     { id: 'a-gili', destinationId: 'gili', name: 'Manta Dive Gili Air Resort', coords: { lat: -8.3560, lon: 116.0840 }, checkIn: '27 Jul', checkOut: '29 Jul', nights: 2, ref: '#5522767108', price: '~315€', status: 'booked', note: 'Costa este, frente al canal de tortugas · operadora de snorkel' },
@@ -551,9 +551,9 @@ const baseTrip: Trip = {
   ],
 
   tasks: [
-    { id: 't1', icon: '⚠️', title: 'Cancelar C9RPUS — AirAsia BKI→SDK', detail: 'Vuelo ya NO necesario — la ruta SIN→KUL→SDK vía Kiwi cubre el trayecto. Cancelar para recuperar ~€72.41. También pendiente reembolso MJ74SH ~€310 (casos #224444735 y #225021331).', where: 'airasia.com → Mi cuenta → Gestionar reserva', cost: '+€72', urgency: 'urgent', done: false },
-    { id: 't2', icon: '📘', title: 'Verificar pasaportes × 4', detail: 'Mínimo 6 meses de validez desde julio 2026 (válidos hasta enero 2027). Niños necesitan pasaporte propio. Españoles: Indonesia visa-free hasta 30 días.', urgency: 'urgent', done: false },
-    { id: 't3', icon: '💉', title: 'Cita medicina del viajero — vacunas + profilaxis malaria', detail: 'Hepatitis A, Tifoidea, Tétanos. Profilaxis malaria para Borneo (imprescindible con niños). Pedir cita urgente — algunas vacunas necesitan varias semanas.', cost: '~50€', urgency: 'urgent', done: false },
+    { id: 't1', icon: '⚠️', title: 'Cancelar C9RPUS — AirAsia BKI→SDK', detail: 'Vuelo ya NO necesario — la ruta SIN→KUL→SDK vía Kiwi cubre el trayecto. Cancelar para recuperar ~€72.41. También pendiente reembolso MJ74SH ~€310 (casos #224444735 y #225021331).', where: 'airasia.com → Mi cuenta → Gestionar reserva', cost: '+€72', urgency: 'urgent', done: true },
+    { id: 't2', icon: '📘', title: 'Verificar pasaportes × 4', detail: 'Mínimo 6 meses de validez desde julio 2026 (válidos hasta enero 2027). Niños necesitan pasaporte propio. Españoles: Indonesia visa-free hasta 30 días.', urgency: 'urgent', done: true },
+    { id: 't3', icon: '💉', title: 'Cita medicina del viajero — vacunas + profilaxis malaria', detail: 'Hepatitis A, Tifoidea, Tétanos. Profilaxis malaria para Borneo (imprescindible con niños). Pedir cita urgente — algunas vacunas necesitan varias semanas.', cost: '~50€', urgency: 'urgent', done: true },
     { id: 't4', icon: '🚤', title: 'Reservar fast boat Ubud→Gili Air — 27 Jul', detail: 'Bluewater Express door-to-door. Julio es temporada alta — reservar esta semana.', where: 'bluewaterexpress.com', cost: '~180€', urgency: 'soon', done: false },
     { id: 't5', icon: '🚤', title: 'Reservar fast boat Gili Air→Sanur — 29 Jul (tarde)', detail: 'Fast boat ~2h. Coge el de primera hora de la TARDE (~13:30-14:00) para aprovechar la mañana en Gili; último ~16:00 como margen. Operadores: Bluewater, Eka Jaya, Semaya One, Scoot.', where: 'gilitickets.com', cost: '~110€', urgency: 'soon', done: false },
     { id: 't6', icon: '🦁', title: 'Tickets Night Safari Singapur — 14 Jul', detail: '⚠️ SE AGOTAN en julio. ~45€/adulto · ~30€/niño. Sesión 21:00. Tram ride por la jungla nocturna — el plato fuerte de Singapur con Leo.', where: 'mandai.com/en/night-safari', cost: '~150€', urgency: 'soon', done: false },
@@ -573,6 +573,10 @@ const baseTrip: Trip = {
     { id: 't20', icon: '📍', title: 'Google Maps offline: SIN + Sabah + KL + Ubud + Gili + Sanur', detail: 'Borneo tiene señal muy limitada — offline imprescindible. Descargar en WiFi antes del viaje.', urgency: 'week', done: false },
     { id: 't21', icon: '🏦', title: 'Avisar banco + activar Wise/Revolut', detail: 'Wise para cambio SGD, MYR, IDR sin comisiones. Avisar al banco. Llevar 200€ en SGD y 200€ en MYR al salir.', urgency: 'week', done: false },
     { id: 't22', icon: '🚗', title: 'Pre-reservar transfer DPS→Ubud — 24 Jul', detail: 'Transfer privado aeropuerto Bali → Green Field Hotel Ubud (~1.5h).', cost: '~25€', urgency: 'soon', done: false },
+    { id: 't23', icon: '📱', title: 'Check-in online Malaysia Airlines MH2711 · 18 Jul', detail: 'Recordatorio 48h antes. SDK→KUL · 20 Jul 14:10 · reserva BES-31888123. Descargar tarjetas y confirmar asientos/equipaje.', where: 'malaysiaairlines.com · app Malaysia Airlines', urgency: 'week', done: false },
+    { id: 't24', icon: '📱', title: 'Check-in online AirAsia AK398 · 22 Jul', detail: 'Recordatorio 48h antes. KUL→DPS · 24 Jul 16:05 · KLIA2. Descargar tarjetas y revisar equipaje antes de salir del hotel.', where: 'airasia.com · app AirAsia MOVE', urgency: 'week', done: false },
+    { id: 't25', icon: '📱', title: 'Check-in online Scoot TR289 · 2 Ago', detail: 'Recordatorio 48h antes. DPS→SIN · 4 Ago 14:05 · reserva XBN9XZ. Descargar tarjetas y revisar equipaje para el enlace con SQ388.', where: 'flyscoot.com · app Scoot', urgency: 'week', done: false },
+    { id: 't26', icon: '📱', title: 'Check-in online Singapore SQ388 · 2 Ago', detail: 'Recordatorio 48h antes. SIN→BCN · 4 Ago 23:35 · localizador FRBRZ9. Descargar tarjetas y confirmar asientos para el vuelo largo.', where: 'singaporeair.com · app SingaporeAir', urgency: 'week', done: false },
   ],
 
   budget: [
